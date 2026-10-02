@@ -6,8 +6,11 @@
 <title>LEADERBOARD — INSERT COFFEE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=3.1">
+<base href="/">
+<link rel="stylesheet" href="/assets/css/style.css?v=3.5">
+<link rel="stylesheet" href="/assets/css/leaderboard.css?v=3.5">
+<link rel="stylesheet" href="assets/css/style.css?v=3.5">
+<link rel="stylesheet" href="assets/css/leaderboard.css?v=3.5">
 
 <!-- Firebase App & Services (Compat SDK) -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -19,23 +22,23 @@
 <!-- NAVBAR -->
 <nav class="navbar" role="navigation" aria-label="Main navigation">
   <div class="container">
-    <a href="../index.html" class="nav-logo" tabindex="0" role="button" aria-label="Go to home">INSERT COFFEE</a>
+    <a href="index.html" class="nav-logo" tabindex="0" role="button" aria-label="Go to home">INSERT COFFEE</a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="../index.html" id="nav-home">Home</a></li>
-      <li><a href="../index.html#coffee" id="nav-coffee">Coffee</a></li>
-      <li><a href="../index.html#arcade" id="nav-arcade">Arcade</a></li>
-      <li><a href="index.html" id="nav-leaderboard" class="active">Leaderboard</a></li>
-      <li><a href="../index.html#about" id="nav-about">About</a></li>
-      <li><a href="../index.html#display" id="nav-display">Display</a></li>
-      <li><a href="../admin/index.html" id="nav-admin-panel" class="nav-admin-btn" title="Admin Portal & Backend">Admin</a></li>
+      <li><a href="index.html" id="nav-home">Home</a></li>
+      <li><a href="index.html#coffee" id="nav-coffee">Coffee</a></li>
+      <li><a href="index.html#arcade" id="nav-arcade">Arcade</a></li>
+      <li><a href="leaderboard.html" id="nav-leaderboard" class="active">Leaderboard</a></li>
+      <li><a href="index.html#about" id="nav-about">About</a></li>
+      <li><a href="index.html#display" id="nav-display">Display</a></li>
+      <li><a href="admin/index.html" id="nav-admin-panel" class="nav-admin-btn" title="Admin Portal & Backend">Admin</a></li>
       <li>
-        <a href="../index.html#cart" class="nav-cart-btn" aria-label="View order cart">
+        <a href="index.html#cart" class="nav-cart-btn" aria-label="View order cart">
           Cart
           <span class="cart-badge" id="cartBadge" aria-live="polite"></span>
         </a>
       </li>
       <li>
-        <a href="../playerloginpage.html?return=leaderboard" class="nav-profile-circle" id="navPlayerBtn" title="Login / Profil Pemain" aria-label="Profil Pemain">
+        <a href="playerloginpage.html?return=leaderboard" class="nav-profile-circle" id="navPlayerBtn" title="Login / Profil Pemain" aria-label="Profil Pemain">
           <span class="profile-circle-avatar" id="navPlayerAvatar">
             <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </span>
@@ -47,7 +50,7 @@
       <button class="nav-hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <a href="../playerloginpage.html?return=leaderboard" class="nav-profile-circle mobile-profile-btn" id="navPlayerBtnMobile" title="Login / Profil Pemain" aria-label="Profil Pemain">
+      <a href="playerloginpage.html?return=leaderboard" class="nav-profile-circle mobile-profile-btn" id="navPlayerBtnMobile" title="Login / Profil Pemain" aria-label="Profil Pemain">
         <span class="profile-circle-avatar" id="navPlayerAvatarMobile">
           <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </span>
@@ -59,7 +62,7 @@
 
 <!-- MOBILE MENU -->
 <div class="nav-mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
-  <div class="nav-mobile-user-card" onclick="window.location.href='../playerloginpage.html?return=leaderboard'">
+  <div class="nav-mobile-user-card" onclick="window.location.href='playerloginpage.html?return=leaderboard'">
     <div class="mobile-user-avatar" id="mobileMenuAvatar">P</div>
     <div class="mobile-user-info">
       <span class="mobile-user-label">Pemain Aktif</span>
@@ -67,14 +70,14 @@
     </div>
     <span class="mobile-user-badge">Akun &rarr;</span>
   </div>
-  <a href="../index.html" onclick="closeMobileMenu();">Home</a>
-  <a href="../index.html#coffee" onclick="closeMobileMenu();">Coffee</a>
-  <a href="../index.html#arcade" onclick="closeMobileMenu();">Arcade</a>
-  <a href="index.html" class="active" onclick="closeMobileMenu();">Leaderboard</a>
-  <a href="../index.html#about" onclick="closeMobileMenu();">About</a>
-  <a href="../index.html#display" onclick="closeMobileMenu();">Display</a>
-  <a href="../admin/index.html" style="color:var(--amber);">Admin Portal</a>
-  <a href="../index.html#cart" onclick="closeMobileMenu();">Cart</a>
+  <a href="index.html" onclick="closeMobileMenu();">Home</a>
+  <a href="index.html#coffee" onclick="closeMobileMenu();">Coffee</a>
+  <a href="index.html#arcade" onclick="closeMobileMenu();">Arcade</a>
+  <a href="leaderboard.html" class="active" onclick="closeMobileMenu();">Leaderboard</a>
+  <a href="index.html#about" onclick="closeMobileMenu();">About</a>
+  <a href="index.html#display" onclick="closeMobileMenu();">Display</a>
+  <a href="admin/index.html" style="color:var(--amber);">Admin Portal</a>
+  <a href="index.html#cart" onclick="closeMobileMenu();">Cart</a>
 </div>
 
 <!-- LEADERBOARD MAIN CONTENT -->
@@ -141,15 +144,15 @@
       </div>
       <div class="footer-links">
         <div class="footer-heading">Navigasi</div>
-        <a href="../index.html#coffee">Coffee Menu</a>
-        <a href="../index.html#arcade">Arcade Games</a>
-        <a href="index.html">Leaderboard</a>
-        <a href="../index.html#display">Display Antrean</a>
+        <a href="index.html#coffee">Coffee Menu</a>
+        <a href="index.html#arcade">Arcade Games</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="index.html#display">Display Antrean</a>
       </div>
       <div class="footer-links">
         <div class="footer-heading">Akun &amp; Portal</div>
-        <a href="../playerloginpage.html">Gamertag Login</a>
-        <a href="../admin/index.html">Admin Portal</a>
+        <a href="playerloginpage.html">Gamertag Login</a>
+        <a href="admin/index.html">Admin Portal</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -159,8 +162,8 @@
 </footer>
 
 <!-- JS Modules -->
-<script src="../assets/js/firebase-config.js?v=3.1"></script>
-<script src="../assets/js/leaderboard.js?v=3.1"></script>
+<script src="/assets/js/firebase-config.js?v=3.5"></script>
+<script src="/assets/js/leaderboard.js?v=3.5"></script>
 
 <script>
 function toggleMobileMenu() {
