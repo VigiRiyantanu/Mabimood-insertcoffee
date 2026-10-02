@@ -49,9 +49,9 @@ if __name__ == '__main__':
         except Exception:
             pass
 
-    socketserver.TCPServer.allow_reuse_address = True
+    socketserver.ThreadingTCPServer.allow_reuse_address = True
     try:
-        with socketserver.TCPServer(("0.0.0.0", PORT), NoCacheHTTPRequestHandler) as httpd:
+        with socketserver.ThreadingTCPServer(("0.0.0.0", PORT), NoCacheHTTPRequestHandler) as httpd:
             print("=" * 60)
             print("  [INSERT COFFEE] WEB SERVER AKTIF")
             print("=" * 60)

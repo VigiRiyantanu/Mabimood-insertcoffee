@@ -64,10 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const audioIcon = document.getElementById('audioIcon');
       const audioText = document.getElementById('audioText');
       if (audioIcon && audioText) {
-        audioIcon.textContent = audioEnabled ? '🔊' : '🔇';
+        audioIcon.textContent = audioEnabled ? '♪' : '×';
         audioText.textContent = audioEnabled ? 'ON' : 'OFF';
       } else {
-        audioToggleBtn.innerHTML = audioEnabled ? '<span>🔊</span> <span>ON</span>' : '<span>🔇</span> <span>OFF</span>';
+        audioToggleBtn.innerHTML = audioEnabled ? '<span>♪</span> <span>ON</span>' : '<span>×</span> <span>OFF</span>';
       }
       audioToggleBtn.classList.toggle('active', audioEnabled);
       if (audioEnabled) playConfirmSound();
