@@ -337,21 +337,24 @@
   let targetX = 0;
   let targetY = 0;
 
+  const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 768);
+
   window.addEventListener('mousemove', (e) => {
+    if (isTouch) return;
     const cx = window.innerWidth / 2;
     const cy = window.innerHeight / 2;
     targetX = (e.clientX - cx) / cx; // -1 to +1
     targetY = (e.clientY - cy) / cy; // -1 to +1
   }, { passive: true });
 
-  // Touch parallax
+  // Only light cup parallax on touch, NEVER shift form inputs on mobile
   window.addEventListener('touchmove', (e) => {
     if (e.touches.length > 0) {
       const t = e.touches[0];
       const cx = window.innerWidth / 2;
       const cy = window.innerHeight / 2;
-      targetX = (t.clientX - cx) / cx;
-      targetY = (t.clientY - cy) / cy;
+      targetX = (t.clientX - cx) / cx * 0.4;
+      targetY = (t.clientY - cy) / cy * 0.4;
     }
   }, { passive: true });
 
@@ -361,26 +364,26 @@
 
     // Apply distinct layered depth offsets
     if (cupWrap) {
-      cupWrap.style.setProperty('--px-cup', `${(mouseX * 18).toFixed(2)}px`);
-      cupWrap.style.setProperty('--py-cup', `${(mouseY * 12).toFixed(2)}px`);
+      cupWrap.style.setProperty('--px-cup', `${(mouseX * 16).toFixed(2)}px`);
+      cupWrap.style.setProperty('--py-cup', `${(mouseY * 10).toFixed(2)}px`);
     }
-    if (header) {
-      header.style.setProperty('--px-hdr', `${(mouseX * 12).toFixed(2)}px`);
-      header.style.setProperty('--py-hdr', `${(mouseY * 8).toFixed(2)}px`);
+    if (header && !isTouch) {
+      header.style.setProperty('--px-hdr', `${(mouseX * 10).toFixed(2)}px`);
+      header.style.setProperty('--py-hdr', `${(mouseY * 6).toFixed(2)}px`);
     }
-    if (group1) {
-      group1.style.setProperty('--px-f1', `${(mouseX * 7).toFixed(2)}px`);
-      group1.style.setProperty('--py-f1', `${(mouseY * 5).toFixed(2)}px`);
+    if (group1 && !isTouch) {
+      group1.style.setProperty('--px-f1', `${(mouseX * 6).toFixed(2)}px`);
+      group1.style.setProperty('--py-f1', `${(mouseY * 4).toFixed(2)}px`);
     }
-    if (group2) {
-      group2.style.setProperty('--px-f2', `${(mouseX * 5).toFixed(2)}px`);
-      group2.style.setProperty('--py-f2', `${(mouseY * 4).toFixed(2)}px`);
+    if (group2 && !isTouch) {
+      group2.style.setProperty('--px-f2', `${(mouseX * 4).toFixed(2)}px`);
+      group2.style.setProperty('--py-f2', `${(mouseY * 3).toFixed(2)}px`);
     }
-    if (btn) {
-      btn.style.setProperty('--px-btn', `${(mouseX * 10).toFixed(2)}px`);
-      btn.style.setProperty('--py-btn', `${(mouseY * 6).toFixed(2)}px`);
+    if (btn && !isTouch) {
+      btn.style.setProperty('--px-btn', `${(mouseX * 8).toFixed(2)}px`);
+      btn.style.setProperty('--py-btn', `${(mouseY * 5).toFixed(2)}px`);
     }
-    if (bottomNav) {
+    if (bottomNav && !isTouch) {
       bottomNav.style.setProperty('--px-nav', `${(mouseX * 4).toFixed(2)}px`);
       bottomNav.style.setProperty('--py-nav', `${(mouseY * 3).toFixed(2)}px`);
     }

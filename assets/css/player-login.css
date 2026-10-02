@@ -34,13 +34,26 @@ body.retro-coffee-body {
   color: var(--text-cream);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  overflow: hidden;
-  user-select: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   position: relative;
+}
+
+.coffee-3d-wrap,
+#coffee3dCanvas,
+.brand-title,
+.input-label,
+.ambient-roast-glow,
+.retro-scanlines,
+.btn-login {
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /* 1. Moving Ambient Roast Glow */
@@ -246,19 +259,28 @@ body.retro-coffee-body {
   width: 100%;
   display: flex;
   align-items: center;
+  z-index: 2;
 }
 
 .retro-input {
   width: 100%;
   background: var(--bg-input);
   border: 1px solid var(--border-subtle);
-  border-radius: 4px;
-  padding: 0.8rem 0.95rem;
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
   font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
+  font-size: 16px; /* 16px prevents mobile auto-zoom on iOS */
   color: var(--text-cream);
   outline: none;
-  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  cursor: text;
+  -webkit-appearance: none;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+  touch-action: manipulation;
+  pointer-events: auto;
+  position: relative;
+  z-index: 2;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .retro-input::placeholder {
@@ -465,5 +487,61 @@ body.retro-coffee-body {
   .link-return {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* ============================================================
+   MOBILE & TOUCH DEVICE OPTIMIZATIONS
+   ============================================================ */
+@media (max-width: 680px), (hover: none) and (pointer: coarse) {
+  body.retro-coffee-body {
+    padding: 1.25rem 1rem;
+    align-items: flex-start;
+  }
+  .login-container {
+    max-width: 100%;
+    width: 100%;
+    margin: auto 0;
+    padding: 0.5rem 0 2rem;
+  }
+  .coffee-3d-wrap {
+    height: 130px;
+    margin-bottom: 0;
+  }
+  #coffee3dCanvas {
+    width: 180px;
+    height: 130px;
+  }
+  .brand-title {
+    font-size: 1.2rem;
+  }
+  /* Keep input wraps static on touch so tap never misses */
+  .input-group-gamertag .input-wrap,
+  .input-group-password .input-wrap,
+  .input-group-gamertag .input-label,
+  .input-group-password .input-label {
+    animation: none !important;
+    transform: none !important;
+  }
+  .input-group-gamertag,
+  .input-group-password {
+    transform: none !important;
+  }
+  .retro-input {
+    font-size: 16px !important;
+    padding: 0.85rem 1rem;
+    min-height: 48px;
+    line-height: normal;
+  }
+  .btn-eye {
+    animation: none !important;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .btn-login {
+    min-height: 48px;
+    font-size: 0.9rem;
+    animation: none !important;
+    transform: none !important;
   }
 }

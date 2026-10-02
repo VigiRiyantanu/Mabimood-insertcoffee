@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Admin Portal & Kasir — INSERT COFFEE</title>
+<base href="/admin/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=3.1">
+<link rel="stylesheet" href="/assets/css/style.css?v=3.5">
+<link rel="stylesheet" href="../assets/css/style.css?v=3.5">
 
 <!-- Firebase App & Services (Compat SDK) -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -437,7 +439,7 @@ body.admin-body {
     </div>
 
     <div class="admin-login-footer">
-      <a href="../index.html" class="btn-back-link">&larr; Kembali ke Menu Utama Pelanggan</a>
+      <a href="/index.html" class="btn-back-link">&larr; Kembali ke Menu Utama Pelanggan</a>
     </div>
   </div>
 </div>
@@ -449,7 +451,7 @@ body.admin-body {
   <!-- Topbar Header -->
   <header class="admin-topbar">
     <div class="admin-topbar-left">
-      <a href="index.html" class="admin-brand-link">
+      <a href="/admin/" class="admin-brand-link">
         <div class="brand-icon-box">IC</div>
         <div>
           <div class="admin-brand-title">INSERT COFFEE</div>
@@ -470,19 +472,19 @@ body.admin-body {
       </button>
 
       <!-- Store Menu Link -->
-      <a href="../index.html#coffee" class="admin-nav-link-btn" title="Buka Halaman Menu Pelanggan (Tab Baru)" target="_blank">
+      <a href="/index.html#coffee" class="admin-nav-link-btn" title="Buka Halaman Menu Pelanggan (Tab Baru)" target="_blank">
         <span>Menu Toko</span>
         <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
       </a>
 
       <!-- Leaderboard Link -->
-      <a href="../leaderboard/index.html" class="admin-nav-link-btn" title="Buka Halaman Leaderboard Publik (Tab Baru)" target="_blank">
+      <a href="/leaderboard.html" class="admin-nav-link-btn" title="Buka Halaman Leaderboard Publik (Tab Baru)" target="_blank">
         <span>Leaderboard</span>
         <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
       </a>
 
       <!-- Display Screen Link -->
-      <a href="../index.html#display" class="admin-nav-link-btn" title="Buka Layar Antrean TV Display (Tab Baru)" target="_blank">
+      <a href="/index.html#display" class="admin-nav-link-btn" title="Buka Layar Antrean TV Display (Tab Baru)" target="_blank">
         <span>Layar TV Antrean</span>
         <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
       </a>
@@ -852,8 +854,8 @@ service cloud.firestore {<br>
      SCRIPTS & CONTROLLER GLUE
      ============================================================ -->
 <!-- Core Shared Data & Audio -->
-<script src="../assets/js/data.js?v=3.2"></script>
-<script src="../assets/js/audio.js?v=3.2"></script>
+<script src="/assets/js/data.js?v=3.5"></script>
+<script src="/assets/js/audio.js?v=3.5"></script>
 
 <script>
 // Formatting helper
@@ -928,9 +930,9 @@ function navigate(page) {
     if (viewDashboard) viewDashboard.style.display = 'flex';
     if (typeof renderAdminPanel === 'function') renderAdminPanel();
   } else if (page === 'leaderboard') {
-    window.location.href = '../leaderboard.html';
+    window.location.href = '/leaderboard.html';
   } else if (page === 'coffee' || page === 'home' || page === 'display' || page === 'arcade') {
-    window.location.href = '../index.html#' + page;
+    window.location.href = '/index.html#' + page;
   }
 }
 
@@ -978,8 +980,8 @@ function handleOrderSearch(query) {
 </script>
 
 <!-- Load Firebase Config & Admin Core Logic -->
-<script src="../assets/js/firebase-config.js?v=3.1"></script>
-<script src="../assets/js/admin.js?v=3.1"></script>
+<script src="/assets/js/firebase-config.js?v=3.5"></script>
+<script src="/assets/js/admin.js?v=3.5"></script>
 
 <script>
 // Initialize page state based on current session
