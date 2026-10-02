@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portofolio Vigi Riyan Tanu — Mahasiswa Semester 1 Teknik Informatika UIN Maulana Malik Ibrahim Malang" />
+    <title>Vigi Riyan Tanu — Portofolio</title>
+    <script>
+      // If opened via static web server (such as python server.py on :8080) or file://,
+      // immediately redirect to the full interactive 3D portfolio
+      if (location.protocol === 'file:' || (location.port !== '5173' && !window.__vite_plugin_react_preamble_installed__)) {
+        var target = location.pathname.indexOf('/dist') !== -1 ? 'landing-pages/kage.html' : 'public/landing-pages/kage.html';
+        window.location.replace(target + window.location.search + window.location.hash);
+      }
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0; url=public/landing-pages/kage.html" />
+    </noscript>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,176 @@
+/* ============================================================
+   layout.css — container, section, grid dasar
+   ============================================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(1.1rem, 4vw, 2rem);
+}
+
+/* ---------- Section ---------- */
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+  scroll-margin-top: var(--nav-h);
+}
+
+.section--alt {
+  background-color: var(--c-bg-alt);
+  border-block: 1px solid var(--c-border-soft);
+}
+
+.section__head {
+  max-width: 62ch;
+  margin-bottom: clamp(2.2rem, 4vw, 3.4rem);
+}
+
+.section__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-full);
+  background: var(--c-surface);
+  color: var(--c-primary);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.section__title {
+  margin-bottom: 0.9rem;
+}
+
+.section__lead {
+  color: var(--c-text-muted);
+  font-size: 1.03rem;
+}
+
+/* ---------- About layout ---------- */
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: clamp(1.6rem, 3.5vw, 2.8rem);
+  align-items: start;
+}
+
+.about__side {
+  display: grid;
+  gap: 1.2rem;
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+}
+
+/* ---------- Contact layout ---------- */
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: clamp(1.5rem, 3vw, 2.6rem);
+  align-items: start;
+}
+
+/* ---------- Skills layout ---------- */
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.8vw, 1.3rem);
+}
+
+.skills__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  background: var(--c-surface);
+  transition: border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base);
+}
+
+.skills__group:hover {
+  border-color: rgba(56, 189, 248, 0.42);
+  transform: translateY(-4px);
+  box-shadow: var(--c-shadow);
+}
+
+.skills__group-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.15rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px dashed var(--c-border);
+}
+
+.skills__group-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 10px;
+  background: var(--grad-brand-soft);
+  border: 1px solid var(--c-border);
+  font-size: 1rem;
+}
+
+.skills__group-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.skills__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* ---------- Projects layout ---------- */
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.2rem, 2.4vw, 1.8rem);
+}
+
+.projects__empty {
+  padding: 2.4rem 1rem;
+  border: 1px dashed var(--c-border);
+  border-radius: var(--r-lg);
+  color: var(--c-text-dim);
+  text-align: center;
+}
+
+/* ---------- Experience layout ---------- */
+.exp {
+  display: grid;
+  gap: clamp(1.6rem, 3vw, 2.6rem);
+}
+
+.exp__col-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.exp__col-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--c-border), transparent);
+}
+
+.exp__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.1rem, 2.2vw, 1.6rem);
+}

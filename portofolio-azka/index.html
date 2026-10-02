@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ahmad Azka Ibadillah | Portofolio</title>
+<meta name="description" content="Portofolio Ahmad Azka Ibadillah - Mahasiswa Semester 1 UIN Maulana Malik Ibrahim Malang" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050505;
+  --surface:#080D1A;
+  --text:#f2f5ff;
+  --muted:#9aa3b8;
+  --border:#1a2340;
+  --accent:#5B8CFF;
+  --nav-bg:rgba(5,5,5,.8);
+  --tag-bg:#0B1630;
+  --bar-bg:#1a2340;
+}
+[data-theme="light"]{
+  --bg:#fafaf7;
+  --surface:#ffffff;
+  --text:#17171a;
+  --muted:#5f626b;
+  --border:#e3e1d8;
+  --accent:#1d4ed8;
+  --nav-bg:#fafaf7;
+  --tag-bg:#f0efe9;
+  --bar-bg:#e7e5dc;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after{
+  transition:background-color .45s ease,color .45s ease,border-color .45s ease !important;
+}
+body{
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  overflow-x:hidden;
+  transition:background-color .45s ease,color .45s ease;
+}
+a{color:inherit;text-decoration:none}
+.container{max-width:1020px;margin:0 auto;padding:0 24px}
+.hl{color:var(--text)}
+
+/* PREMIUM FUTURISTIC BACKGROUND — deep black / midnight blue */
+#space{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:0;pointer-events:none;
+  transition:opacity .6s ease;
+}
+.aurora{position:fixed;border-radius:50%;filter:blur(120px);z-index:0;pointer-events:none;transition:opacity .6s ease;will-change:transform}
+.aurora-blue{width:min(60vw,780px);height:min(60vw,780px);top:-14%;left:-15%;background:radial-gradient(circle,rgba(37,99,235,.28),rgba(37,99,235,.07) 45%,transparent 70%);animation:drift1 30s ease-in-out infinite alternate}
+.aurora-violet{width:min(54vw,700px);height:min(54vw,700px);top:28%;right:-17%;background:radial-gradient(circle,rgba(124,58,237,.20),rgba(124,58,237,.05) 45%,transparent 70%);animation:drift2 36s ease-in-out infinite alternate}
+.aurora-cyan{width:min(42vw,540px);height:min(42vw,540px);bottom:-20%;left:20%;background:radial-gradient(circle,rgba(6,182,212,.10),transparent 70%);animation:drift1 44s ease-in-out infinite alternate-reverse}
+@keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,40px) scale(1.07)}}
+@keyframes drift2{from{transform:translate(0,0) scale(1.05)}to{transform:translate(-70px,50px) scale(1)}}
+.grid-overlay{
+  position:fixed;inset:0;z-index:0;pointer-events:none;transition:opacity .6s ease;opacity:.5;
+  background-image:linear-gradient(rgba(140,160,220,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(140,160,220,.045) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse 75% 62% at 50% 42%,transparent 42%,black 78%);
+  mask-image:radial-gradient(ellipse 75% 62% at 50% 42%,transparent 42%,black 78%);
+}
+.noise{
+  position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;transition:opacity .6s ease;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;transition:opacity .6s ease;background:radial-gradient(ellipse 88% 72% at 50% 44%,transparent 54%,rgba(0,0,0,.62) 100%)}
+[data-theme="light"] #space,[data-theme="light"] .aurora,[data-theme="light"] .grid-overlay,[data-theme="light"] .noise,[data-theme="light"] .vignette{opacity:0}
+header.hero,main,footer{position:relative;z-index:2}
+@media(prefers-reduced-motion:reduce){.aurora-blue,.aurora-violet,.aurora-cyan{animation:none}}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:var(--nav-bg);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  transition:background-color .45s ease,border-color .45s ease;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:800;font-size:1.1rem;letter-spacing:-.3px}
+.logo i{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;gap:26px;font-weight:600;font-size:.92rem;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--text);color:var(--bg);
+  font-weight:700;padding:10px 20px;border-radius:8px;
+  border:1px solid var(--text);cursor:pointer;transition:border-color .2s,color .2s,background-color .45s ease;
+  font-size:.9rem;
+}
+.btn:hover{opacity:.85}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--text);opacity:1}
+.theme-toggle{
+  width:40px;height:40px;border-radius:8px;border:1px solid var(--border);
+  background:transparent;color:var(--text);font-size:1rem;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:background-color .45s ease,color .45s ease,border-color .45s ease,transform .3s ease;
+}
+.theme-toggle:hover{border-color:var(--text)}
+.theme-toggle span{display:inline-block;transition:transform .4s ease,opacity .25s ease}
+.theme-toggle.switching span{transform:rotate(180deg) scale(.4);opacity:0}
+.hamburger{display:none;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:1.15rem;cursor:pointer;width:40px;height:40px}
+
+/* HERO */
+.hero{padding:140px 0 60px}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start}
+.eyebrow{
+  display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:1.5px;
+  color:var(--muted);border:1px solid var(--border);border-radius:999px;
+  padding:6px 14px;margin-bottom:22px;
+}
+.hero h1{font-size:clamp(2.2rem,4.6vw,3.3rem);line-height:1.15;letter-spacing:-1.2px;margin-bottom:14px;font-weight:800;min-height:1.3em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.typed-caret{display:inline-block;width:.55ch;margin-left:2px;color:var(--accent);font-weight:400;animation:caret-blink 1s step-end infinite}
+@keyframes caret-blink{0%,100%{opacity:1}50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.typed-caret{animation:none}}
+.hero .sub{font-size:1.05rem;color:var(--muted);max-width:540px;margin-bottom:26px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:30px}
+.hero-meta{border-top:1px solid var(--border);padding-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;font-size:.85rem;color:var(--muted)}
+.hero-meta strong{color:var(--text);display:block;font-size:.95rem;margin-bottom:2px}
+
+.profile{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:28px;text-align:left;
+  transition:background-color .45s ease,border-color .45s ease;
+}
+.profile img{
+  width:96px;height:96px;border-radius:50%;object-fit:cover;display:block;
+  border:1px solid var(--border);margin-bottom:16px;background:var(--tag-bg);
+}
+.profile h3{font-size:1.2rem;margin-bottom:2px}
+.profile .role{color:var(--muted);font-size:.9rem;margin-bottom:14px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{background:var(--tag-bg);border:1px solid var(--border);padding:5px 11px;border-radius:6px;font-size:.78rem;font-weight:600;transition:background-color .45s ease,border-color .45s ease}
+
+/* SECTION */
+section{padding:56px 0;border-top:1px solid var(--border)}
+.section-index{font-size:.8rem;font-weight:700;letter-spacing:1.5px;color:var(--muted);margin-bottom:10px}
+.section-index b{color:var(--accent);font-weight:800;margin-right:8px}
+.section-h{font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-.5px;margin-bottom:10px}
+.section-d{color:var(--muted);max-width:620px;margin-bottom:30px;font-size:.98rem}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);border-radius:12px;padding:24px;
+  transition:background-color .45s ease,border-color .45s ease,transform .2s ease;
+}
+.card:hover{transform:translateY(-3px)}
+.card .num{font-size:.78rem;font-weight:800;letter-spacing:1px;color:var(--accent);display:block;margin-bottom:10px}
+.card h3{margin-bottom:6px;font-size:1.05rem}
+.card p{color:var(--muted);font-size:.92rem}
+.card .link{display:inline-block;margin-top:12px;font-weight:700;font-size:.88rem;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:2px}
+.card .link:hover{border-color:var(--text)}
+.skill-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.skill-top span{font-size:.85rem;color:var(--muted);font-weight:700;white-space:nowrap}
+.skill-bar{background:var(--bar-bg);height:6px;border-radius:99px;margin-top:12px;overflow:hidden;transition:background-color .45s ease}
+.skill-fill{height:100%;background:var(--accent);border-radius:99px}
+.timeline{border-left:1px solid var(--border);margin-left:4px;padding-left:26px;display:flex;flex-direction:column;gap:26px}
+.timeline-item{position:relative}
+.timeline-item::before{content:'';position:absolute;left:-31px;top:7px;width:9px;height:9px;background:var(--bg);border:2px solid var(--accent);border-radius:50%}
+.timeline-item span{font-size:.8rem;color:var(--muted);font-weight:700;letter-spacing:.5px}
+.timeline-item h3{margin:4px 0;font-size:1.05rem}
+.timeline-item p{color:var(--muted);font-size:.92rem;max-width:640px}
+
+/* CONTACT */
+.contact-box{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  padding:44px 36px;transition:background-color .45s ease,border-color .45s ease;
+}
+.contact-box h2{font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-.5px;margin-bottom:10px}
+.contact-box p{color:var(--muted);margin-bottom:24px;max-width:560px;font-size:.96rem}
+.contact-links{display:flex;gap:10px;flex-wrap:wrap}
+.contact-links a{border:1px solid var(--border);border-radius:8px;padding:9px 16px;font-weight:700;font-size:.88rem}
+.contact-links a:hover{border-color:var(--text)}
+
+footer{padding:28px 0;border-top:1px solid var(--border);color:var(--muted);font-size:.85rem}
+.footer-inner{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:860px){
+  .hero-grid,.grid-2,.grid-3{grid-template-columns:1fr}
+  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--nav-bg);flex-direction:column;padding:16px 24px 22px;border-bottom:1px solid var(--border);gap:16px}
+  .nav-links.open{display:flex}
+  .hamburger{display:inline-flex;align-items:center;justify-content:center}
+  .hero{padding-top:112px}
+  .hero-meta{grid-template-columns:1fr 1fr}
+  .contact-box{padding:32px 22px}
+}
+</style>
+</head>
+<body>
+
+<canvas id="space" aria-hidden="true"></canvas>
+<div class="aurora aurora-blue" aria-hidden="true"></div>
+<div class="aurora aurora-violet" aria-hidden="true"></div>
+<div class="aurora aurora-cyan" aria-hidden="true"></div>
+<div class="grid-overlay" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo">azka<i>.</i>dev</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#tentang">Tentang</a>
+      <a href="#pendidikan">Pendidikan</a>
+      <a href="#skill">Skill</a>
+      <a href="#proyek">Proyek</a>
+      <a href="#kontak">Kontak</a>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="theme-toggle" id="themeToggle" aria-label="Ganti mode gelap atau terang"><span id="themeIcon">○</span></button>
+      <a class="btn" href="https://github.com/fahmielmurottal-sys" target="_blank" rel="noopener">GitHub ↗</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">PORTOFOLIO — 2026</span>
+      <h1 aria-label="Ahmad Azka Ibadillah"><span id="typedName">Ahmad Azka Ibadillah<em>.</em></span><span class="typed-caret" aria-hidden="true">|</span></h1>
+      <p class="sub">Mahasiswa semester 1 di UIN Maulana Malik Ibrahim Malang. Sedang belajar dasar pemrograman dan web development, dan mendokumentasikan progresnya di sini.</p>
+      <div class="hero-cta">
+        <a href="#proyek" class="btn">Lihat proyek →</a>
+        <a href="https://github.com/fahmielmurottal-sys" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+      </div>
+      <div class="hero-meta">
+        <div><strong>Status</strong>Semester 1</div>
+        <div><strong>Lokasi</strong>Malang, Indonesia</div>
+        <div><strong>GitHub</strong>@fahmielmurottal-sys</div>
+      </div>
+    </div>
+    <aside class="profile">
+      <img src="azka.jpg" alt="Foto profil Ahmad Azka Ibadillah" loading="lazy" />
+      <h3>Ahmad Azka Ibadillah</h3>
+      <p class="role">Mahasiswa — UIN Maliki Malang</p>
+      <div class="tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Git</span>
+        <span class="tag">Python</span>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<main class="container">
+
+<section id="tentang" class="reveal">
+  <div class="section-index"><b>01</b> / TENTANG</div>
+  <h2 class="section-h">Baru mulai, fokus di dasar-dasar.</h2>
+  <p class="section-d">Nama saya <strong class="hl">Ahmad Azka Ibadillah</strong>, mahasiswa semester 1 di UIN Maulana Malik Ibrahim Malang. Semester ini saya pakai untuk adaptasi kuliah dan membangun fondasi: logika pemrograman, web dasar, dan Git.</p>
+  <div class="grid-3">
+    <div class="card"><span class="num">[ 01 ]</span><h3>Kuliah</h3><p>Mengikuti perkuliahan semester awal dan kegiatan kampus di UIN Maliki Malang.</p></div>
+    <div class="card"><span class="num">[ 02 ]</span><h3>Belajar coding</h3><p>Latihan HTML, CSS, JavaScript, dan Git. Target: bisa membuat website responsif dari nol.</p></div>
+    <div class="card"><span class="num">[ 03 ]</span><h3>Arah</h3><p>Menuju software development. Menulis kode setiap minggu dan mempublikasikannya di GitHub.</p></div>
+  </div>
+</section>
+
+<section id="pendidikan" class="reveal">
+  <div class="section-index"><b>02</b> / PENDIDIKAN</div>
+  <h2 class="section-h">Riwayat singkat.</h2>
+  <p class="section-d">Latar pendidikan formal saya sampai saat ini.</p>
+  <div class="timeline">
+    <div class="timeline-item">
+      <span>2025 — SEKARANG</span>
+      <h3>UIN Maulana Malik Ibrahim Malang</h3>
+      <p>Mahasiswa semester 1. Mempelajari dasar perkuliahan dan pengantar pemrograman.</p>
+    </div>
+    <div class="timeline-item">
+      <span>SEBELUMNYA</span>
+      <h3>SMA / MA sederajat</h3>
+      <p>Lulus pendidikan menengah dengan minat di teknologi. Belajar komputer secara otodidak.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skill" class="reveal">
+  <div class="section-index"><b>03</b> / SKILL</div>
+  <h2 class="section-h">Yang sedang dipelajari.</h2>
+  <p class="section-d">Progres jujur per semester 1 — masih bertumbuh.</p>
+  <div class="grid-2">
+    <div class="card"><div class="skill-top"><h3>HTML + CSS</h3><span>75%</span></div><p>Struktur halaman, flexbox, grid, responsive dasar.</p><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+    <div class="card"><div class="skill-top"><h3>JavaScript</h3><span>45%</span></div><p>Sintaks dasar, manipulasi DOM, interaksi sederhana.</p><div class="skill-bar"><div class="skill-fill" style="width:45%"></div></div></div>
+    <div class="card"><div class="skill-top"><h3>Python</h3><span>40%</span></div><p>Tipe data, kontrol alur, latihan logika untuk kuliah.</p><div class="skill-bar"><div class="skill-fill" style="width:40%"></div></div></div>
+    <div class="card"><div class="skill-top"><h3>Git + GitHub</h3><span>60%</span></div><p>Commit, push/pull, publikasi kode di @fahmielmurottal-sys.</p><div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div></div>
+  </div>
+</section>
+
+<section id="proyek" class="reveal">
+  <div class="section-index"><b>04</b> / PROYEK</div>
+  <h2 class="section-h">Kerjaan awal.</h2>
+  <p class="section-d">Tiga latihan pertama selama semester 1. Kode lengkap ada di GitHub.</p>
+  <div class="grid-3">
+    <div class="card"><span class="num">P.01</span><h3>Website portofolio ini</h3><p>Halaman statis responsif, HTML + CSS + JS tanpa framework.</p><a class="link" href="https://github.com/fahmielmurottal-sys" target="_blank" rel="noopener">GitHub ↗</a></div>
+    <div class="card"><span class="num">P.02</span><h3>Latihan HTML dasar</h3><p>Biodata, tabel, form, dan landing page sederhana.</p><a class="link" href="https://github.com/fahmielmurottal-sys" target="_blank" rel="noopener">GitHub ↗</a></div>
+    <div class="card"><span class="num">P.03</span><h3>Latihan JavaScript</h3><p>Kalkulator, to-do list, dan manipulasi DOM.</p><a class="link" href="https://github.com/fahmielmurottal-sys" target="_blank" rel="noopener">GitHub ↗</a></div>
+  </div>
+</section>
+
+<section id="kontak" class="reveal">
+  <div class="contact-box">
+    <div class="section-index"><b>05</b> / KONTAK</div>
+    <h2>Butuh teman belajar atau diskusi tugas.</h2>
+    <p>Terbuka untuk belajar bareng, proyek kampus, atau komunitas IT di Malang. Cara tercepat menghubungi saya lewat GitHub atau email.</p>
+    <div class="contact-links">
+      <a href="https://github.com/fahmielmurottal-sys" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://www.uin-malang.ac.id" target="_blank" rel="noopener">UIN Malang ↗</a>
+      <a href="mailto:fahmielmurottal@example.com">Email →</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 Ahmad Azka Ibadillah</span>
+    <span>Malang, Indonesia — Semester 1, UIN Maliki Malang</span>
+  </div>
+</footer>
+
+<script>
+// --- Mode gelap / terang, transisi smooth ---
+const rootEl = document.documentElement;
+const toggleBtn = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+
+function applyTheme(theme, animate=true){
+  if(animate){
+    rootEl.classList.add('theme-anim');
+    toggleBtn.classList.add('switching');
+    setTimeout(()=>toggleBtn.classList.remove('switching'), 250);
+    setTimeout(()=>rootEl.classList.remove('theme-anim'), 600);
+  }
+  rootEl.setAttribute('data-theme', theme);
+  themeIcon.textContent = theme === 'light' ? '●' : '○';
+  try{ localStorage.setItem('azka-theme', theme); }catch(e){}
+}
+(function(){
+  let saved = null;
+  try{ saved = localStorage.getItem('azka-theme'); }catch(e){}
+  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  applyTheme(saved || (prefersLight ? 'light' : 'dark'), false);
+})();
+toggleBtn.addEventListener('click', ()=>{
+  const next = rootEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  applyTheme(next, true);
+});
+
+const ham = document.getElementById('hamburger');
+const links = document.getElementById('navLinks');
+ham.addEventListener('click', () => links.classList.toggle('open'));
+links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); } });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// --- Cinematic deep-space background: dust, glow particles, light trails ---
+(function(){
+  const canvas = document.getElementById('space');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W = 0, H = 0, stars = [], dust = [], trails = [];
+  const TINTS = ['235,240,255','235,240,255','200,215,255','196,181,253','165,243,252'];
+
+  function resize(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = Math.floor(W * dpr);
+    canvas.height = Math.floor(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.max(120, Math.min(260, Math.floor(W * H / 7000)));
+    stars = Array.from({length: count}, (_, idx)=>({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.3 + 0.3,
+      base: Math.random() * 0.5 + 0.3,
+      amp: Math.random() * 0.35 + 0.1,
+      speed: Math.random() * 1.6 + 0.4,
+      phase: Math.random() * Math.PI * 2,
+      drift: Math.random() * 0.12 + 0.03,
+      glow: idx % 18 === 0,
+      tint: TINTS[Math.floor(Math.random() * TINTS.length)]
+    }));
+    const dustCount = Math.max(14, Math.min(36, Math.floor(W * H / 45000)));
+    dust = Array.from({length: dustCount}, ()=>({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 2.2 + 1,
+      vy: -(Math.random() * 0.16 + 0.05),
+      vx: (Math.random() - 0.5) * 0.08,
+      a: Math.random() * 0.10 + 0.05,
+      phase: Math.random() * Math.PI * 2
+    }));
+    // abstract curved light trails — extremely subtle, flowing across the scene
+    trails = [
+      {y: 0.20, amp: 60, len: 1.4, speed: 0.000045, width: 1.4, alpha: 0.10, color: '80,130,255', phase: 0.0},
+      {y: 0.55, amp: 85, len: 1.1, speed: 0.000032, width: 1.2, alpha: 0.08, color: '150,110,250', phase: 2.1},
+      {y: 0.82, amp: 50, len: 1.6, speed: 0.000058, width: 1.0, alpha: 0.07, color: '60,200,220', phase: 4.2}
+    ];
+  }
+
+  function paintBackground(){
+    const g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, '#050505');
+    g.addColorStop(0.55, '#05070d');
+    g.addColorStop(1, '#080D1A');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+    const depth = ctx.createRadialGradient(W * 0.5, H * 1.1, 0, W * 0.5, H * 1.1, Math.max(W, H) * 0.75);
+    depth.addColorStop(0, 'rgba(11,22,48,.45)');
+    depth.addColorStop(1, 'rgba(11,22,48,0)');
+    ctx.fillStyle = depth;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  function drawStars(t, dt){
+    for(const s of stars){
+      s.y += s.drift * dt;
+      if(s.y > H + 4){ s.y = -4; s.x = Math.random() * W; }
+      const tw = s.base + s.amp * Math.sin(t * 0.001 * s.speed + s.phase);
+      if(s.glow){
+        const halo = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 7);
+        halo.addColorStop(0, 'rgba(170,200,255,' + (0.35 * tw).toFixed(3) + ')');
+        halo.addColorStop(1, 'rgba(170,200,255,0)');
+        ctx.fillStyle = halo;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * 7, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(' + s.tint + ',' + tw.toFixed(3) + ')';
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function drawDust(t, dt){
+    for(const p of dust){
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      if(p.y < -6){ p.y = H + 6; p.x = Math.random() * W; }
+      if(p.x < -6){ p.x = W + 6; } else if(p.x > W + 6){ p.x = -6; }
+      const pulse = p.a * (0.7 + 0.3 * Math.sin(t * 0.0008 + p.phase));
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(150,190,255,' + pulse.toFixed(3) + ')';
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // curved light trails — segmented strokes so the center stays dark and clean
+  function trailY(tr, x, shift){
+    const k = (Math.PI * 2 * tr.len) / W;
+    return tr.y * H
+      + Math.sin(x * k + tr.phase + shift) * tr.amp
+      + Math.sin(x * k * 0.37 + tr.phase * 1.7 + shift * 0.6) * tr.amp * 0.5;
+  }
+
+  function drawTrails(t){
+    const STEPS = 90;
+    for(const tr of trails){
+      const shift = t * tr.speed * W;
+      for(let pass = 0; pass < 2; pass++){
+        ctx.lineWidth = pass === 0 ? tr.width * 5 : tr.width;
+        for(let i = 0; i < STEPS; i++){
+          const x0 = (i / STEPS) * (W + 200) - 100;
+          const x1 = ((i + 1) / STEPS) * (W + 200) - 100;
+          // fade toward the horizontal center — typography zone stays clean
+          const fade = 0.22 + 0.78 * Math.min(1, Math.abs((x0 / W) - 0.5) * 2.2);
+          const a = tr.alpha * fade * (pass === 0 ? 0.35 : 1);
+          ctx.strokeStyle = 'rgba(' + tr.color + ',' + a.toFixed(4) + ')';
+          ctx.beginPath();
+          ctx.moveTo(x0, trailY(tr, x0, shift));
+          ctx.lineTo(x1, trailY(tr, x1, shift));
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function renderStatic(){
+    paintBackground();
+    drawTrails(0);
+    for(const s of stars){
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(' + s.tint + ',' + s.base.toFixed(3) + ')';
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    for(const p of dust){
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(150,190,255,' + p.a.toFixed(3) + ')';
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  if(reduceMotion){
+    resize();
+    renderStatic();
+    window.addEventListener('resize', ()=>{
+      resize();
+      paintBackground();
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(' + s.tint + ',' + s.base.toFixed(3) + ')';
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+    return;
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  let last = 0;
+  (function loop(t){
+    const now = t || 0;
+    const dt = Math.min((now - last) / 16.7 || 1, 3);
+    last = now;
+    paintBackground();
+    drawTrails(now);
+    drawDust(now, dt);
+    drawStars(now, dt);
+    requestAnimationFrame(loop);
+  })();
+})();
+
+// --- Efek mengetik looping pada nama ---
+(function(){
+  const el = document.getElementById('typedName');
+  const fullText = 'Ahmad Azka Ibadillah.';
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function paint(text){
+    if(text.endsWith('.')){
+      const head = text.slice(0, -1)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      el.innerHTML = head + '<em>.</em>';
+    }else{
+      el.textContent = text;
+    }
+  }
+  if(reduceMotion){ paint(fullText); return; }
+  const TYPE_MS = 110, DELETE_MS = 55, HOLD_MS = 2000, GAP_MS = 500;
+  let i = fullText.length, deleting = true, timer = null;
+  function tick(){
+    if(deleting){
+      i--;
+      paint(fullText.slice(0, i));
+      if(i <= 0){
+        deleting = false;
+        timer = setTimeout(tick, GAP_MS);
+      }else{
+        timer = setTimeout(tick, DELETE_MS);
+      }
+    }else{
+      i++;
+      paint(fullText.slice(0, i));
+      if(i >= fullText.length){
+        deleting = true;
+        timer = setTimeout(tick, HOLD_MS);
+      }else{
+        timer = setTimeout(tick, TYPE_MS);
+      }
+    }
+  }
+  timer = setTimeout(tick, HOLD_MS);
+})();
+</script>
+</body>
+</html>

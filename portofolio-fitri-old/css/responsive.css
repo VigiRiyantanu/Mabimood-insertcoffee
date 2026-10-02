@@ -1,0 +1,343 @@
+/* ============================================================
+   responsive.css — breakpoints
+   Desktop ≥1024 (default) · Tablet ≤1023 · Mobile ≤767 · Mini ≤479
+   ============================================================ */
+
+/* ============================================================
+   TABLET (≤ 1023px)
+   ============================================================ */
+@media (max-width: 1023px) {
+  :root {
+    --container: 900px;
+  }
+
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: calc(var(--nav-h) + 2.5rem);
+    padding-bottom: 5rem;
+  }
+
+  .hero__content {
+    max-width: 42rem;
+  }
+
+  .hero__visual {
+    max-width: 560px;
+  }
+
+  .hero__card {
+    transform: none;
+  }
+
+  .hero__visual:hover .hero__card {
+    transform: none;
+  }
+
+  .hero__scroll {
+    display: none;
+  }
+
+  .about {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about__side {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .about__photo {
+    margin-bottom: 0;
+  }
+
+  .skills__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .exp__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ============================================================
+   MOBILE (≤ 767px)
+   ============================================================ */
+@media (max-width: 767px) {
+  :root {
+    --nav-h: 60px;
+    --section-y: 3.6rem;
+  }
+
+  body {
+    font-size: 0.97rem;
+  }
+
+  /* --- Navbar: hamburger --- */
+  .nav-toggle {
+    display: flex;
+    order: 3;
+  }
+
+  .navbar__actions--desktop {
+    display: none;
+  }
+
+  .navbar__inner {
+    justify-content: space-between;
+  }
+
+  .navbar__nav {
+    position: fixed;
+    inset: var(--nav-h) 0 auto 0;
+    margin: 0;
+    max-height: 0;
+    padding-inline: clamp(1.1rem, 4vw, 2rem);
+    background: var(--c-bg-alt);
+    border-bottom: 1px solid var(--c-border);
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height var(--t-base), visibility var(--t-base);
+  }
+
+  .navbar__nav.is-open {
+    max-height: min(70vh, 520px);
+    visibility: visible;
+    overflow-y: auto;
+  }
+
+  .navbar__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.15rem;
+    padding-block: 0.9rem 0.4rem;
+  }
+
+  .navbar__link {
+    padding: 0.78rem 0.85rem;
+    font-size: 1rem;
+  }
+
+  .navbar__link::after {
+    left: 0.85rem;
+    right: auto;
+    width: 18px;
+    bottom: 0.45rem;
+  }
+
+  .navbar__actions--mobile {
+    display: flex;
+    gap: 0.6rem;
+    padding-block: 0.9rem 1.2rem;
+    border-top: 1px solid var(--c-border-soft);
+    margin-top: 0.4rem;
+  }
+
+  .navbar__actions--mobile .btn {
+    flex: 1;
+  }
+
+  /* --- Hero --- */
+  .hero__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+    padding-top: 1.3rem;
+  }
+
+  .hero__badge--1 {
+    top: -14px;
+    left: 0;
+  }
+
+  .hero__badge--2 {
+    bottom: 34px;
+    left: -6px;
+  }
+
+  .hero__badge--3 {
+    bottom: -14px;
+    right: 0;
+  }
+
+  .hero__code {
+    font-size: 0.74rem;
+    padding: 1.1rem 1rem 1.3rem;
+  }
+
+  /* --- About --- */
+  .about__side {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about__photo {
+    max-width: 300px;
+    margin-inline: auto;
+  }
+
+  .about__facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* --- Grid umum --- */
+  .skills__grid,
+  .projects__grid,
+  .exp__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* --- Form --- */
+  .form__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .form__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form__footer .btn {
+    width: 100%;
+  }
+
+  .form__status {
+    text-align: center;
+  }
+
+  /* --- Project --- */
+  .project__links {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  .project__link {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* --- Footer --- */
+  .footer__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ============================================================
+   MINI / MOBILE KECIL (≤ 479px)
+   ============================================================ */
+@media (max-width: 479px) {
+  :root {
+    --section-y: 3rem;
+  }
+
+  h1 {
+    font-size: 1.85rem;
+  }
+
+  .hero__name {
+    font-size: 1.7rem;
+  }
+
+  .hero__role {
+    font-size: 1.12rem;
+  }
+
+  .hero__cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__cta .btn {
+    width: 100%;
+  }
+
+  .hero__stats {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.9rem;
+  }
+
+  .hero__badge {
+    display: none;
+  }
+
+  .timeline {
+    padding-left: 1.5rem;
+  }
+
+  .tl-item {
+    padding: 1rem;
+  }
+
+  .tl-item::before {
+    left: -1.5rem;
+    width: 12px;
+    height: 12px;
+  }
+
+  .about__list li {
+    padding: 0.75rem 0.85rem 0.75rem 2.1rem;
+  }
+
+  .project__actions {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .project__actions .btn {
+    flex: 1;
+  }
+}
+
+/* ============================================================
+   LAYAR SENTUH — hover tidak selalu tersedia
+   ============================================================ */
+@media (hover: none) {
+  .project__links {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  .skill__fill {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   CETAK
+   ============================================================ */
+@media print {
+  .navbar,
+  .to-top,
+  .hero__scroll,
+  .hero__bg,
+  .project__links,
+  #theme-toggle {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .section {
+    padding-block: 1.5rem;
+    break-inside: avoid;
+  }
+
+  .card,
+  .tl-item,
+  .project {
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,880 @@
+/* ============================================================
+   ARCADE — RETRO ARCADE HUB & MINIGAME STYLES
+   ============================================================ */
+/* ============================================================
+   ARCADE PAGE
+   ============================================================ */
+.arcade-header {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.arcade-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.arcade-accent {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--purple-2);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.arcade-header h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+.arcade-header p {
+  color: var(--text-2);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+.arcade-scores-hint {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.15s, color 0.15s;
+  text-transform: uppercase;
+}
+.arcade-scores-hint:hover { border-color: var(--purple); color: var(--purple-2); }
+.arcade-content { padding: 2.5rem 0 5rem; }
+.arcade-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.game-card {
+  background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2);
+  padding: 1.75rem;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.2s;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  position: relative;
+  transform-style: preserve-3d;
+}
+.game-card:hover {
+  transform: translateY(-6px) scale3d(1.02, 1.02, 1.02);
+  box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.7), 0 0 25px rgba(122, 110, 160, 0.25);
+  border-color: var(--purple-2) !important;
+  z-index: 2;
+}
+.game-card-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--bg-3) 0%, #151210 100%);
+  border: 2px solid var(--border-2);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  color: var(--purple-2);
+  letter-spacing: 0.06em;
+  text-align: center;
+  line-height: 1.5;
+  box-shadow: 0 5px 0 var(--border), 0 8px 15px rgba(0,0,0,0.5);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
+}
+.game-card:hover .game-card-icon {
+  transform: translateY(-3px) scale(1.08);
+  border-color: var(--purple-2);
+  color: var(--amber);
+  box-shadow: 0 8px 0 var(--purple-d), 0 12px 20px rgba(122, 110, 160, 0.4);
+}
+.game-card-info {
+  flex: 1;
+  transform-style: preserve-3d;
+}
+.game-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+.game-card-desc {
+  font-size: 0.825rem;
+  color: var(--text-3);
+  line-height: 1.55;
+  margin-bottom: 0.85rem;
+}
+.game-card-meta {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.game-meta-item {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+}
+.game-meta-item strong {
+  color: var(--purple-2);
+  display: block;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.15rem;
+}
+.btn-play {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: var(--purple-d);
+  color: var(--text);
+  border: 1px solid var(--purple);
+  padding: 0.45rem 1.1rem;
+  border-radius: var(--radius);
+  box-shadow: 0 3px 0 #251b3d, 0 6px 12px rgba(0,0,0,0.4);
+  cursor: pointer;
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s, background 0.15s;
+}
+.btn-play:hover {
+  background: var(--purple);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 #251b3d, 0 10px 18px rgba(90, 78, 122, 0.4);
+}
+.btn-play:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #251b3d;
+}
+.game-card-hs {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-3);
+  margin-top: 0.35rem;
+}
+.game-card-hs span { color: var(--amber); font-weight: 700; }
+
+/* ============================================================
+   GAME PLAY PAGE
+   ============================================================ */
+.game-play-page { min-height: calc(100vh - 56px); }
+.game-play-header {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-2);
+}
+.game-play-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.game-play-back {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-2);
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.15s;
+}
+.game-play-back:hover { color: var(--text); }
+.game-play-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.game-play-actions { display: flex; gap: 0.5rem; }
+.btn-game-action {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: var(--bg-3);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius);
+  transition: all 0.15s;
+}
+.btn-game-action:hover { background: var(--bg-4); color: var(--text); }
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 0;
+  align-items: flex-start;
+  min-height: calc(100vh - 112px);
+}
+.game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75rem 1rem;
+  background: #100E0C;
+  border-right: 1px solid var(--border);
+  min-height: calc(100vh - 112px);
+}
+.game-canvas-wrap {
+  position: relative;
+  display: inline-block;
+}
+.game-canvas-wrap canvas {
+  display: block;
+  image-rendering: pixelated;
+  border: 1px solid var(--border-2);
+}
+.game-side {
+  padding: 1.5rem;
+  background: var(--bg-2);
+}
+.game-side-block {
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.game-side-block:last-child { border-bottom: none; }
+.game-side-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 0.5rem;
+}
+.game-score-display {
+  font-family: 'Space Mono', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--amber);
+  line-height: 1;
+}
+.game-hs-display {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.1rem;
+  color: var(--text-2);
+  margin-top: 0.4rem;
+}
+.controls-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.control-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.key-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  background: var(--bg-4);
+  border: 1px solid var(--border-2);
+  border-bottom-width: 2px;
+  padding: 0.2rem 0.45rem;
+  border-radius: 3px;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+.control-action {
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+.game-msg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,8,6,0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+.game-msg-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.game-msg-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-3);
+  letter-spacing: 0.08em;
+}
+.btn-start-game {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--coffee);
+  color: var(--text);
+  padding: 0.65rem 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: background 0.15s;
+  margin-top: 0.25rem;
+}
+.btn-start-game:hover { background: var(--coffee-2); }
+
+/* ============================================================
+   RETRO PHYSICAL ARCADE CONTROLLER FOR MOBILE
+   ============================================================ */
+.mobile-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 440px;
+  margin: 1.15rem auto 0;
+  padding: 0.95rem 1rem;
+  background: linear-gradient(180deg, #1d1712 0%, #110e0b 100%);
+  border: 2px solid #3d2f23;
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.85), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.12),
+              inset 0 -2px 0 rgba(0, 0, 0, 0.8);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  position: relative;
+  z-index: 20;
+  box-sizing: border-box;
+}
+
+/* Controller Chassis Header / Top Bar */
+.arcade-pad-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px dashed rgba(212, 168, 83, 0.25);
+  margin-bottom: 0.15rem;
+}
+.arcade-pad-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--amber);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.arcade-pad-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+.arcade-pad-hint {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.arcade-pad-toggle-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-2);
+  color: var(--text-2);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.arcade-pad-toggle-btn:hover {
+  background: var(--bg-3);
+  color: var(--text);
+  border-color: var(--amber);
+}
+
+/* Gamepad Deck Layouts */
+.arcade-pad-deck {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.85rem;
+}
+
+/* Left / Right clusters */
+.pad-cluster-left, .pad-cluster-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pad-cluster-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Base Physical Tactile Button (Real 3D Mechanical Sink Press) */
+.phys-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.06s ease, box-shadow 0.06s ease, filter 0.06s ease;
+}
+
+/* Physical D-PAD Button (Matte Charcoal with Tactile Bevel) */
+.phys-dpad-key {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(180deg, #2c241c 0%, #1a1511 100%);
+  border: 1.5px solid #4a3b2c;
+  border-radius: 12px;
+  color: #ede8e1;
+  font-size: 1.3rem;
+  box-shadow: 0 5px 0 #0d0a08, 0 8px 14px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+.phys-dpad-key:active,
+.phys-dpad-key.is-pressed {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #0d0a08, inset 0 2px 5px rgba(0, 0, 0, 0.8);
+  background: #140f0c;
+  color: var(--amber);
+  border-color: var(--amber);
+}
+
+/* 3x3 D-Pad Matrix */
+.phys-dpad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 46px);
+  grid-template-rows: repeat(3, 46px);
+  gap: 4px;
+}
+.phys-dpad-grid .phys-dpad-empty {
+  background: transparent;
+  pointer-events: none;
+}
+.phys-dpad-center {
+  background: #16110d;
+  border-radius: 50%;
+  border: 1px solid #33271d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: var(--text-3);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
+  pointer-events: none;
+}
+
+/* Dual Horizontal D-pad (Left & Right) */
+.phys-dpad-horizontal {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.phys-dpad-horizontal .phys-dpad-key {
+  width: 52px;
+  height: 52px;
+  font-size: 1.4rem;
+}
+
+/* Dual Vertical D-pad (Up & Down for Pong) */
+.phys-dpad-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+.phys-dpad-vertical .phys-dpad-key {
+  width: 60px;
+  height: 50px;
+  font-size: 1.4rem;
+}
+
+/* Action Dome Buttons (A, B, X) */
+.phys-action-btn {
+  padding: 0 0.95rem;
+  height: 50px;
+  min-width: 54px;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+}
+
+/* Button A - Golden Amber (Primary Action: Jump / Rotate / Launch / Tap) */
+.btn-action-gold {
+  background: linear-gradient(180deg, #d4a853 0%, #aa7e30 100%);
+  color: #120e0a;
+  border: 1px solid #ecc16d;
+  box-shadow: 0 5px 0 #5c4115, 0 8px 16px rgba(212, 168, 83, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+.btn-action-gold:active,
+.btn-action-gold.is-pressed {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #5c4115, inset 0 2px 6px rgba(0, 0, 0, 0.5);
+  background: #a3782b;
+}
+
+/* Button B - Crimson Red (Secondary Action: Fire / Shoot / Steam / Hard Drop) */
+.btn-action-red {
+  background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+  color: #ffffff;
+  border: 1px solid #f87171;
+  box-shadow: 0 5px 0 #7f1d1d, 0 8px 16px rgba(239, 68, 68, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.btn-action-red:active,
+.btn-action-red.is-pressed {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #7f1d1d, inset 0 2px 6px rgba(0, 0, 0, 0.5);
+  background: #991b1b;
+}
+
+/* Button X - Cyan Blue (Utility Action: Dash / Sprint) */
+.btn-action-blue {
+  background: linear-gradient(180deg, #06b6d4 0%, #0891b2 100%);
+  color: #ffffff;
+  border: 1px solid #67e8f9;
+  box-shadow: 0 5px 0 #155e75, 0 8px 16px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.btn-action-blue:active,
+.btn-action-blue.is-pressed {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #155e75, inset 0 2px 6px rgba(0, 0, 0, 0.5);
+  background: #0e7490;
+}
+
+/* Big Round Punch Button for Flappy */
+.phys-punch-btn {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  margin: 0 auto;
+}
+
+/* Sub-labels on Action buttons */
+.phys-btn-badge {
+  font-size: 0.6rem;
+  font-weight: 900;
+  opacity: 0.85;
+}
+
+/* Minesweeper Rocker Switch */
+.minesweeper-toggle-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+.ms-toggle-pill {
+  flex: 1;
+  padding: 0.8rem 0.6rem;
+  border-radius: 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #241d17;
+  color: var(--text-2);
+  border: 1.5px solid var(--border-2);
+  box-shadow: 0 4px 0 #100d0a;
+  transition: all 0.15s ease;
+}
+.ms-toggle-pill.active {
+  background: linear-gradient(180deg, #d4a853 0%, #aa7e30 100%);
+  color: #120e0a;
+  border-color: #ecc16d;
+  box-shadow: 0 4px 0 #5c4115, 0 0 18px rgba(212, 168, 83, 0.45);
+}
+.ms-toggle-pill:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #100d0a;
+}
+
+/* High Scores panel */
+.highscores-panel {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  margin-top: 2rem;
+}
+.hs-head {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.hs-game-section {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.hs-game-section:last-child { border-bottom: none; }
+.hs-game-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--purple-2);
+  margin-bottom: 0.6rem;
+}
+.hs-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-2);
+  padding: 0.25rem 0;
+}
+.hs-rank { color: var(--text-3); margin-right: 0.75rem; }
+.hs-score { color: var(--amber); }
+.hs-empty { font-size: 0.75rem; color: var(--text-3); font-family: 'Space Mono', monospace; }
+
+/* About Page */
+.about-page { padding: 4rem 0 6rem; }
+.about-page-inner { max-width: 1040px; margin: 0 auto; }
+.about-page-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+.about-body p { color: var(--text-2); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.25rem; max-width: 60ch; }
+.about-body h3 { font-size: 1.25rem; margin: 2rem 0 0.75rem; }
+.about-page-rule { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+
+
+/* ============================================================
+   HEBOH RETRO ARCADE EFFECTS
+   ============================================================ */
+@keyframes hebohPulse {
+  0% { transform: scale(1) rotate(0deg); filter: hue-rotate(0deg); }
+  25% { transform: scale(1.02) rotate(-0.5deg); filter: hue-rotate(15deg); }
+  50% { transform: scale(1.04) rotate(0.5deg); filter: hue-rotate(30deg); }
+  75% { transform: scale(1.02) rotate(-0.5deg); filter: hue-rotate(15deg); }
+  100% { transform: scale(1) rotate(0deg); filter: hue-rotate(0deg); }
+}
+
+@keyframes rainbowBorder {
+  0% { border-color: var(--coffee); box-shadow: 0 0 10px rgba(156, 114, 72, 0.5); }
+  33% { border-color: var(--amber); box-shadow: 0 0 20px rgba(212, 168, 83, 0.8); }
+  66% { border-color: var(--purple-2); box-shadow: 0 0 20px rgba(122, 110, 160, 0.8); }
+  100% { border-color: var(--coffee); box-shadow: 0 0 10px rgba(156, 114, 72, 0.5); }
+}
+
+@keyframes backgroundDisco {
+  0% { background-color: var(--bg); }
+  25% { background-color: #211915; }
+  50% { background-color: #261D18; }
+  75% { background-color: #1F1924; }
+  100% { background-color: var(--bg); }
+}
+
+body {
+  animation: backgroundDisco 15s infinite;
+}
+
+.game-card {
+  animation: rainbowBorder 6s infinite;
+}
+
+.hero-visual img, .hero-title, .arcade-banner {
+  animation: hebohPulse 4s infinite ease-in-out;
+}
+
+.nav-logo {
+  animation: retroGlow 1.5s infinite alternate, hebohPulse 3s infinite;
+}
+
+/* Clean High-Impact Neon Buttons (Arcade & Action) */
+.btn-primary, .btn-neon, .btn-view-order, .btn-checkout {
+  position: relative;
+  box-shadow: 0 0 16px rgba(212, 168, 83, 0.35), 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary:hover, .btn-neon:hover, .btn-view-order:hover, .btn-checkout:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(212, 168, 83, 0.75), 0 0 42px rgba(212, 168, 83, 0.28), 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.btn-primary:active, .btn-neon:active, .btn-view-order:active, .btn-checkout:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 0 12px rgba(212, 168, 83, 0.5);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(156, 114, 72, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(212, 168, 83, 0.5); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.hero-visual img, .game-card {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.hero-visual img:hover {
+  transform: scale(1.03) translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.game-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(156, 114, 72, 0.15);
+  border-color: var(--coffee);
+}
+
+/* Subtle, smooth interactive micro-motion for standard buttons */
+button:not(.btn-primary):not(.btn-view-order):not(.btn-add):hover {
+  filter: brightness(1.1);
+}
+
+button:active, .btn:active {
+  transform: scale(0.97);
+}
+
+.page {
+  animation: fadeInPage 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeInPage {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.badge, .tag, .cart-badge {
+  animation: pulseGlow 3s infinite;
+}
+@media (max-width: 900px) {
+  .hero .container { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .drinks-grid { grid-template-columns: repeat(2, 1fr); }
+  .games-preview-grid { grid-template-columns: repeat(3, 1fr); }
+  .how-steps { grid-template-columns: repeat(2, 1fr); }
+  .about-inner { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .checkout-layout { grid-template-columns: 1fr; }
+  .game-layout { grid-template-columns: 1fr; }
+  .game-layout .game-area { 
+    order: 1; 
+    min-height: auto; 
+    padding: 1rem 0.5rem 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .game-side { 
+    order: 2; 
+    border-bottom: none;
+    padding: 1.25rem 1rem;
+  }
+  .mobile-controls { 
+    display: flex; 
+  }
+  .arcade-header .container { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  
+  /* Org Tree on Tablet */
+  .org-tree-connector { max-width: 95%; }
+  .org-tree-members { gap: 1rem; }
+  .team-card { padding: 1.25rem 0.75rem; }
+  .team-avatar-wrapper { width: 84px; height: 84px; }
+  .member-name { font-size: 0.95rem; }
+}
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .nav-right-mobile { display: flex; }
+  .mobile-profile-btn { display: inline-flex; }
+  .nav-hamburger { display: flex; }
+}
+@media (max-width: 680px) {
+  .drinks-grid { grid-template-columns: 1fr; }
+  .games-preview-grid { grid-template-columns: repeat(2, 1fr); }
+  .how-steps { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .products-grid { grid-template-columns: 1fr; }
+  .arcade-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .hero-title { font-size: 2rem; }
+  .cart-drawer { width: 100vw; }
+  .menu-title-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
+
+  /* Org Tree on Mobile (Vertical Branch Hierarchy) */
+  .org-tree-connector { display: none; }
+  .org-tree-members {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    position: relative;
+    padding-left: 1.75rem;
+    margin-top: 1.75rem;
+    border-left: 2px dashed rgba(212, 168, 83, 0.4);
+    width: 100%;
+    max-width: 400px;
+  }
+  .org-tree-member-col {
+    position: relative;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .org-tree-member-col::before {
+    content: '';
+    position: absolute;
+    left: -1.75rem;
+    top: 50%;
+    width: 1.75rem;
+    height: 2px;
+    background: rgba(212, 168, 83, 0.6);
+  }
+  .org-tree-card {
+    max-width: 100%;
+    width: 100%;
+  }
+  .org-tree-root {
+    max-width: 400px;
+  }
+}
+

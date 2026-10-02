@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id" class="no-js" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1120" />
+
+  <title>Nurul Fitriani — Frontend Developer &amp; Student of Technology</title>
+  <meta name="description" content="Portofolio pribadi Nurul Fitriani, developer yang sedang mendalami web development, pembuatan REST API, dan fundamental engineering. Lihat proyek, skill, dan pengalaman saya." />
+  <meta name="author" content="Nurul Fitriani" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://example.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="id_ID" />
+  <meta property="og:site_name" content="Portofolio Nurul Fitriani" />
+  <meta property="og:title" content="Nurul Fitriani — Frontend Developer &amp; Student of Technology" />
+  <meta property="og:description" content="Portofolio pribadi: proyek, skill, dan pengalaman sebagai developer." />
+  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:image" content="assets/img/project-placeholder.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Nurul Fitriani — Portofolio" />
+  <meta name="twitter:description" content="Portofolio pribadi: proyek, skill, dan pengalaman sebagai developer." />
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <script>document.documentElement.classList.remove("no-js");</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten utama</a>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a class="navbar__brand" href="#home" aria-label="Nurul Fitriani, kembali ke beranda">
+        <span class="navbar__logo" aria-hidden="true">&lt;/&gt;</span>
+        <span class="navbar__brand-text">Nurul<span class="navbar__brand-dot">.</span></span>
+      </a>
+
+      <nav class="navbar__nav" id="nav-menu" aria-label="Navigasi utama">
+        <ul class="navbar__list" id="nav-list"><!-- diisi oleh js/nav.js --></ul>
+        <div class="navbar__actions navbar__actions--mobile">
+          <a class="btn btn--outline btn--sm" href="#projects">Lihat Proyek</a>
+          <a class="btn btn--primary btn--sm" href="#contact">Hubungi Saya</a>
+        </div>
+      </nav>
+
+      <div class="navbar__actions navbar__actions--desktop">
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Ganti tema terang/gelap" title="Ganti tema">
+          <span class="icon-btn__glyph" data-icon="moon" aria-hidden="true">☾</span>
+        </button>
+        <a class="btn btn--primary btn--sm" href="#contact">Hubungi Saya</a>
+      </div>
+
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Buka menu navigasi">
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+      </button>
+    </div>
+    <div class="navbar__progress" id="scroll-progress" aria-hidden="true"></div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="section hero" id="home" aria-labelledby="hero-name">
+      <div class="hero__bg" aria-hidden="true">
+        <span class="hero__glow hero__glow--1"></span>
+        <span class="hero__glow hero__glow--2"></span>
+        <span class="hero__grid"></span>
+      </div>
+
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <p class="hero__eyebrow" data-reveal>
+            <span class="hero__dot" aria-hidden="true"></span>
+            Terbuka untuk kolaborasi &amp; peluang baru
+          </p>
+
+          <h1 class="hero__title" data-reveal data-reveal-delay="1">
+            <span class="hero__name text-gradient" id="hero-name">Nurul Fitriani</span>
+            <span class="hero__role">Developer yang membangun <em>antarmuka web</em> yang bersih &amp; fungsional.</span>
+          </h1>
+
+          <p class="hero__desc" data-reveal data-reveal-delay="2">
+            Halo, saya <strong>Nurul</strong>. Saya sedang mendalami pengembangan web — dari
+            <strong>HTML, CSS, dan JavaScript</strong> hingga pembuatan <strong>REST API</strong> dan
+            fundamental engineering seperti Git, Linux, dan database. Saya suka memecah
+            masalah rumit menjadi solusi yang sederhana, rapi, dan dapat dipertahankan.
+          </p>
+
+          <div class="hero__cta" data-reveal data-reveal-delay="3">
+            <a class="btn btn--primary" href="#projects">
+              Lihat Portfolio
+              <span class="btn__arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="btn btn--outline" href="#contact">Hubungi Saya</a>
+          </div>
+
+          <dl class="hero__stats" data-reveal data-reveal-delay="4">
+            <div class="hero__stat">
+              <dt class="hero__stat-label">Fokus Belajar</dt>
+              <dd class="hero__stat-value">Web Development</dd>
+            </div>
+            <div class="hero__stat">
+              <dt class="hero__stat-label">Proyek</dt>
+              <dd class="hero__stat-value" id="stat-projects">6+</dd>
+            </div>
+            <div class="hero__stat">
+              <dt class="hero__stat-label">Status</dt>
+              <dd class="hero__stat-value">Belajar Aktif</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="hero__visual" data-reveal data-reveal-delay="2" aria-hidden="true">
+          <div class="hero__card">
+            <div class="hero__card-bar">
+              <span></span><span></span><span></span>
+            </div>
+            <pre class="hero__code"><code><span class="code-k">const</span> <span class="code-f">fitri</span> = {
+  <span class="code-p">role</span>: <span class="code-s">"Web Developer"</span>,
+  <span class="code-p">focus</span>: [<span class="code-s">"Frontend"</span>, <span class="code-s">"REST API"</span>],
+  <span class="code-p">stack</span>: [<span class="code-s">"HTML"</span>, <span class="code-s">"CSS"</span>, <span class="code-s">"JavaScript"</span>],
+  <span class="code-p">learning</span>: <span class="code-b">true</span>,
+  <span class="code-f">build</span>(idea) {
+    <span class="code-k">return</span> <span class="code-s">`${idea} → clean code`</span>;
+  }
+};
+<span class="code-c">// still learning, always building.</span></code></pre>
+          </div>
+          <div class="hero__badge hero__badge--1">HTML</div>
+          <div class="hero__badge hero__badge--2">CSS</div>
+          <div class="hero__badge hero__badge--3">JavaScript</div>
+        </div>
+      </div>
+
+      <a class="hero__scroll" href="#about" aria-label="Gulir ke section About">
+        <span class="hero__scroll-line" aria-hidden="true"></span>
+        Scroll
+      </a>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section section--alt" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <header class="section__head" data-reveal>
+          <p class="section__eyebrow">01 — Tentang Saya</p>
+          <h2 class="section__title" id="about-title">Sedang dalam perjalanan belajar, siap berkarya</h2>
+          <p class="section__lead">
+            Saya percaya kode yang baik itu sederhana, mudah dibaca, dan menyelesaikan masalah yang nyata.
+          </p>
+        </header>
+
+        <div class="about">
+          <div data-reveal>
+            <div class="about__text">
+              <h3 class="about__sub">Perkenalan singkat</h3>
+              <p>
+                Saya <strong>Nurul Fitriani</strong>, seorang student yang sedang belajar
+                membangun perangkat lunak. Ketertarikan saya pada dunia teknologi bermula sejak
+                belajar membuat halaman web sederhana, ketika saya menyadari bahwa logika yang
+                tertulis di dalam kode bisa menyelesaikan masalah yang nyata.
+              </p>
+              <p>
+                Saat ini saya berfokus memperdalam <strong>web development</strong>: menyusun antarmuka
+                yang responsif, menulis JavaScript yang rapi, dan memahami cara kerja API serta
+                database di baliknya.
+              </p>
+
+              <h3 class="about__sub">Fokus &amp; bidang yang saya pelajari</h3>
+              <ul class="about__list">
+                <li><strong>Frontend Web</strong> — HTML semantik, CSS modern (Flexbox, Grid, responsif), JavaScript (DOM, fetch, async/await).</li>
+                <li><strong>Backend Dasar</strong> — REST API, validasi input, autentikasi dasar, dan operasi CRUD pada database.</li>
+                <li><strong>DevOps &amp; Tools</strong> — Git/GitHub untuk alur kerja kolaboratif, terminal Linux, dan kontainer dengan Docker.</li>
+                <li><strong>Networking</strong> — memahami cara kerja HTTP, DNS, dan request-response di jaringan.</li>
+              </ul>
+
+              <h3 class="about__sub">Tujuan &amp; ketertarikan saya</h3>
+              <p>
+                Tujuan jangka pendek saya adalah menyelesaikan pembelajaran fundamental, membangun
+                beberapa proyek nyata dari nol, lalu aktif berkontribusi pada proyek open source.
+                Untuk jangka panjang, saya ingin berkembang menjadi developer yang tidak hanya bisa
+                menulis kode, tetapi juga memahami <em>mengapa</em> sebuah solusi dipilih di atas
+                solusi lain.
+              </p>
+
+              <div class="about__facts">
+                <div class="about__fact">
+                  <span class="about__fact-label">Sedang dipelajari</span>
+                  <span class="about__fact-value">Web Development</span>
+                </div>
+                <div class="about__fact">
+                  <span class="about__fact-label">Pendekatan</span>
+                  <span class="about__fact-value">Belajar aktif + praktik</span>
+                </div>
+                <div class="about__fact">
+                  <span class="about__fact-label">Bahasa</span>
+                  <span class="about__fact-value">Bahasa Indonesia</span>
+                </div>
+                <div class="about__fact">
+                  <span class="about__fact-label">Tujuan</span>
+                  <span class="about__fact-value">Developer full-stack</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="about__side" data-reveal data-reveal-delay="1" aria-label="Ringkasan singkat">
+            <figure class="about__photo">
+              <img src="assets/img/nurul.jpg" width="400" height="400" alt="Foto profil Nurul Fitriani" loading="lazy" decoding="async" style="border-radius:16px;object-fit:cover;" />
+            </figure>
+
+            <div class="card card--panel">
+              <h3 class="card__title">Yang sedang dipelajari</h3>
+              <ul class="about__learning" id="about-learning"><!-- diisi oleh js/render.js --></ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <header class="section__head" data-reveal>
+          <p class="section__eyebrow">02 — Skills</p>
+          <h2 class="section__title" id="skills-title">Teknologi yang saya gunakan</h2>
+          <p class="section__lead">
+            Daftar di bawah bisa diedit kapan saja di <code>js/data.js</code>. Persentase mencerminkan
+            tingkat familiarize saya saat ini — bukan klaim ahli.
+          </p>
+        </header>
+
+        <div class="skills__grid" id="skills-grid"><!-- diisi oleh js/render.js --></div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="section section--alt" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <header class="section__head" data-reveal>
+          <p class="section__eyebrow">03 — Projects</p>
+          <h2 class="section__title" id="projects-title">Proyek pilihan</h2>
+          <p class="section__lead">
+            Beberapa proyek yang saya buat sebagai bagian proses belajar. Data proyek tersimpan di
+            <code>js/data.js</code> sehingga mudah diganti dengan proyek asli.
+          </p>
+        </header>
+
+        <div class="projects__grid" id="projects-grid"><!-- diisi oleh js/render.js --></div>
+
+        <p class="projects__empty is-hidden" id="projects-empty">
+          Belum ada proyek yang ditampilkan.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE / EDUCATION ============ -->
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="container">
+        <header class="section__head" data-reveal>
+          <p class="section__eyebrow">04 — Experience &amp; Education</p>
+          <h2 class="section__title" id="experience-title">Perjalanan pendidikan &amp; pengalaman</h2>
+          <p class="section__lead">
+            Placeholder berikut bisa diganti dengan riwayat asli melalui <code>js/data.js</code>.
+          </p>
+        </header>
+
+        <div class="exp" id="exp-root"><!-- diisi oleh js/render.js --></div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section section--alt" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <header class="section__head" data-reveal>
+          <p class="section__eyebrow">05 — Contact</p>
+          <h2 class="section__title" id="contact-title">Mari terhubung</h2>
+          <p class="section__lead">
+            Punya tugas, kolaborasi, atau sekadar ingin berdiskusi soal teknologi? Silakan kirim pesan.
+          </p>
+        </header>
+
+        <div class="contact">
+          <div data-reveal>
+            <h3 class="contact__title">Informasi kontak</h3>
+            <p class="contact__note">
+              Punya tugas, kolaborasi, atau ingin berdiskusi soal teknologi? Silakan hubungi saya
+              lewat salah satu kanal di bawah atau isi form pesan.
+            </p>
+            <ul class="contact__list" id="contact-list"><!-- diisi oleh js/render.js --></ul>
+          </div>
+
+          <div data-reveal data-reveal-delay="1">
+            <form class="card card--panel" id="contact-form" novalidate>
+              <h3 class="card__title">Kirim pesan</h3>
+
+              <div class="form__row">
+                <div class="form__group">
+                  <label class="form__label" for="cf-name">Nama <span class="form__req" aria-hidden="true">*</span></label>
+                  <input class="form__input" type="text" id="cf-name" name="name" placeholder="Nama Anda" autocomplete="name" required />
+                  <p class="form__error" data-error-for="cf-name" role="alert"></p>
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="cf-email">Email <span class="form__req" aria-hidden="true">*</span></label>
+                  <input class="form__input" type="email" id="cf-email" name="email" placeholder="email@example.com" autocomplete="email" required />
+                  <p class="form__error" data-error-for="cf-email" role="alert"></p>
+                </div>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label" for="cf-subject">Subjek</label>
+                <input class="form__input" type="text" id="cf-subject" name="subject" placeholder="Contoh: Kolaborasi proyek web" />
+                <p class="form__error" data-error-for="cf-subject" role="alert"></p>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label" for="cf-message">Pesan <span class="form__req" aria-hidden="true">*</span></label>
+                <textarea class="form__input form__textarea" id="cf-message" name="message" rows="5" placeholder="Tulis pesan Anda di sini…" required></textarea>
+                <p class="form__hint"><span id="cf-count">0</span>/500 karakter</p>
+                <p class="form__error" data-error-for="cf-message" role="alert"></p>
+              </div>
+
+              <div class="form__footer">
+                <button class="btn btn--primary" type="submit" id="cf-submit">
+                  Kirim Pesan
+                  <span class="btn__arrow" aria-hidden="true">→</span>
+                </button>
+                <p class="form__status" id="cf-status" role="status" aria-live="polite"></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__copy">© 2026 Nurul Fitriani. All rights reserved.</p>
+      <nav aria-label="Navigasi footer">
+        <ul class="footer__list" id="footer-list"><!-- diisi oleh js/nav.js --></ul>
+      </nav>
+    </div>
+  </footer>
+
+  <button class="to-top" id="to-top" type="button" aria-label="Kembali ke atas" title="Kembali ke atas">
+    <span aria-hidden="true">↑</span>
+  </button>
+
+  <script src="js/data.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

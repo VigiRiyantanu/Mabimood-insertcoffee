@@ -1,0 +1,25 @@
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #05070a;
+}
+
+.shader-frame {
+  width: 100%;
+  height: 100vh;
+  min-height: 100svh;
+  position: relative;
+  overflow: hidden;
+}
+
+.shader-frame .threeui-background,
+.shader-frame .landing-page-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}

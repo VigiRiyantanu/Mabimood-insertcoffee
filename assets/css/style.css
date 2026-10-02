@@ -1,0 +1,11 @@
+/* ============================================================
+   INSERT COFFEE — MASTER STYLESHEET (MODULAR IMPORTS)
+   Coffee, Games, and Chill
+   ============================================================ */
+
+@import url('base.css');
+@import url('store.css');
+@import url('arcade.css');
+@import url('leaderboard.css');
+@import url('admin.css');
+@import url('profile.css');

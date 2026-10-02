@@ -1,0 +1,469 @@
+/* ============================================================
+   RETRO COFFEE ARCADE LOGIN — FULLY ANIMATED & LIVING MOTION
+   ============================================================ */
+:root {
+  --bg-deep:       #14110e;
+  --bg-surface:    #1b1713;
+  --bg-input:      #221c17;
+  --border-subtle: #332a22;
+  --border-focus:  #d4a853;
+  
+  --amber:         #d4a853;
+  --amber-hover:   #e4b964;
+  --amber-dim:     rgba(212, 168, 83, 0.12);
+  --coffee-crema:  #c89862;
+  --text-cream:    #ede8e1;
+  --text-latte:    #b8afa6;
+  --text-muted:    #7a726a;
+  --error-red:     #e06c58;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body.retro-coffee-body {
+  background-color: var(--bg-deep);
+  color: var(--text-cream);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow: hidden;
+  user-select: none;
+  position: relative;
+}
+
+/* 1. Moving Ambient Roast Glow */
+.ambient-roast-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 50% 35%, rgba(212, 168, 83, 0.07) 0%, transparent 60%),
+    radial-gradient(circle at 50% 85%, rgba(156, 114, 72, 0.05) 0%, transparent 55%);
+  z-index: 0;
+  animation: glowBreathe 7s ease-in-out infinite alternate;
+}
+
+@keyframes glowBreathe {
+  0%   { transform: scale(1) translate(0, 0); opacity: 0.7; }
+  50%  { transform: scale(1.12) translate(-8px, 12px); opacity: 1; }
+  100% { transform: scale(0.95) translate(10px, -8px); opacity: 0.85; }
+}
+
+/* 2. Scrolling Retro Scanlines */
+.retro-scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(rgba(18, 15, 12, 0) 50%, rgba(0, 0, 0, 0.28) 50%);
+  background-size: 100% 4px;
+  z-index: 1;
+  opacity: 0.35;
+  animation: scanlinesDrift 10s linear infinite;
+}
+
+@keyframes scanlinesDrift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 120px; }
+}
+
+/* Main Container with Entrance Animation */
+.login-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: containerEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes containerEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 3. 3D Coffee Cup Wrapper with Floating Bounce */
+.coffee-3d-wrap {
+  width: 100%;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 0.25rem;
+  transform: translate3d(var(--px-cup, 0px), var(--py-cup, 0px), 0);
+  transition: transform 0.12s ease-out;
+}
+
+#coffee3dCanvas {
+  width: 220px;
+  height: 170px;
+  display: block;
+  cursor: grab;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
+}
+
+#coffee3dCanvas:active {
+  cursor: grabbing;
+}
+
+/* 4. Moving Brand Header */
+.login-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  transform: translate3d(var(--px-hdr, 0px), var(--py-hdr, 0px), 0);
+  transition: transform 0.14s ease-out;
+}
+
+/* Liquid Sheen Moving Across Title Text */
+.brand-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.28rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  display: inline-block;
+  background: linear-gradient(90deg, #ede8e1 0%, #efc97c 40%, #ede8e1 80%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: 
+    floatBrand 3.6s ease-in-out infinite,
+    textSheen 5s linear infinite;
+}
+
+@keyframes floatBrand {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%      { transform: translateY(-4px) rotate(-0.5deg); }
+}
+
+@keyframes textSheen {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+
+
+/* 5. Minimal Form */
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+/* Gamertag Group Animation */
+.input-group-gamertag {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  transform: translate3d(var(--px-f1, 0px), var(--py-f1, 0px), 0);
+  transition: transform 0.16s ease-out;
+}
+
+.input-group-gamertag .input-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  animation: floatLabel1 3.8s ease-in-out infinite 0.2s;
+}
+
+@keyframes floatLabel1 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50%      { transform: translateY(-2px) translateX(2px); }
+}
+
+.input-group-gamertag .input-wrap {
+  animation: floatWrap1 4.2s ease-in-out infinite 0.3s;
+}
+
+@keyframes floatWrap1 {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-3px); }
+}
+
+/* Password Group Animation (Out of phase for undulating effect) */
+.input-group-password {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  transform: translate3d(var(--px-f2, 0px), var(--py-f2, 0px), 0);
+  transition: transform 0.18s ease-out;
+}
+
+.input-group-password .input-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  animation: floatLabel2 3.6s ease-in-out infinite 0.6s;
+}
+
+@keyframes floatLabel2 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50%      { transform: translateY(-2.5px) translateX(-2px); }
+}
+
+.input-group-password .input-wrap {
+  animation: floatWrap2 4.4s ease-in-out infinite 0.7s;
+}
+
+@keyframes floatWrap2 {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-3.5px); }
+}
+
+.input-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-latte);
+}
+
+.input-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.retro-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 0.8rem 0.95rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-cream);
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.retro-input::placeholder {
+  color: var(--text-muted);
+}
+
+.retro-input:hover {
+  border-color: #4a3e33;
+  transform: translateY(-1px);
+}
+
+.retro-input:focus {
+  border-color: var(--border-focus);
+  background: #28211b;
+  box-shadow: 0 0 0 2px rgba(212, 168, 83, 0.18), 0 4px 12px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Eye Toggle with Floating Motion */
+.btn-eye {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, transform 0.15s;
+  animation: eyeOscillate 2.8s ease-in-out infinite;
+}
+
+@keyframes eyeOscillate {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-2px) scale(1.08); }
+}
+
+.btn-eye:hover {
+  color: var(--amber);
+  transform: scale(1.15) !important;
+}
+
+/* 6. Dynamic Floating Button with Light Sweep */
+.btn-login {
+  position: relative;
+  width: 100%;
+  margin-top: 0.4rem;
+  padding: 0.85rem;
+  background: var(--amber);
+  color: #14110e;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 3px 0 #8a6a22, 0 6px 16px rgba(0, 0, 0, 0.35);
+  animation: floatButton 3.4s ease-in-out infinite 0.4s;
+  transform: translate3d(var(--px-btn, 0px), var(--py-btn, 0px), 0);
+  transition: background 0.12s, box-shadow 0.15s, transform 0.12s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes floatButton {
+  0%, 100% {
+    transform: translateY(0px);
+    box-shadow: 0 3px 0 #8a6a22, 0 6px 16px rgba(0, 0, 0, 0.35);
+  }
+  50% {
+    transform: translateY(-4px);
+    box-shadow: 0 7px 0 #8a6a22, 0 12px 24px rgba(212, 168, 83, 0.28);
+  }
+}
+
+/* Light Sheen Sweep Across Button */
+.btn-login::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 45%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: rotate(25deg);
+  animation: sheenSweep 4s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes sheenSweep {
+  0%        { left: -60%; }
+  35%, 100% { left: 140%; }
+}
+
+.btn-login:hover:not(:disabled) {
+  background: var(--amber-hover);
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 0 #8a6a22, 0 10px 22px rgba(212, 168, 83, 0.32);
+}
+
+.btn-login:active:not(:disabled) {
+  transform: translateY(2px) !important;
+  box-shadow: 0 1px 0 #8a6a22, 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.btn-login:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Minimal Spinner */
+.btn-spinner {
+  display: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(20, 17, 14, 0.35);
+  border-top-color: #14110e;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: 0.45rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Feedback Notice */
+.login-feedback {
+  display: none;
+  font-size: 0.78rem;
+  color: var(--error-red);
+  line-height: 1.35;
+  animation: fadeUp 0.15s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(-3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-feedback.active {
+  display: block;
+}
+
+.login-feedback.success {
+  color: #4ade80;
+}
+
+/* Error Shake */
+.shake-wrap {
+  animation: errorShake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes errorShake {
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+/* 7. Bottom Link with Floating Sway */
+.bottom-links {
+  margin-top: 1.75rem;
+  text-align: center;
+  transform: translate3d(var(--px-nav, 0px), var(--py-nav, 0px), 0);
+  transition: transform 0.2s ease-out;
+}
+
+.link-return {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  text-decoration: none;
+  display: inline-block;
+  animation: floatReturnLink 3.5s ease-in-out infinite 0.8s;
+  transition: color 0.15s, transform 0.15s;
+}
+
+@keyframes floatReturnLink {
+  0%, 100% { transform: translateY(0) translateX(0); color: var(--text-muted); }
+  50%      { transform: translateY(-3px) translateX(-3px); color: var(--text-latte); }
+}
+
+.link-return:hover {
+  color: var(--amber);
+  transform: translateY(-2px) translateX(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-roast-glow,
+  .retro-scanlines,
+  .brand-title,
+  .input-label,
+  .input-wrap,
+  .btn-eye,
+  .btn-login,
+  .link-return {
+    animation: none !important;
+    transition: none !important;
+  }
+}

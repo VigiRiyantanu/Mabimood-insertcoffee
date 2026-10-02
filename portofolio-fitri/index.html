@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nurul Fitriani — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ffb3d1;--blush:#ffd1e4;--baby:#ffe8f2;--cream:#fff8ee;--lav:#cdb8ff;--ink:#111;--i:1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:90px;overflow-x:hidden}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Space Grotesk',system-ui,sans-serif;font-weight:500;overflow-x:hidden;background-image:radial-gradient(#11111122 1.5px,transparent 1.5px);background-size:22px 22px}
+h1,h2,h3,.big{font-family:'Archivo Black','Arial Black',sans-serif;font-weight:400;margin:0;line-height:.95;text-transform:uppercase}
+section{padding:90px 5vw;position:relative;max-width:1200px;margin:auto}
+.box{border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:#fff;transition:transform .2s,box-shadow .2s}
+.btn{display:inline-block;font:inherit;font-weight:700;font-family:'Archivo Black',sans-serif;text-transform:uppercase;padding:16px 26px;border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);background:var(--pink);color:var(--ink);text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-3px,-3px) rotate(-2deg);box-shadow:10px 10px 0 var(--ink)}
+.btn:active{transform:translate(6px,6px) scale(.97);box-shadow:0 0 0 var(--ink)}
+.btn.alt{background:var(--lav)}
+h2{font-size:clamp(2.4rem,7vw,5rem);margin-bottom:40px}
+h2 span{background:var(--pink);padding:0 10px;border:4px solid var(--ink);display:inline-block;transform:rotate(-2deg);box-shadow:6px 6px 0 var(--ink)}
+.rv{opacity:0;transform:translateY(50px) rotate(2deg);transition:opacity .7s,transform .7s cubic-bezier(.2,1.4,.4,1)}
+.rv.in{opacity:1;transform:none}
+/* nav */
+nav{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:50;background:var(--pink);display:flex;gap:6px;padding:8px;width:max-content;max-width:94vw;animation:bob 4s ease-in-out infinite}
+nav a{color:var(--ink);text-decoration:none;font-weight:700;padding:8px 14px;border:3px solid transparent;transition:.2s}
+nav a:hover{background:var(--lav);border-color:var(--ink);transform:rotate(-4deg) scale(1.08)}
+nav a.on{background:var(--ink);color:var(--pink)}
+#burger{display:none}
+@keyframes bob{50%{transform:translateX(-50%) translateY(-5px)}}
+@media(max-width:760px){nav{flex-direction:column;align-items:stretch;width:92vw;text-align:center}nav a:not(#burger){display:none}nav.open a{display:block}#burger{display:block;background:var(--ink);color:var(--pink)}}
+/* hero */
+#home{min-height:100vh;display:flex;flex-direction:column;justify-content:center;max-width:none;padding-top:120px;overflow:hidden}
+.hero-in{max-width:1200px;margin:auto;width:100%;position:relative;z-index:2}
+.badge{display:inline-block;background:var(--lav);border:3px solid var(--ink);padding:8px 14px;font-weight:700;transform:rotate(-3deg);box-shadow:4px 4px 0 var(--ink);margin-bottom:20px}
+h1{font-size:clamp(2.4rem,8vw,6.2rem);text-shadow:5px 5px 0 var(--pink)}
+.sub{font-family:'Archivo Black',sans-serif;font-size:clamp(1.2rem,3.4vw,2.4rem);background:var(--ink);color:var(--blush);display:inline-block;padding:6px 14px;margin:18px 0 10px;transform:rotate(1deg)}
+#type{font-size:clamp(1.1rem,2.6vw,1.8rem);min-height:2.2em;font-weight:700}
+#type::after{content:"▌";animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+.hero-in p{max-width:580px;font-size:1.15rem}
+.cta{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px}
+.fl{position:absolute;z-index:1;will-change:transform;pointer-events:none}
+.fl>*{animation:flt 5s ease-in-out infinite;display:block}
+@keyframes flt{50%{transform:translateY(-22px) rotate(8deg)}}
+.cube{width:90px;height:90px;transform-style:preserve-3d;animation:spin 12s linear infinite!important}
+.cube i{position:absolute;inset:0;border:4px solid var(--ink);background:var(--baby);display:grid;place-items:center;font:normal 900 1.6rem 'Archivo Black',monospace}
+.cube i:nth-child(1){transform:translateZ(45px)}.cube i:nth-child(2){transform:rotateY(180deg) translateZ(45px);background:var(--lav)}.cube i:nth-child(3){transform:rotateY(90deg) translateZ(45px);background:var(--pink)}.cube i:nth-child(4){transform:rotateY(-90deg) translateZ(45px)}.cube i:nth-child(5){transform:rotateX(90deg) translateZ(45px);background:var(--blush)}.cube i:nth-child(6){transform:rotateX(-90deg) translateZ(45px)}
+@keyframes spin{to{transform:rotateX(360deg) rotateY(360deg)}}
+.star{width:80px;height:80px;background:var(--lav);clip-path:polygon(50% 0,62% 36%,100% 38%,70% 60%,80% 100%,50% 76%,20% 100%,30% 60%,0 38%,38% 36%);filter:drop-shadow(5px 5px 0 var(--ink));animation:flt 5s ease-in-out infinite,rot 8s linear infinite!important}
+@keyframes rot{to{rotate:360deg}}
+.heart{font-size:70px;color:var(--pink);text-shadow:3px 3px 0 var(--ink),-2px -2px 0 var(--ink),3px -2px 0 var(--ink),-2px 3px 0 var(--ink)}
+.win{width:190px;font-size:.8rem}
+.win b{display:flex;gap:5px;background:var(--pink);border-bottom:3px solid var(--ink);padding:5px}
+.win b s{width:11px;height:11px;border:2px solid var(--ink);border-radius:50%;background:#fff}
+.win code{display:block;padding:8px;background:#fff}
+.flower{font-size:64px;filter:drop-shadow(4px 4px 0 var(--ink))}
+.ticker{position:absolute;bottom:0;left:0;right:0;background:var(--ink);color:var(--pink);font-family:'Archivo Black',sans-serif;padding:12px 0;overflow:hidden;white-space:nowrap;z-index:3;user-select:none;border-top:3px solid var(--ink);box-shadow:0 -4px 15px rgba(0,0,0,0.15);display:flex}
+.ticker-track{display:flex;width:max-content;will-change:transform}
+.ticker-content{display:inline-block;white-space:nowrap;font-size:1.15rem;letter-spacing:0.08em;padding-right:2rem}
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.idc{background:var(--blush);padding:22px;transform-style:preserve-3d;will-change:transform;max-width:380px}
+.idc .ph{height:170px;background:var(--lav);border:4px solid var(--ink);display:grid;place-items:center;font-size:4.5rem;margin:14px 0}
+.idc dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px}.idc dt{font-weight:700}.idc dd{margin:0}
+.panels{display:grid;gap:18px}
+.panel{padding:18px;cursor:pointer;background:var(--baby)}
+.panel:hover{transform:translate(-4px,-4px) rotate(-1deg);box-shadow:12px 12px 0 var(--ink)}
+.panel p{margin:8px 0 0;display:none}.panel.open p{display:block}.panel.open{background:var(--lav)}
+/* skills */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:22px}
+.sk{padding:18px;cursor:pointer;text-align:left}
+.sk .ic{font:1.2rem 'Archivo Black',sans-serif;background:var(--ink);color:var(--pink);padding:5px 12px;display:inline-block;transition:transform .4s}
+.sk:hover .ic{transform:rotateY(360deg) scale(1.2)}
+.sk:hover{transform:translate(-4px,-4px) rotate(-2deg);box-shadow:12px 12px 0 var(--ink)}
+.sk h3{font-size:1.4rem;margin:8px 0}
+.lvl{display:inline-block;border:3px solid var(--ink);padding:3px 9px;font-size:.85rem;background:var(--lav);font-weight:700}
+.sk .more{max-height:0;overflow:hidden;transition:max-height .4s}.sk.open .more{max-height:120px}.sk .more p{margin:12px 0 0}
+/* projects */
+.pj{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:34px;perspective:1000px}
+.pc{padding:20px;position:relative;transform-style:preserve-3d;will-change:transform}
+.pc .no{font-family:'Archivo Black';font-size:5rem;line-height:1;-webkit-text-stroke:3px var(--ink);color:transparent;transition:.3s}
+.pc:hover .no{color:var(--ink)}
+.pv{height:150px;border:4px solid var(--ink);margin:12px 0;display:grid;place-items:center;font:2.6rem 'Archivo Black',sans-serif;overflow:hidden}
+.pv span{transition:transform .4s}.pc:hover .pv span{transform:scale(1.5) rotate(10deg)}
+.pc .pop{position:absolute;top:-18px;right:-14px;font-size:2.2rem;opacity:0;transform:translateZ(60px) scale(0);transition:.3s}
+.pc:hover .pop{opacity:1;transform:translateZ(60px) scale(1) rotate(15deg)}
+.tag{display:inline-block;border:3px solid var(--ink);padding:2px 9px;margin:4px 4px 0 0;font-size:.85rem;font-weight:700;background:var(--cream)}
+/* journey */
+.tl{position:relative;padding-left:60px}
+.tl::before{content:"";position:absolute;left:18px;top:0;bottom:0;width:6px;background:var(--ink);transform-origin:top;transform:scaleY(var(--p,0))}
+.nd{position:relative;margin-bottom:34px;padding:18px;max-width:560px}
+.nd::before{content:"";position:absolute;left:-54px;top:20px;width:26px;height:26px;background:var(--pink);border:4px solid var(--ink);box-shadow:3px 3px 0 var(--ink);transform:rotate(45deg);transition:.4s}
+.nd.in::before{background:var(--lav);transform:rotate(225deg) scale(1.2)}
+.yr{font-family:'Archivo Black';background:var(--ink);color:var(--pink);display:inline-block;padding:2px 10px}
+/* personality */
+.pp{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px}
+.pcard{padding:20px;min-height:170px;cursor:pointer;position:relative}
+.pcard:hover{transform:rotate(var(--r,2deg)) scale(1.04)}
+.pcard small{font-weight:700;letter-spacing:.08em}.pcard p{font-family:'Archivo Black';font-size:1.3rem;margin:10px 0 0}
+.st{position:absolute;right:10px;bottom:6px;font-size:2rem}
+/* contact */
+#contact{text-align:center}
+#contact h2{font-size:clamp(2.6rem,9vw,7rem)}
+.links{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:30px}
+.links .btn{font-size:1.15rem;min-width:200px}
+footer{background:var(--ink);color:var(--pink);text-align:center;padding:40px 5vw;font-family:'Archivo Black';position:relative;overflow:hidden}
+footer .h{position:absolute;bottom:-30px;animation:up 6s linear infinite;opacity:.8}
+@keyframes up{to{transform:translateY(-160px) rotate(40deg);opacity:0}}
+.hero-top{display:flex;align-items:center;gap:clamp(18px,4vw,44px);flex-wrap:wrap}
+.pw{animation:pf 6s ease-in-out infinite;flex:none;position:relative}
+@keyframes pf{50%{transform:translateY(-14px) rotate(2deg)}}
+.photo{width:clamp(130px,19vw,230px);aspect-ratio:3/4;background:var(--lav);cursor:pointer;overflow:hidden;display:grid;place-items:center;text-align:center;font-weight:700;position:relative;transform:rotate(-4deg);padding:10px}
+.photo img,.ph img{display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.has img{display:block}.has .ph-t{display:none}.ph{position:relative;overflow:hidden}
+.pw::before{content:"★";position:absolute;top:-22px;right:-18px;font-size:2.6rem;color:var(--pink);z-index:2;text-shadow:2px 2px 0 #111,-2px -2px 0 #111,2px -2px 0 #111,-2px 2px 0 #111;animation:rot 6s linear infinite}
+.pw::after{content:"";position:absolute;top:-14px;left:50%;width:70px;height:24px;margin-left:-35px;background:#ffd1e4cc;border:3px solid var(--ink);transform:rotate(-6deg);z-index:2}
+.ch{display:inline-block;animation:wv 2.6s ease-in-out infinite;animation-delay:calc(var(--i)*80ms)}
+.w{display:inline-block;white-space:nowrap}
+@keyframes wv{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-.1em) rotate(-3deg)}}
+.sw{animation:sw 4.5s ease-in-out infinite}
+@keyframes sw{50%{translate:0 -3px}}
+/* cursor */
+#cd,#cr{position:fixed;top:0;left:0;pointer-events:none;z-index:999;display:none}
+#cd{width:10px;height:10px;background:var(--ink);border-radius:50%;margin:-5px 0 0 -5px;border:2px solid #fff}
+#cr{width:38px;height:38px;border:3px solid var(--ink);border-radius:50%;margin:-19px 0 0 -19px;transition:width .2s,height .2s,margin .2s,background .2s}
+#cr.h{width:70px;height:70px;margin:-35px 0 0 -35px;background:#ffb3d188}
+@media(hover:hover) and (pointer:fine){body.cur,body.cur *{cursor:none!important}#cd,#cr{display:block}}
+@media(max-width:760px){.about{grid-template-columns:1fr}.fl.hm{display:none}section{padding:70px 5vw}.box{box-shadow:5px 5px 0 var(--ink)}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+</style></head><body>
+<nav class="box" id="nav"><a href="../index.html#page-about" style="background:var(--ink);color:var(--pink);border:2px solid var(--ink);font-weight:700;">☕ Tim MabiMood</a><a href="#" id="burger">☰ Menu</a></nav>
+
+<header id="home"><div class="hero-in">
+<span class="badge">HALO, AKU PELAJAR DEVELOPER ★</span>
+<div class="hero-top"><div class="pw"><div class="photo box tilt" title="Klik untuk menambah foto"><span class="ph-t">FOTO<br>KLIK UNTUK<br>TAMBAH</span><img alt="Foto profil"></div></div><h1>Halo, aku <br><span id="nm"></span></h1></div>
+<div class="sub">Frontend / Web Developer</div>
+<div id="type"></div>
+<p id="bio"></p>
+<div class="cta"><a class="btn mg" href="#projects">Lihat karyaku</a><a class="btn alt mg" href="#contact">Hubungi aku</a></div></div>
+<div class="fl" data-d="40" style="top:16%;right:10%"><div class="cube"><i>&lt;/&gt;</i><i>{ }</i><i>♥</i><i>01</i><i>py</i><i>js</i></div></div>
+<div class="fl hm" data-d="-30" style="top:58%;right:22%"><div class="star"></div></div>
+<div class="fl" data-d="60" style="top:30%;right:38%"><div class="heart">♥</div></div>
+<div class="fl hm" data-d="-50" style="top:68%;right:6%"><div class="win box"><b><s></s><s></s><s></s></b><code>console.log("halo,<br>dunia")</code></div></div>
+<div class="fl hm" data-d="25" style="top:14%;left:58%"><div class="flower">✿</div></div>
+<div class="fl hm" data-d="-20" style="top:80%;left:50%"><div class="flower" style="font-size:48px">❀</div></div>
+<div class="ticker"><div class="ticker-track" id="tkTrack"><div id="tk" class="ticker-content">NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ </div><div class="ticker-content ticker-clone" aria-hidden="true">NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ </div></div></div></header>
+
+<section id="about"><h2 class="rv"><span>Tentang</span> aku</h2><div class="about"><div class="rv"><div class="box idc tilt"><span class="lvl">KARTU PELAJAR ✿</span><div class="ph"><span class="ph-t" style="font-family:'Archivo Black',sans-serif">NF</span><img alt=""></div><dl id="idc"></dl></div></div><div class="panels" id="panels"></div></div></section>
+<section id="skills"><h2 class="rv"><span>Skill</span> terbuka</h2><div class="grid" id="skg"></div></section>
+<section id="projects"><h2 class="rv"><span>Proyek</span></h2><div class="pj" id="pj"></div></section>
+<section id="journey"><h2 class="rv"><span>Perjalanan</span></h2><div class="tl" id="tl"></div></section>
+<section id="fun"><h2 class="rv"><span>Seru</span>-seruan</h2><div class="pp" id="pp"></div></section>
+<section id="contact"><h2 class="rv">Ayo bikin <span>sesuatu</span></h2><div class="links" id="ln"></div></section>
+<footer><span id="ft"></span><div id="hs"></div></footer>
+<div id="cr"></div><div id="cd"></div>
+
+<script>
+/* ===== EDIT ME: all content lives here ===== */
+const CFG={
+ name:"Nurul Fitriani",
+ bio:"Aku student yang sedang belajar membangun perangkat lunak. Berawal dari membuat halaman web sederhana, kini aku fokus pada web development, antarmuka responsif, JavaScript yang rapi, serta memahami API dan database.",
+ roles:["Student Software Development","Frontend / Web Developer","Belajar Aktif + Praktik","Calon Full-Stack Developer"],
+ intensity:1, // 0 = tenang ... 1 = penuh
+ photo:"assets/img/nurul.jpg", // Foto profil Nurul Fitriani
+ school:"UIN Maulana Malik Ibrahim Malang", major:"Teknik Informatika", semester:"1",
+ about:[["Siapa aku","Student yang sedang belajar membangun perangkat lunak, berawal dari membuat halaman web sederhana."],["Fokus saat ini","Web development, antarmuka responsif, JavaScript yang rapi, serta REST API dan database."],["Cara belajar","Belajar aktif + praktik: pelajari sedikit, langsung coba, lalu bangun proyek."],["Tujuan","Menyelesaikan fundamental, membangun proyek nyata dari nol, berkontribusi ke open source, dan menjadi developer full-stack."]],
+ skills:[["HTML","HT","Belajar aktif","Menyusun struktur halaman yang semantik."],["CSS","CS","Belajar aktif","Layout responsif dengan Flexbox dan Grid."],["JavaScript","JS","Belajar aktif","Menulis kode rapi dan membuat halaman interaktif."],["REST API","API","Sedang dipelajari","Memahami request, response, dan endpoint."],["Database","DB","Sedang dipelajari","Dasar menyimpan dan mengambil data."],["Git","GIT","Sedang dipelajari","Mencatat perubahan lewat commit dan branch."],["GitHub","GH","Sedang dipelajari","Menyimpan dan membagikan proyek."],["Linux","LX","Menjelajah","Terbiasa dengan terminal dan perintah dasar."],["Docker","DK","Menjelajah","Mengenal container untuk menjalankan aplikasi."],["Networking","NET","Menjelajah","Memahami dasar cara perangkat saling terhubung."]],
+ projects:[ // contoh proyek, ganti dengan proyek aslimu
+  {title:"Landing Page Kopi Lokal",desc:"Halaman web responsif untuk kedai kopi fiktif. Latihan layout dengan Flexbox dan Grid.",tags:["HTML","CSS","Responsif"],emoji:"</>",color:"#ffd1e4"},
+  {title:"Daftar Tugas Harian",desc:"Aplikasi to-do sederhana dengan JavaScript. Tugas tersimpan di localStorage.",tags:["JavaScript","DOM","localStorage"],emoji:"[ ]",color:"#cdb8ff"},
+  {title:"Cek Cuaca Kota",desc:"Mengambil data dari REST API publik lalu menampilkannya dalam kartu yang rapi.",tags:["JavaScript","REST API","Fetch"],emoji:"API",color:"#ffb3d1"},
+  {title:"Katalog Buku Mini",desc:"Aplikasi CRUD kecil dengan database untuk mencatat buku yang sedang dibaca.",tags:["Database","CRUD","REST API"],emoji:"DB",color:"#ffe8f2"}],
+ journey:[{year:"Awal",title:"Halaman web pertama",desc:"Ketertarikan pada teknologi bermula dari membuat halaman web sederhana."},{year:"2026",title:"UIN Maulana Malik Ibrahim Malang",desc:"Teknik Informatika, Semester 1."},{year:"Sekarang",title:"Belajar aktif + praktik",desc:"Mendalami frontend, REST API, database, Git, Linux, dan Docker."},{year:"Target",title:"Developer full-stack",desc:"Proyek nyata dari nol dan kontribusi ke open source."}],
+ fun:[["Sedang dipelajari","Frontend Web + REST API","★"],["Sedang dijelajahi","Linux + Docker","✦"],["Mood ngoding","“Debug terus sampai jalan”","♥"],["Pendekatan","Belajar aktif + praktik","✿"],["Tujuan","Proyek nyata + open source","◆"]],
+ social:[["Email","↗","mailto:you@example.com"],["GitHub","↗","https://github.com/"],["Instagram","↗","https://instagram.com/"],["LinkedIn","↗","https://linkedin.com/"]],
+ sections:[["Beranda","home"],["Tentang","about"],["Skill","skills"],["Proyek","projects"],["Perjalanan","journey"],["Kontak","contact"]]
+};
+/* ===== engine ===== */
+const $=s=>document.querySelector(s),RM=matchMedia('(prefers-reduced-motion:reduce)').matches,I=RM?0:CFG.intensity,touch=!matchMedia('(hover:hover) and (pointer:fine)').matches;
+$('#nm').textContent=CFG.name;$('#bio').textContent=CFG.bio;document.title=`${CFG.name} — Portfolio`;
+const tkText = "NGODING ✿ BELAJAR ✿ BUILD ✿ ULANGI ✿ ".repeat(8);
+if($('#tk')) $('#tk').textContent = tkText;
+if($('.ticker-clone')) $('.ticker-clone').textContent = tkText;
+const nav=$('#nav');CFG.sections.forEach(s=>nav.insertAdjacentHTML('beforeend',`<a href="#${s[1]}">${s[0]}</a>`));
+nav.onclick=e=>{if(e.target.id=='burger'){e.preventDefault();nav.classList.toggle('open')}else nav.classList.remove('open')};
+$('#idc').innerHTML=`<dt>NAMA</dt><dd>${CFG.name}</dd><dt>JURUSAN</dt><dd>${CFG.major}</dd><dt>KAMPUS</dt><dd>${CFG.school}</dd><dt>SEM</dt><dd>${CFG.semester}</dd>`;
+$('#panels').innerHTML=CFG.about.map(a=>`<div class="box panel rv"><h3>${a[0]} +</h3><p>${a[1]}</p></div>`).join('');
+$('#skg').innerHTML=CFG.skills.map((s,i)=>`<div class="box sk rv" style="background:${['#ffd1e4','#ffe8f2','#fff','#e6dcff'][i%4]}"><span class="ic">${s[1]}</span><h3>${s[0]}</h3><span class="lvl">${s[2]}</span><div class="more"><p>${s[3]}</p></div></div>`).join('');
+$('#pj').innerHTML=CFG.projects.map((p,i)=>`<div class="box pc tilt rv" style="background:${p.color}"><span class="pop" style="color:#ff6fa5">★</span><div class="no">0${i+1}</div><h3>${p.title}</h3><div class="pv box" style="background:#fff;box-shadow:none"><span>${p.emoji}</span></div><p>${p.desc}</p>${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`).join('');
+$('#tl').innerHTML=CFG.journey.map(j=>`<div class="box nd rv"><span class="yr">${j.year}</span><h3 style="font-size:1.3rem;margin:10px 0 6px">${j.title}</h3>${j.desc}</div>`).join('');
+$('#pp').innerHTML=CFG.fun.map((f,i)=>`<div class="box pcard rv" style="--r:${i%2?-2:2}deg;background:${['#ffd1e4','#e6dcff','#fff','#ffe8f2','#ffb3d1'][i%5]}"><small>${f[0].toUpperCase()}</small><p>${f[1]}</p><span class="st">${f[2]}</span></div>`).join('');
+$('#ln').innerHTML=CFG.social.map((s,i)=>`<a class="btn mg ${i%2?'alt':''}" href="${s[2]}" target="_blank" rel="noopener">${s[0]} ${s[1]}</a>`).join('');
+$('#ft').textContent=`Dirancang & dibangun dengan kode ♥ ${CFG.name} ${new Date().getFullYear()}`;
+$('#hs').innerHTML=Array.from({length:touch?6:14},(_,i)=>`<span class="h" style="left:${i*7+3}%;animation-delay:${i*.7}s">${i%2?'♥':'★'}</span>`).join('');
+// typing
+(()=>{const el=$('#type');let r=0,c=0,del=0;(function t(){const w=CFG.roles[r];c+=del?-1:1;el.textContent=w.slice(0,c);let d=del?35:80;if(!del&&c==w.length){del=1;d=1400}else if(del&&c==0){del=0;r=(r+1)%CFG.roles.length;d=300}setTimeout(t,RM?3000:d)})()})();
+// split text into waving letters + gentle sway
+function sp(el){let n=0;(function w(node){[...node.childNodes].forEach(c=>{if(c.nodeType==3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){f.append(' ');return}const wd=document.createElement('span');wd.className='w';[...t].forEach(ch=>{const q=document.createElement('span');q.className='ch';q.textContent=ch;q.style.setProperty('--i',n++);wd.append(q)});f.append(wd)});c.replaceWith(f)}else if(c.nodeType==1&&c.tagName!='BR')w(c)})})(el)}
+document.querySelectorAll('h1,h2,h3,.sub,.badge,.yr').forEach(sp);
+document.querySelectorAll('p,dd,.tag,.lvl,#type,.more').forEach(e=>{e.classList.add('sw');e.style.animationDelay=(Math.random()*-4)+'s'});
+// photo
+const PH=[...document.querySelectorAll('.photo,.ph')];
+function setP(u){PH.forEach(p=>{p.querySelector('img').src=u;p.classList.add('has')})}
+const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+$('.photo').onclick=()=>inp.click();
+inp.onchange=()=>{const f=inp.files[0];if(!f)return;const im=new Image();im.onload=()=>{const k=Math.min(1,600/im.width),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);const u=c.toDataURL('image/jpeg',.85);setP(u);try{localStorage.setItem('ph',u)}catch(e){}};im.src=URL.createObjectURL(f)};
+let sv='';try{sv=localStorage.getItem('ph')||''}catch(e){}
+if(sv||CFG.photo)setP(sv||CFG.photo);
+// reveal + nav + timeline
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach((e,i)=>{e.style.transitionDelay=(i%4)*70+'ms';io.observe(e)});
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const id=e.target.id=='fun'?'journey':e.target.id;nav.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')=='#'+id))}}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('section,header').forEach(s=>so.observe(s));
+// clicks
+document.querySelectorAll('.panel,.sk').forEach(e=>e.onclick=()=>e.classList.toggle('open'));
+document.querySelectorAll('.pcard').forEach(e=>e.onclick=()=>{e.animate([{transform:'rotate(0)'},{transform:'rotate(-8deg) scale(1.1)'},{transform:'rotate(6deg)'},{transform:'none'}],{duration:500})});
+// scroll + mouse parallax
+const fl=[...document.querySelectorAll('.fl')],tl=$('#tl');let mx=0,my=0,tmx=0,tmy=0,sy=0,ssy=0;
+let tickerPos = 0, lastSy = 0;
+const tkTrack = $('#tkTrack'), tkItem = $('#tk');
+
+function frame(){
+  mx+=(tmx-mx)*.07;
+  my+=(tmy-my)*.07;
+  ssy+=(sy-ssy)*.09;
+  fl.forEach(f=>{const d=+f.dataset.d*I;f.style.transform=`translate3d(${mx*d}px,${my*d-ssy*.15*Math.sign(d||1)}px,0)`});
+  const r=tl.getBoundingClientRect();
+  tl.style.setProperty('--p',Math.min(1,Math.max(0,(innerHeight*.7-r.top)/r.height)));
+  
+  // running text + parallax scroll engine
+  if(tkTrack && tkItem){
+    const w = tkItem.offsetWidth || 1200;
+    const scrollDelta = sy - lastSy;
+    // auto cruise speed (1.4px) + velocity inertia when scrolling
+    tickerPos -= (1.4 + Math.abs(scrollDelta) * 0.45);
+    // dynamic parallax offset based on smooth scroll position
+    const totalOffset = tickerPos - (ssy * 0.5);
+    const wrap = ((totalOffset % w) - w) % w;
+    tkTrack.style.transform = `translate3d(${wrap}px,0,0)`;
+    lastSy = sy;
+  }
+  
+  requestAnimationFrame(frame);
+}
+addEventListener('scroll',()=>{sy=scrollY},{passive:true});
+if(!touch&&I){addEventListener('mousemove',e=>{tmx=e.clientX/innerWidth-.5;tmy=e.clientY/innerHeight-.5},{passive:true});
+ // tilt
+ document.querySelectorAll('.tilt').forEach(c=>{c.addEventListener('mousemove',e=>{const b=c.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;c.style.transition='transform .12s ease-out,box-shadow .2s';c.style.transform=`perspective(800px) rotateY(${x*18*I}deg) rotateX(${-y*18*I}deg) translateZ(10px)`;c.style.boxShadow=`${-x*30}px ${-y*30+8}px 0 #111`});c.addEventListener('mouseleave',()=>{c.style.transition='transform .6s cubic-bezier(.2,1.6,.4,1),box-shadow .6s';c.style.transform='';c.style.boxShadow=''})});
+ // magnetic
+ document.querySelectorAll('.mg').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.translate=`${(e.clientX-r.left-r.width/2)*.25}px ${(e.clientY-r.top-r.height/2)*.35}px`});b.addEventListener('mouseleave',()=>b.style.translate='')});
+ // cursor
+ document.body.classList.add('cur');const cd=$('#cd'),cr=$('#cr');let rx=0,ry=0,cx=0,cy=0;
+ addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;cd.style.transform=`translate(${cx}px,${cy}px)`});
+ (function L(){rx+=(cx-rx)*.15;ry+=(cy-ry)*.15;cr.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(L)})();
+ document.addEventListener('mouseover',e=>cr.classList.toggle('h',!!e.target.closest('a,button,.panel,.sk,.pcard,.pc,.photo')));
+ addEventListener('mousedown',()=>cr.style.scale='.6');addEventListener('mouseup',()=>cr.style.scale='1');
+ // click burst
+ addEventListener('click',e=>{for(let i=0;i<6;i++){const s=document.createElement('span');s.textContent=['♥','★','✿'][i%3];s.style.cssText=`position:fixed;left:${e.clientX}px;top:${e.clientY}px;z-index:998;pointer-events:none;color:#ff6fa5;font-size:18px`;document.body.append(s);const a=i/6*6.28;s.animate([{transform:'none',opacity:1},{transform:`translate(${Math.cos(a)*60}px,${Math.sin(a)*60}px) rotate(200deg)`,opacity:0}],{duration:650}).onfinish=()=>s.remove()}});
+}
+frame();
+</script></body></html>

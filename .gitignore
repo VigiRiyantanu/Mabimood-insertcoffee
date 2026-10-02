@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Logs & Temporary files
+server.log
+*.log
+scratch/
+.system_generated/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor / IDE
+.vscode/
+.idea/

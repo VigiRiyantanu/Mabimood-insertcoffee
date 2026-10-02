@@ -1,0 +1,343 @@
+/* ============================================================
+   base.css — reset, design token, tipografi
+   ============================================================ */
+
+/* ---------- 1. Design token ---------- */
+:root {
+  /* Warna — dark theme (default) */
+  --c-bg: #080c17;
+  --c-bg-alt: #0b1120;
+  --c-surface: #0f172a;
+  --c-surface-2: #131d33;
+  --c-border: #1e293b;
+  --c-border-soft: #172033;
+
+  --c-text: #e6edf7;
+  --c-text-muted: #9aa8c2;
+  --c-text-dim: #7c8db5;
+
+  --c-primary: #38bdf8;
+  --c-primary-strong: #0ea5e9;
+  --c-accent: #818cf8;
+  --c-success: #34d399;
+  --c-danger: #fb7185;
+  --c-warning: #fbbf24;
+  --c-on-primary: #04121f;
+
+  --c-ring: rgba(56, 189, 248, 0.45);
+  --c-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.85);
+  --c-shadow-lg: 0 32px 64px -32px rgba(0, 0, 0, 0.9);
+  --c-glass: rgba(15, 23, 42, 0.72);
+
+  /* Gradien */
+  --grad-brand: linear-gradient(120deg, var(--c-primary) 0%, var(--c-accent) 100%);
+  --grad-brand-soft: linear-gradient(120deg, rgba(56, 189, 248, 0.16) 0%, rgba(129, 140, 248, 0.16) 100%);
+
+  /* Tipografi */
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Spacing (skala 4px) */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --sp-9: 6rem;
+
+  /* Bentuk */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-xl: 26px;
+  --r-full: 999px;
+
+  /* Transisi */
+  --t-fast: 140ms ease;
+  --t-base: 240ms cubic-bezier(0.4, 0, 0.2, 1);
+  --t-slow: 520ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Tata letak */
+  --container: 1140px;
+  --nav-h: 68px;
+  --section-y: clamp(4rem, 8vw, 7rem);
+}
+
+/* ---------- 2. Light theme (opsional, via tombol tema) ---------- */
+[data-theme="light"] {
+  --c-bg: #f6f8fc;
+  --c-bg-alt: #ffffff;
+  --c-surface: #ffffff;
+  --c-surface-2: #f1f5fb;
+  --c-border: #dbe3ef;
+  --c-border-soft: #e7edf6;
+
+  --c-text: #0f172a;
+  --c-text-muted: #475569;
+  --c-text-dim: #5b6b82;
+
+  --c-primary: #0369a1;
+  --c-primary-strong: #075985;
+  --c-accent: #4338ca;
+  --c-success: #047857;
+  --c-danger: #be123c;
+  --c-warning: #b45309;
+  --c-on-primary: #ffffff;
+
+  --c-ring: rgba(2, 132, 199, 0.4);
+  --c-shadow: 0 16px 34px -26px rgba(15, 23, 42, 0.5);
+  --c-shadow-lg: 0 30px 60px -34px rgba(15, 23, 42, 0.55);
+  --c-glass: rgba(255, 255, 255, 0.78);
+
+  --grad-brand-soft: linear-gradient(120deg, rgba(2, 132, 199, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+}
+
+/* ---------- 3. Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: var(--c-primary);
+  text-decoration: none;
+  transition: color var(--t-fast);
+}
+
+a:hover {
+  color: var(--c-accent);
+}
+
+p a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+:target {
+  scroll-margin-top: calc(var(--nav-h) + 16px);
+}
+
+/* ---------- 4. Tipografi ---------- */
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--c-text);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3.4vw, 2.35rem);
+}
+
+h3 {
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+em {
+  font-style: normal;
+  color: var(--c-primary);
+}
+
+strong {
+  color: var(--c-text);
+  font-weight: 700;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+:not(pre) > code {
+  padding: 0.15em 0.42em;
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  background: var(--c-surface-2);
+  color: var(--c-primary);
+  white-space: nowrap;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+/* ---------- 5. Fokus & aksesibilitas ---------- */
+:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 200;
+  padding: 0.6rem 1rem;
+  border-radius: var(--r-sm);
+  background: var(--c-primary);
+  color: var(--c-on-primary);
+  font-weight: 700;
+  transform: translateY(-160%);
+  transition: transform var(--t-base);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+  color: var(--c-on-primary);
+}
+
+/* ---------- 6.utilities ---------- */
+.is-hidden {
+  display: none !important;
+}
+
+.text-gradient {
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- 7. Reveal on scroll ---------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity var(--t-slow),
+    transform var(--t-slow);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* Tanpa JS: tampilkan semua konten agar tetap terbaca */
+.no-js [data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- 8. Preferensi reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- 9. Scrollbar ---------- */
+@supports selector(::-webkit-scrollbar) {
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--c-bg-alt);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--c-border);
+    border: 3px solid var(--c-bg-alt);
+    border-radius: var(--r-full);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--c-text-dim);
+  }
+}

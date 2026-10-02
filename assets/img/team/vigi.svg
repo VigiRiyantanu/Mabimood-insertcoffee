@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="vigiBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D1F16"/>
+      <stop offset="60%" stop-color="#19120D"/>
+      <stop offset="100%" stop-color="#0E0A07"/>
+    </linearGradient>
+    
+    <!-- Gold Trim Gradient -->
+    <linearGradient id="vigiGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE08A"/>
+      <stop offset="50%" stop-color="#D4A853"/>
+      <stop offset="100%" stop-color="#9C6B28"/>
+    </linearGradient>
+
+    <!-- Jacket Gradient -->
+    <linearGradient id="vigiJacket" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2C241E"/>
+      <stop offset="100%" stop-color="#14100D"/>
+    </linearGradient>
+
+    <!-- Strict Circular Clip Path to prevent ANY overflow -->
+    <clipPath id="avatarCircleClip">
+      <circle cx="100" cy="100" r="95"/>
+    </clipPath>
+  </defs>
+
+  <!-- Group clipped to perfect circle -->
+  <g clip-path="url(#avatarCircleClip)">
+    <!-- Background Fill -->
+    <rect width="200" height="200" fill="url(#vigiBg)"/>
+    <circle cx="100" cy="80" r="85" fill="#D4A853" opacity="0.08"/>
+
+    <!-- Shoulders / Jacket -->
+    <path d="M 20 200 C 25 142, 60 132, 100 132 C 140 132, 175 142, 180 200 Z" fill="url(#vigiJacket)"/>
+    <path d="M 68 135 L 100 168 L 132 135 Z" fill="#D4A853" opacity="0.85"/>
+    <path d="M 80 148 L 100 185 L 120 148 Z" fill="#14100D"/>
+    <!-- Collar Line -->
+    <path d="M 68 135 L 76 200" stroke="#3D3228" stroke-width="2"/>
+    <path d="M 132 135 L 124 200" stroke="#3D3228" stroke-width="2"/>
+
+    <!-- Neck -->
+    <rect x="87" y="104" width="26" height="32" rx="5" fill="#D99E6E"/>
+    <path d="M 87 118 C 94 125, 106 125, 113 118 Z" fill="#C48958" opacity="0.6"/>
+
+    <!-- Ears -->
+    <circle cx="63" cy="88" r="9" fill="#D99E6E"/>
+    <circle cx="137" cy="88" r="9" fill="#D99E6E"/>
+    <circle cx="63" cy="88" r="5" fill="#C48958" opacity="0.5"/>
+    <circle cx="137" cy="88" r="5" fill="#C48958" opacity="0.5"/>
+
+    <!-- Face -->
+    <ellipse cx="100" cy="88" rx="36" ry="42" fill="#E8B588"/>
+
+    <!-- Hair Back/Sides -->
+    <path d="M 60 84 C 58 52, 75 42, 100 42 C 125 42, 142 52, 140 84 C 132 68, 118 64, 100 64 C 82 64, 68 68, 60 84 Z" fill="#1C1613"/>
+    
+    <!-- Hair Top & Modern Texture -->
+    <path d="M 62 76 C 60 48, 76 38, 100 38 C 124 38, 140 48, 138 76 C 130 54, 120 48, 100 50 C 80 52, 70 58, 62 76 Z" fill="#2A201A"/>
+    <path d="M 74 48 Q 96 34 116 44" stroke="#4A3B30" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M 84 54 Q 104 42 124 50" stroke="#4A3B30" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Eyebrows -->
+    <path d="M 76 74 Q 87 70 94 74" stroke="#1C1613" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M 106 74 Q 113 70 124 74" stroke="#1C1613" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Eyes with shine -->
+    <ellipse cx="85" cy="83" rx="4" ry="4.5" fill="#1C1613"/>
+    <ellipse cx="115" cy="83" rx="4" ry="4.5" fill="#1C1613"/>
+    <circle cx="86.5" cy="81.5" r="1.5" fill="#FFFFFF"/>
+    <circle cx="116.5" cy="81.5" r="1.5" fill="#FFFFFF"/>
+
+    <!-- Stylish Modern Glasses (Gold Trim) -->
+    <rect x="72" y="75" width="25" height="17" rx="4" fill="rgba(212, 168, 83, 0.08)" stroke="#D4A853" stroke-width="2.5"/>
+    <rect x="103" y="75" width="25" height="17" rx="4" fill="rgba(212, 168, 83, 0.08)" stroke="#D4A853" stroke-width="2.5"/>
+    <line x1="97" y1="82" x2="103" y2="82" stroke="#D4A853" stroke-width="2.5"/>
+    <!-- Glasses Temple Bars -->
+    <line x1="72" y1="80" x2="63" y2="84" stroke="#D4A853" stroke-width="2"/>
+    <line x1="128" y1="80" x2="137" y2="84" stroke="#D4A853" stroke-width="2"/>
+
+    <!-- Nose -->
+    <path d="M 98 88 L 96 95 L 102 95" stroke="#C48958" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Confident Warm Smile -->
+    <path d="M 89 104 Q 100 113 111 104" stroke="#8E4F28" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Crisp Outer Ring Border -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="url(#vigiGold)" stroke-width="5"/>
+  <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+</svg>

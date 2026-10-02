@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LEADERBOARD — INSERT COFFEE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=3.1">
+
+<!-- Firebase App & Services (Compat SDK) -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body class="leaderboard-page-body">
+
+<!-- NAVBAR -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="../index.html" class="nav-logo" tabindex="0" role="button" aria-label="Go to home">INSERT COFFEE</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html" id="nav-home">Home</a></li>
+      <li><a href="../index.html#coffee" id="nav-coffee">Coffee</a></li>
+      <li><a href="../index.html#arcade" id="nav-arcade">Arcade</a></li>
+      <li><a href="index.html" id="nav-leaderboard" class="active">Leaderboard</a></li>
+      <li><a href="../index.html#about" id="nav-about">About</a></li>
+      <li><a href="../index.html#display" id="nav-display">Display</a></li>
+      <li><a href="../admin/index.html" id="nav-admin-panel" class="nav-admin-btn" title="Admin Portal & Backend">Admin</a></li>
+      <li>
+        <a href="../index.html#cart" class="nav-cart-btn" aria-label="View order cart">
+          Cart
+          <span class="cart-badge" id="cartBadge" aria-live="polite"></span>
+        </a>
+      </li>
+      <li>
+        <a href="../playerloginpage.html?return=leaderboard" class="nav-profile-circle" id="navPlayerBtn" title="Login / Profil Pemain" aria-label="Profil Pemain">
+          <span class="profile-circle-avatar" id="navPlayerAvatar">
+            <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
+          <span class="profile-online-dot"></span>
+        </a>
+      </li>
+    </ul>
+    <div class="nav-right-mobile">
+      <button class="nav-hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="../playerloginpage.html?return=leaderboard" class="nav-profile-circle mobile-profile-btn" id="navPlayerBtnMobile" title="Login / Profil Pemain" aria-label="Profil Pemain">
+        <span class="profile-circle-avatar" id="navPlayerAvatarMobile">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        <span class="profile-online-dot"></span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="nav-mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+  <div class="nav-mobile-user-card" onclick="window.location.href='../playerloginpage.html?return=leaderboard'">
+    <div class="mobile-user-avatar" id="mobileMenuAvatar">P</div>
+    <div class="mobile-user-info">
+      <span class="mobile-user-label">Pemain Aktif</span>
+      <span class="mobile-user-name" id="mobilePlayerName">Tamu</span>
+    </div>
+    <span class="mobile-user-badge">Akun &rarr;</span>
+  </div>
+  <a href="../index.html" onclick="closeMobileMenu();">Home</a>
+  <a href="../index.html#coffee" onclick="closeMobileMenu();">Coffee</a>
+  <a href="../index.html#arcade" onclick="closeMobileMenu();">Arcade</a>
+  <a href="index.html" class="active" onclick="closeMobileMenu();">Leaderboard</a>
+  <a href="../index.html#about" onclick="closeMobileMenu();">About</a>
+  <a href="../index.html#display" onclick="closeMobileMenu();">Display</a>
+  <a href="../admin/index.html" style="color:var(--amber);">Admin Portal</a>
+  <a href="../index.html#cart" onclick="closeMobileMenu();">Cart</a>
+</div>
+
+<!-- LEADERBOARD MAIN CONTENT -->
+<main class="leaderboard-page-container">
+  <div class="container">
+    <div class="leaderboard-box full-page">
+      
+      <div class="leaderboard-box-header">
+        <div class="header-meta-row">
+          <span class="live-status-pill">
+            <span class="live-dot"></span>
+            LIVE ARCADE STANDINGS
+          </span>
+          <span class="player-count-badge" id="playerCountBadge">SYNCING...</span>
+        </div>
+        <div class="header-main-row">
+          <div class="header-title-group">
+            <h1 class="leaderboard-title">LEADERBOARD</h1>
+            <p class="leaderboard-sub">Daftar pencetak skor tertinggi di arcade Insert Coffee. Mainkan game dan ukir namamu!</p>
+          </div>
+          <button class="btn-refresh-lb" onclick="Leaderboard.refresh()" title="Sinkronisasi skor terbaru" aria-label="Refresh Leaderboard">
+            <svg class="refresh-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+            </svg>
+            <span>Sync Live</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Current Player Position (Only if logged in and in Firebase) -->
+      <div class="player-rank-bar" id="pagePlayerRank" style="display:none;"></div>
+
+      <!-- Table Section -->
+      <div class="leaderboard-table-wrap">
+        <table class="leaderboard-table" role="table">
+          <thead>
+            <tr>
+              <th class="th-rank">RANK</th>
+              <th class="th-gamertag">GAMERTAG</th>
+              <th class="th-score">SCORE</th>
+            </tr>
+          </thead>
+          <tbody id="pageLeaderboardBody">
+            <tr>
+              <td colspan="3" class="lb-state-msg">Loading leaderboard...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="font-size:1.1rem; color:var(--text);">INSERT COFFEE</div>
+        <p style="margin-top:0.5rem; color:var(--text-3); font-size:0.85rem; max-width:32ch;">
+          Coffee, games, and chill. Built for the community with artisanal brew and retro arcade spirit.
+        </p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-heading">Navigasi</div>
+        <a href="../index.html#coffee">Coffee Menu</a>
+        <a href="../index.html#arcade">Arcade Games</a>
+        <a href="index.html">Leaderboard</a>
+        <a href="../index.html#display">Display Antrean</a>
+      </div>
+      <div class="footer-links">
+        <div class="footer-heading">Akun &amp; Portal</div>
+        <a href="../playerloginpage.html">Gamertag Login</a>
+        <a href="../admin/index.html">Admin Portal</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 INSERT COFFEE. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- JS Modules -->
+<script src="../assets/js/firebase-config.js?v=3.1"></script>
+<script src="../assets/js/leaderboard.js?v=3.1"></script>
+
+<script>
+function toggleMobileMenu() {
+  const m = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  if (m) {
+    const isOpen = m.classList.toggle('open');
+    if (btn) {
+      btn.classList.toggle('is-active', isOpen);
+      btn.setAttribute('aria-expanded', isOpen);
+    }
+  }
+}
+
+function closeMobileMenu() {
+  const m = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  if (m) {
+    m.classList.remove('open');
+    if (btn) {
+      btn.classList.remove('is-active');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  }
+}
+
+// Update player avatar & name in navbar if logged in
+function syncNavPlayer() {
+  const guestSvg = `<svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+  try {
+    const raw = localStorage.getItem('ic_user_profile');
+    if (raw) {
+      const p = JSON.parse(raw);
+      if (p && p.name) {
+        const mEl = document.getElementById('mobilePlayerName');
+        const aEl = document.getElementById('navPlayerAvatar');
+        const maEl = document.getElementById('navPlayerAvatarMobile');
+        const mmaEl = document.getElementById('mobileMenuAvatar');
+        const navBtn = document.getElementById('navPlayerBtn');
+        const mobileBtn = document.getElementById('navPlayerBtnMobile');
+
+        if (mEl) mEl.textContent = p.name;
+        if (navBtn) {
+          navBtn.title = 'Profil: ' + p.name;
+          navBtn.classList.add('is-logged-in');
+        }
+        if (mobileBtn) {
+          mobileBtn.title = 'Profil: ' + p.name;
+          mobileBtn.classList.add('is-logged-in');
+        }
+
+        const avatarHtml = (p.avatar && (p.avatar.startsWith('http') || p.avatar.startsWith('data:image')))
+          ? '<img src="' + p.avatar + '" alt="' + p.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">'
+          : (p.name[0] || 'P').toUpperCase();
+
+        if (aEl) aEl.innerHTML = avatarHtml;
+        if (maEl) maEl.innerHTML = avatarHtml;
+        if (mmaEl) mmaEl.innerHTML = avatarHtml;
+      }
+    }
+  } catch (e) {}
+
+  try {
+    const cart = JSON.parse(localStorage.getItem('ic_cart') || '[]');
+    const count = cart.reduce((acc, item) => acc + (item.qty || 1), 0);
+    const bEl = document.getElementById('cartBadge');
+    if (bEl && count > 0) {
+      bEl.textContent = count;
+      bEl.classList.add('visible');
+    }
+  } catch (e) {}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  syncNavPlayer();
+});
+</script>
+</body>
+</html>

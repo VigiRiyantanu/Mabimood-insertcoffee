@@ -1,0 +1,753 @@
+/* ============================================================
+   components.css — navbar, tombol, card, badge, timeline, form, footer
+   ============================================================ */
+
+/* ============================================================
+   1. NAVBAR
+   ============================================================ */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background var(--t-base), border-color var(--t-base), backdrop-filter var(--t-base);
+}
+
+.navbar.is-stuck {
+  background: var(--c-glass);
+  border-bottom-color: var(--c-border);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: var(--nav-h);
+}
+
+.navbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--c-text);
+  font-weight: 800;
+  font-size: 1.06rem;
+  letter-spacing: -0.02em;
+  flex: none;
+}
+
+.navbar__brand:hover {
+  color: var(--c-text);
+}
+
+.navbar__logo {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--grad-brand-soft);
+  border: 1px solid var(--c-border);
+  color: var(--c-primary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.navbar__brand-dot {
+  color: var(--c-primary);
+}
+
+.navbar__brand-text {
+  white-space: nowrap;
+}
+
+.navbar__nav {
+  margin-inline: auto;
+}
+
+.navbar__list {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.navbar__link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.78rem;
+  border-radius: var(--r-sm);
+  color: var(--c-text-muted);
+  font-size: 0.925rem;
+  font-weight: 500;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+
+.navbar__link:hover {
+  color: var(--c-text);
+  background: var(--c-surface-2);
+}
+
+.navbar__link::after {
+  content: "";
+  position: absolute;
+  left: 0.78rem;
+  right: 0.78rem;
+  bottom: 0.22rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--grad-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-base);
+}
+
+.navbar__link.is-active {
+  color: var(--c-text);
+}
+
+.navbar__link.is-active::after {
+  transform: scaleX(1);
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: none;
+}
+
+.navbar__actions--mobile {
+  display: none;
+}
+
+.navbar__progress {
+  height: 2px;
+  width: 0;
+  background: var(--grad-brand);
+  transition: width 80ms linear;
+}
+
+/* Hamburger */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  padding: 0 10px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-sm);
+  background: var(--c-surface);
+  flex: none;
+}
+
+.nav-toggle__bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-text);
+  transition: transform var(--t-base), opacity var(--t-base);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================================
+   2. TOMBOL
+   ============================================================ */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.72rem 1.35rem;
+  border: 1px solid transparent;
+  border-radius: var(--r-full);
+  font-size: 0.925rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform var(--t-base), box-shadow var(--t-base),
+    background-color var(--t-base), border-color var(--t-base), color var(--t-base);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn--sm {
+  padding: 0.52rem 1rem;
+  font-size: 0.87rem;
+}
+
+.btn--primary {
+  background: var(--grad-brand);
+  color: var(--c-on-primary);
+  box-shadow: 0 10px 26px -14px rgba(56, 189, 248, 0.75);
+}
+
+.btn--primary:hover {
+  color: var(--c-on-primary);
+  box-shadow: 0 16px 34px -14px rgba(56, 189, 248, 0.85);
+}
+
+.btn--outline {
+  border-color: var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-text);
+}
+
+.btn--outline:hover {
+  border-color: var(--c-primary);
+  color: var(--c-text);
+}
+
+.btn__arrow {
+  transition: transform var(--t-base);
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(4px);
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-sm);
+  background: var(--c-surface);
+  color: var(--c-text-muted);
+  font-size: 1.05rem;
+  line-height: 1;
+  transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+}
+
+.icon-btn__glyph {
+  display: block;
+  line-height: 1;
+}
+
+.icon-btn:hover {
+  color: var(--c-primary);
+  border-color: var(--c-primary);
+}
+
+/* ============================================================
+   3. CARD
+   ============================================================ */
+.card {
+  position: relative;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  background: var(--c-surface);
+  overflow: hidden;
+}
+
+.card--panel {
+  padding: clamp(1.2rem, 2.4vw, 1.7rem);
+}
+
+.card--hover {
+  transition: transform var(--t-base), border-color var(--t-base), box-shadow var(--t-base);
+}
+
+.card--hover:hover {
+  transform: translateY(-6px);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: var(--c-shadow-lg);
+}
+
+.card__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.1rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.card__title::before {
+  content: "";
+  width: 4px;
+  height: 1.05em;
+  border-radius: 2px;
+  background: var(--grad-brand);
+}
+
+/* ============================================================
+   4. BADGE / TAG
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.24rem 0.6rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-full);
+  background: var(--c-surface-2);
+  color: var(--c-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.badge--accent {
+  border-color: rgba(56, 189, 248, 0.35);
+  background: var(--grad-brand-soft);
+  color: var(--c-primary);
+}
+
+.badge--dot::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+}
+
+/* ============================================================
+   5. SKILL BAR
+   ============================================================ */
+.skill {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.skill__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.35rem;
+}
+
+.skill__name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.skill__level {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--c-text-dim);
+}
+
+.skill__bar {
+  height: 6px;
+  border-radius: var(--r-full);
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border-soft);
+  overflow: hidden;
+}
+
+.skill__fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: var(--grad-brand);
+  transition: width 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skill__note {
+  font-size: 0.78rem;
+  color: var(--c-text-dim);
+}
+
+/* ============================================================
+   6. TIMELINE
+   ============================================================ */
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  padding-left: 1.9rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0.55rem;
+  bottom: 0.55rem;
+  left: 6px;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--c-primary), var(--c-accent), transparent);
+  opacity: 0.6;
+}
+
+.tl-item {
+  position: relative;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  background: var(--c-surface);
+  transition: transform var(--t-base), border-color var(--t-base), box-shadow var(--t-base);
+}
+
+.tl-item:hover {
+  transform: translateX(5px);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: var(--c-shadow);
+}
+
+.tl-item::before {
+  content: "";
+  position: absolute;
+  top: 1.55rem;
+  left: -1.9rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--c-bg-alt);
+  border: 3px solid var(--c-primary);
+  box-shadow: 0 0 0 4px var(--c-bg);
+}
+
+.tl-item--muted::before {
+  border-color: var(--c-text-dim);
+}
+
+.tl-item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.tl-item__period {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--c-primary);
+  letter-spacing: 0.02em;
+}
+
+.tl-item__org {
+  font-size: 0.82rem;
+  color: var(--c-text-dim);
+}
+
+.tl-item__title {
+  margin-bottom: 0.4rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.tl-item__desc {
+  font-size: 0.91rem;
+  color: var(--c-text-muted);
+}
+
+.tl-item__list {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.6rem;
+}
+
+.tl-item__list li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 0.875rem;
+  color: var(--c-text-muted);
+}
+
+.tl-item__list li::before {
+  content: "";
+  position: absolute;
+  top: 0.62em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--c-accent);
+}
+
+/* ============================================================
+   7. FORM
+   ============================================================ */
+.form__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.form__group {
+  margin-bottom: 1rem;
+}
+
+.form__label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.form__req {
+  color: var(--c-danger);
+}
+
+.form__input {
+  width: 100%;
+  padding: 0.72rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-size: 0.92rem;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+}
+
+.form__input::placeholder {
+  color: var(--c-text-dim);
+}
+
+.form__input:hover {
+  border-color: var(--c-text-dim);
+}
+
+.form__input:focus {
+  outline: none;
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 3px var(--c-ring);
+}
+
+.form__input[aria-invalid="true"] {
+  border-color: var(--c-danger);
+}
+
+.form__input[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px rgba(251, 113, 133, 0.35);
+}
+
+.form__textarea {
+  min-height: 130px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.form__hint {
+  margin-top: 0.35rem;
+  font-size: 0.76rem;
+  color: var(--c-text-dim);
+  text-align: right;
+}
+
+.form__error {
+  min-height: 1.1rem;
+  margin-top: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--c-danger);
+}
+
+.form__error:empty {
+  margin-top: 0;
+  min-height: 0;
+}
+
+.form__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 0.4rem;
+}
+
+.form__status {
+  font-size: 0.85rem;
+  color: var(--c-text-muted);
+}
+
+.form__status.is-success {
+  color: var(--c-success);
+}
+
+.form__status.is-error {
+  color: var(--c-danger);
+}
+
+.form__status.is-info {
+  color: var(--c-primary);
+}
+
+/* ============================================================
+   8. KONTAK
+   ============================================================ */
+.contact__title {
+  margin-bottom: 0.6rem;
+}
+
+.contact__note {
+  margin-bottom: 1.4rem;
+  font-size: 0.9rem;
+  color: var(--c-text-muted);
+}
+
+.contact__list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.contact__item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  background: var(--c-surface);
+  transition: transform var(--t-base), border-color var(--t-base), background var(--t-base);
+}
+
+.contact__item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(56, 189, 248, 0.4);
+  background: var(--c-surface-2);
+}
+
+.contact__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 10px;
+  border: 1px solid var(--c-border);
+  background: var(--grad-brand-soft);
+  color: var(--c-primary);
+  font-size: 1.05rem;
+}
+
+.contact__body {
+  min-width: 0;
+}
+
+.contact__label {
+  display: block;
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-text-dim);
+}
+
+.contact__value {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--c-text);
+  overflow-wrap: anywhere;
+}
+
+a.contact__item:hover .contact__value {
+  color: var(--c-primary);
+}
+
+/* ============================================================
+   9. FOOTER
+   ============================================================ */
+.footer {
+  border-top: 1px solid var(--c-border-soft);
+  background: var(--c-bg-alt);
+  padding-block: 1.8rem;
+  margin-top: auto;
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer__copy {
+  font-size: 0.86rem;
+  color: var(--c-text-dim);
+}
+
+.footer__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+
+.footer__list a {
+  font-size: 0.86rem;
+  color: var(--c-text-muted);
+}
+
+.footer__list a:hover {
+  color: var(--c-primary);
+}
+
+/* ============================================================
+   10. TOMBOL BACK TO TOP
+   ============================================================ */
+.to-top {
+  position: fixed;
+  right: clamp(1rem, 3vw, 1.8rem);
+  bottom: clamp(1rem, 3vw, 1.8rem);
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--c-border);
+  border-radius: 50%;
+  background: var(--c-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--c-text);
+  font-size: 1.1rem;
+  box-shadow: var(--c-shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity var(--t-base), transform var(--t-base), visibility var(--t-base),
+    border-color var(--t-fast), color var(--t-fast);
+}
+
+.to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.to-top:hover {
+  border-color: var(--c-primary);
+  color: var(--c-primary);
+}

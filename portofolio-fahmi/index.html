@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="paper">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fahmi el murottal — Avant-Garde Typographic Monograph // 2026</title>
+  <meta name="description" content="Kinetic Typographic Portfolio of Fahmi el murottal — First-Year Undergraduate at UIN Maulana Malik Ibrahim Malang. Typography as Architecture and Spatial Experience." />
+
+  <!-- Google Fonts: Space Grotesk, Syne, Italiana, Playfair Display, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Playfair+Display:ital,wght@1,400;1,600;1,800&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'Space Grotesk', 'sans-serif'],
+            sans: ['Space Grotesk', 'sans-serif'],
+            serif: ['Italiana', 'Playfair Display', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            void: '#070707',
+            surface: '#0f0f0f',
+            elevated: '#161616',
+            neon: {
+              orange: '#ff3e00',
+              glow: 'rgba(255, 62, 0, 0.4)',
+            },
+            paper: '#f5f4ef',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- External Design System CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- GSAP & Lenis Smooth Scroll CDNs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+</head>
+<body class="selection:bg-[#ff3e00] selection:text-white">
+
+  <!-- ======================================================================
+       1. KINETIC CUSTOM CURSOR SYSTEM
+       ====================================================================== -->
+  <div class="custom-cursor-container pointer-events-none" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <div class="cursor-ghost-text">7.9569°S 112.6145°E</div>
+  </div>
+
+  <!-- ======================================================================
+       2. ARCHITECTURAL GRID & CROSSHAIRS
+       ====================================================================== -->
+  <div class="architectural-grid" aria-hidden="true">
+    <div class="grid-col-line relative">
+      <span class="crosshair top-8 left-[-6px]">+</span>
+      <span class="crosshair top-[45vh] left-[-6px]">+</span>
+      <span class="crosshair bottom-12 left-[-6px]">+</span>
+    </div>
+    <div class="grid-col-line hidden md:block"></div>
+    <div class="grid-col-line hidden md:block"></div>
+    <div class="grid-col-line"></div>
+    <div class="grid-col-line hidden md:block"></div>
+    <div class="grid-col-line hidden md:block"></div>
+    <div class="grid-col-line hidden md:block relative">
+      <span class="crosshair top-8 right-[-6px]">+</span>
+      <span class="crosshair top-[70vh] right-[-6px]">+</span>
+    </div>
+    <div class="grid-col-line"></div>
+    <div class="grid-col-line hidden md:block"></div>
+    <div class="grid-col-line hidden md:block"></div>
+    <div class="grid-col-line"></div>
+    <div class="grid-col-line relative">
+      <span class="crosshair top-8 right-[-6px]">+</span>
+      <span class="crosshair bottom-12 right-[-6px]">+</span>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       3. TOP HUD & TELEMETRY NAVIGATION
+       ====================================================================== -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-[var(--bg-void)]/85 backdrop-blur-md border-b border-[var(--border-hairline)] px-4 md:px-10 py-3.5 transition-colors duration-500">
+    <div class="max-w-[1720px] mx-auto flex items-center justify-between">
+      
+      <!-- Identity Mark -->
+      <a href="#" class="group flex items-center gap-3 text-primary flex-shrink-0" data-cursor="[ ZENITH ↑ ]">
+        <span class="relative w-8 h-8 rounded-full overflow-hidden border border-[var(--border-active)] group-hover:border-[var(--accent-neon)] transition-colors flex-shrink-0">
+          <img src="profile.jpg" alt="Fahmi" class="w-full h-full object-cover object-top" />
+        </span>
+        <span class="font-mono text-xs tracking-widest uppercase border border-[var(--border-active)] px-2 py-0.5 rounded-sm text-[var(--accent-neon)] group-hover:bg-[var(--accent-neon)] group-hover:text-white transition-colors duration-300">
+          FM.2026
+        </span>
+        <span class="font-display font-bold text-sm tracking-tight hidden sm:inline-block">
+          FAHMI EL <span class="font-serif italic font-normal text-[var(--accent-neon)]">MUROTTAL</span>
+        </span>
+      </a>
+
+      <!-- Simplified Navigation Links -->
+      <nav class="hidden md:flex items-center gap-6 font-mono text-xs tracking-widest uppercase text-[var(--text-secondary)]">
+        <a href="#tentang" class="hover:text-[var(--accent-neon)] transition-colors" data-cursor="[ 01 // BIO ]">01.IDENTITAS</a>
+        <a href="#pendidikan" class="hover:text-[var(--accent-neon)] transition-colors" data-cursor="[ 02 // EDU ]">02.PROVENANS</a>
+        <a href="#skill" class="hover:text-[var(--accent-neon)] transition-colors" data-cursor="[ 03 // SKILL ]">03.TAKSONOMI</a>
+        <a href="#proyek" class="hover:text-[var(--accent-neon)] transition-colors text-[var(--accent-neon)]" data-cursor="[ 04 // WORKS ]">04.PROTOKOL ↗</a>
+      </nav>
+
+      <!-- Control Toggles -->
+      <div class="flex items-center gap-2.5 flex-shrink-0">
+        <button id="audioToggle" class="hud-btn" data-cursor="[ AUDIO ]" title="Toggle Sound">
+          <span id="audioIcon">🔇</span> <span id="audioText">OFF</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       4. HERO SECTION // MASSIVE 3D PERSPECTIVE STATEMENT
+       ====================================================================== -->
+  <section id="heroSection" class="relative min-h-screen flex flex-col justify-between pt-28 md:pt-36 pb-12 px-4 md:px-12 overflow-hidden perspective-stage">
+    
+    <!-- Ghost Background Watermark -->
+    <div class="ghost-watermark top-16 right-[-5vw]" aria-hidden="true">FM</div>
+
+    <!-- Architectural Coordinate Stamp -->
+    <div class="max-w-[1720px] w-full mx-auto flex flex-col sm:flex-row justify-between sm:items-end gap-4 border-b border-[var(--border-hairline)] pb-4 text-micro-utility z-10">
+      <div>
+        <span class="text-[var(--accent-neon)]">● RECORD 001/2026</span> // UNDERGRADUATE MONOGRAPH
+      </div>
+      <div>
+        UNIVERSITAS ISLAM NEGERI MAULANA MALIK IBRAHIM MALANG
+      </div>
+      <div class="hidden md:block">
+        SEMESTER 01 • AUTONOMOUS ARCHITECTURE
+      </div>
+    </div>
+
+    <!-- 3D Kinetic Tilt Stage: Profile Circle & Resized Typographic Monograph -->
+    <div id="heroTiltPlane" class="max-w-[1720px] w-full mx-auto my-auto py-6 md:py-12 tilt-plane-3d z-10">
+      
+      <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-16 mb-8 select-none">
+        
+        <!-- Avant-Garde Profile Circle -->
+        <div class="profile-circle-container group flex-shrink-0" data-cursor="[ FAHMI // PORTRAIT ]">
+          <!-- Orbital Radar / Telemetry Ring -->
+          <div class="profile-orbit-ring" aria-hidden="true"></div>
+          <div class="profile-orbit-cross top-[-18px] left-1/2 -translate-x-1/2">+</div>
+          <div class="profile-orbit-cross bottom-[-18px] left-1/2 -translate-x-1/2">+</div>
+          <div class="profile-orbit-cross left-[-18px] top-1/2 -translate-y-1/2">+</div>
+          <div class="profile-orbit-cross right-[-18px] top-1/2 -translate-y-1/2">+</div>
+
+          <!-- Main Circular Avatar Frame -->
+          <div class="profile-circle-frame">
+            <img src="profile.jpg" alt="Fahmi el murottal" />
+            <div class="profile-scan-line" aria-hidden="true"></div>
+          </div>
+
+          <!-- Telemetry Status Tag -->
+          <div class="profile-telemetry-tag">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-neon)] animate-pulse"></span>
+            <span>UIN MALANG • S1</span>
+          </div>
+        </div>
+
+        <!-- Scaled Down Typographic Name Block -->
+        <div class="hero-name-content">
+          <div class="text-micro-utility text-[var(--accent-neon)] mb-3 flex items-center gap-2">
+            <span class="inline-block w-2 h-0.5 bg-[var(--accent-neon)]"></span>
+            <span>PORTFOLIO IDENTITAS // RECORD 001/2026</span>
+          </div>
+
+          <div class="text-hero-compact">
+            <div class="kinetic-hover-swap block overflow-hidden" data-cursor="[ FAHMI ]">
+              <span data-split-reveal>FAHMI</span>
+            </div>
+            <div class="kinetic-hover-swap block overflow-hidden text-[var(--text-secondary)] hover:text-[var(--accent-neon)]" data-cursor="[ EL ]">
+              <span class="swap-serif" data-split-reveal>EL</span>
+            </div>
+            <div class="kinetic-hover-swap block overflow-hidden" data-cursor="[ MUROTTAL ]">
+              <span data-split-reveal>MUROTTAL</span>
+            </div>
+          </div>
+
+          <p class="font-mono text-xs md:text-sm text-[var(--text-secondary)] mt-4 tracking-wide max-w-xl">
+            MAHASISWA SEMESTER 1 // UNIVERSITAS ISLAM NEGERI MAULANA MALIK IBRAHIM MALANG
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Manifesto & Core Philosophy Callout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6 md:mt-10 pt-8 border-t border-[var(--border-hairline)] items-start">
+        
+        <div class="lg:col-span-3 text-micro-utility space-y-1">
+          <p class="text-[var(--text-primary)] font-bold">CORE PHILOSOPHY / MOTTO</p>
+          <p>MINDSET MAHASISWA BARU</p>
+          <p class="text-[var(--accent-neon)] font-mono">[ PROTOCOL // LEARNING ]</p>
+        </div>
+
+        <div class="lg:col-span-6">
+          <p class="text-display-sub leading-snug font-normal text-[var(--text-primary)]">
+            <span class="text-serif-accent text-[var(--accent-neon)] text-3xl md:text-5xl mr-2">“</span>
+            Belajar hari ini, untuk menjadi <span class="font-serif italic text-[var(--accent-neon)] underline decoration-[var(--border-active)] underline-offset-8">lebih baik</span> esok hari.
+            <span class="text-serif-accent text-[var(--accent-neon)] text-3xl md:text-5xl ml-2">”</span>
+          </p>
+          <p class="mt-4 text-sm md:text-base text-[var(--text-secondary)] font-sans max-w-xl leading-relaxed">
+            Mahasiswa baru yang mendedikasikan semester awal untuk memahami fondasi keilmuan, membangun disiplin akademik, dan mengeksplorasi batas-batas teknologi web semantik.
+          </p>
+        </div>
+
+        <div class="lg:col-span-3 flex flex-col sm:flex-row lg:flex-col gap-3">
+          <a href="#proyek" class="hud-btn justify-center py-3.5 px-6 border-[var(--accent-neon)] text-[var(--accent-neon)] hover:bg-[var(--accent-neon)] hover:text-white font-mono text-xs tracking-widest text-center" data-cursor="[ PROTOKOL ]">
+            EKSPLORASI PROYEK ↗
+          </a>
+          <a href="#tentang" class="hud-btn justify-center py-3 px-6 text-center" data-cursor="[ DOSSIER ]">
+            EXPLORE DOSSIER [ ↓ ]
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom Indicator -->
+    <div class="max-w-[1720px] w-full mx-auto flex justify-between items-center pt-4 border-t border-[var(--border-hairline)] text-micro-utility z-10">
+      <span class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 border border-[var(--accent-neon)] rotate-45"></span>
+        SCROLL TO ENTER HYPER-DEPTH
+      </span>
+      <span class="font-mono text-[var(--text-muted)]">
+        PAGE_INDEX [01 / 04]
+      </span>
+    </div>
+
+  </section>
+
+  <!-- ======================================================================
+       5. 3D KINETIC RIBBONS // MARQUEE WAVE
+       ====================================================================== -->
+  <div class="ribbon-wrap-3d my-8" aria-hidden="true">
+    
+    <!-- Top Ribbon (Angled Left) -->
+    <div class="ribbon-band-1 py-3.5 mb-2">
+      <div id="ribbonTrack1" class="ribbon-track">
+        <div class="ribbon-text">
+          <span>// FAHMI EL MUROTTAL</span>
+          <span class="ribbon-text-outline">UIN MAULANA MALIK IBRAHIM MALANG</span>
+          <span class="text-[var(--accent-neon)]">•</span>
+          <span>SEMESTER 01</span>
+          <span class="ribbon-text-outline">WEB ARCHITECTURE & COMPUTATION</span>
+          <span class="text-[var(--accent-neon)]">•</span>
+          <span>BELAJAR HARI INI MENJADI LEBIH BAIK ESOK HARI</span>
+          <span class="ribbon-text-outline">MALANG JAVA INDONESIA</span>
+          <span class="text-[var(--accent-neon)]">•</span>
+        </div>
+        <div class="ribbon-text">
+          <span>// FAHMI EL MUROTTAL</span>
+          <span class="ribbon-text-outline">UIN MAULANA MALIK IBRAHIM MALANG</span>
+          <span class="text-[var(--accent-neon)]">•</span>
+          <span>SEMESTER 01</span>
+          <span class="ribbon-text-outline">WEB ARCHITECTURE & COMPUTATION</span>
+          <span class="text-[var(--accent-neon)]">•</span>
+          <span>BELAJAR HARI INI MENJADI LEBIH BAIK ESOK HARI</span>
+          <span class="ribbon-text-outline">MALANG JAVA INDONESIA</span>
+          <span class="text-[var(--accent-neon)]">•</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Ribbon (Angled Right, Reverse Direction) -->
+    <div class="ribbon-band-2 py-3.5">
+      <div id="ribbonTrack2" class="ribbon-track">
+        <div class="ribbon-text">
+          <span class="ribbon-text-outline">KINETIC TYPOGRAPHIC CODEX</span>
+          <span class="text-[var(--accent-neon)]">•</span>
+          <span>CLASS OF 2026</span>
+          <span class="ribbon-text-outline">PUBLIC DISCOURSE & DIGITAL LITERACY</span>
+          <span class="text-[var(--accent-neon)]">•</span>
+          <span>HTML // CSS // MS OFFICE // SYSTEM LOGIC</span>
+          <span class="ribbon-text-outline">ADAPTASI KAMPUS</span>
+          <span class="text-[var(--accent-neon)]">•</span>
+        </div>
+        <div class="ribbon-text">
+          <span class="ribbon-text-outline">KINETIC TYPOGRAPHIC CODEX</span>
+          <span class="text-[var(--accent-neon)]">•</span>
+          <span>CLASS OF 2026</span>
+          <span class="ribbon-text-outline">PUBLIC DISCOURSE & DIGITAL LITERACY</span>
+          <span class="text-[var(--accent-neon)]">•</span>
+          <span>HTML // CSS // SYSTEM LOGIC</span>
+          <span class="ribbon-text-outline">ADAPTASI KAMPUS</span>
+          <span class="text-[var(--accent-neon)]">•</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ======================================================================
+       6. SECTION 01 // IDENTITY & PHILOSOPHY (ABOUT & DOSSIER)
+       ====================================================================== -->
+  <section id="tentang" class="py-24 md:py-36 px-4 md:px-12 relative z-10 border-t border-[var(--border-hairline)]">
+    
+    <div class="ghost-watermark top-12 left-[-6vw]" aria-hidden="true">01</div>
+
+    <div class="max-w-[1720px] mx-auto">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-16 border-b border-[var(--border-hairline)] pb-6">
+        <div>
+          <span class="text-micro-utility text-[var(--accent-neon)] block mb-2">[ 01 // BIOGRAFI & PERKENALAN ]</span>
+          <h2 class="text-section-huge tilt-on-scroll" data-cursor="[ IDENTITY ]">
+            TENTANG <span class="font-serif italic font-normal text-[var(--accent-neon)]">SAYA.</span>
+          </h2>
+        </div>
+        <div class="text-micro-utility md:text-right max-w-xs">
+          <span>PARADIGMA MAHASISWA BARU DI ERA REVOLUSI TEKNOLOGI INFORMASI</span>
+        </div>
+      </div>
+
+      <!-- Content Grid: Cardless Architectural Structure -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        
+        <!-- Left: Editorial Headline & Manifesto Narrative -->
+        <div class="lg:col-span-7 space-y-8">
+          
+          <h3 class="text-2xl sm:text-3xl md:text-4xl font-display font-bold leading-tight" data-split-reveal>
+            Halo! Nama saya Fahmi el murottal, mahasiswa semester 1 di Universitas Islam Negeri Maulana Malik Ibrahim Malang.
+          </h3>
+
+          <div class="space-y-6 text-base md:text-lg text-[var(--text-secondary)] font-sans leading-relaxed border-l-2 border-[var(--accent-neon)] pl-6">
+            <p>
+              Sebagai mahasiswa baru, fase ini adalah ruang adaptasi komprehensif terhadap ekosistem universitas—mempelajari dasar-dasar keilmuan akademik, mengasah kemandirian intelektual, dan aktif mengembangkan harmoni antara <strong class="text-[var(--text-primary)]">soft skill</strong> serta <strong class="text-[var(--text-primary)]">hard skill</strong>.
+            </p>
+            <p>
+              Ketertarikan saya berpusat pada persimpangan antara <span class="text-[var(--text-primary)] font-medium">literasi digital</span>, arsitektur dasar pemrograman web (HTML & CSS), serta keterampilan komunikasi publik dan oratori yang relevan untuk dialog akademik maupun profesional di masa depan.
+            </p>
+          </div>
+
+          <div class="pt-4 flex flex-wrap gap-4 text-micro-utility">
+            <span class="border border-[var(--border-hairline)] px-3 py-1.5 text-[var(--text-primary)]">#MAHASISWA_BARU</span>
+            <span class="border border-[var(--border-hairline)] px-3 py-1.5 text-[var(--text-primary)]">#UIN_MALIKI_MALANG</span>
+            <span class="border border-[var(--border-hairline)] px-3 py-1.5 text-[var(--text-primary)]">#WEB_DASAR</span>
+            <span class="border border-[var(--border-hairline)] px-3 py-1.5 text-[var(--text-primary)]">#PUBLIC_SPEAKING</span>
+            <span class="border border-[var(--border-hairline)] px-3 py-1.5 text-[var(--text-primary)]">#CANVA_DESIGN</span>
+          </div>
+
+        </div>
+
+        <!-- Right: Brutalist Architectural Dossier Ledger -->
+        <div class="lg:col-span-5 border border-[var(--border-hairline)] p-6 md:p-8 bg-[var(--bg-surface)]/60 backdrop-blur-sm">
+          
+          <div class="flex justify-between items-center border-b border-[var(--border-hairline)] pb-4 mb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full overflow-hidden border border-[var(--accent-neon)] flex-shrink-0 shadow-[0_0_15px_rgba(255,62,0,0.25)]">
+                <img src="profile.jpg" alt="Fahmi el murottal" class="w-full h-full object-cover object-top" />
+              </div>
+              <div>
+                <span class="font-mono text-xs text-[var(--accent-neon)] font-bold tracking-widest block">[ DOSSIER AKADEMIK ]</span>
+                <span class="font-mono text-[9px] text-[var(--text-muted)]">VERIFIED ARCHIVE // 2026</span>
+              </div>
+            </div>
+            <span class="font-mono text-[10px] text-[var(--accent-neon)] border border-[var(--border-hairline)] px-2 py-0.5 rounded-sm">ACTIVE</span>
+          </div>
+
+          <ul class="space-y-5 font-mono text-xs">
+            <li class="flex flex-col sm:flex-row justify-between border-b border-[var(--border-hairline)] pb-3">
+              <span class="text-[var(--text-muted)] tracking-wider">NAMA LENGKAP:</span>
+              <span class="text-[var(--text-primary)] font-bold sm:text-right" data-scramble>Fahmi el murottal</span>
+            </li>
+            <li class="flex flex-col sm:flex-row justify-between border-b border-[var(--border-hairline)] pb-3">
+              <span class="text-[var(--text-muted)] tracking-wider">STATUS STATUS:</span>
+              <span class="text-[var(--accent-neon)] font-bold sm:text-right">Mahasiswa Aktif (Semester 1)</span>
+            </li>
+            <li class="flex flex-col sm:flex-row justify-between border-b border-[var(--border-hairline)] pb-3">
+              <span class="text-[var(--text-muted)] tracking-wider">ALMA MATER:</span>
+              <span class="text-[var(--text-primary)] font-bold sm:text-right">UIN Maulana Malik Ibrahim Malang</span>
+            </li>
+            <li class="flex flex-col sm:flex-row justify-between border-b border-[var(--border-hairline)] pb-3">
+              <span class="text-[var(--text-muted)] tracking-wider">LOKASI GEOGRAFIS:</span>
+              <span class="text-[var(--text-primary)] font-bold sm:text-right">Malang, Jawa Timur, Indonesia</span>
+            </li>
+            <li class="flex flex-col sm:flex-row justify-between border-b border-[var(--border-hairline)] pb-3">
+              <span class="text-[var(--text-muted)] tracking-wider">BIDANG MINAT:</span>
+              <span class="text-[var(--text-primary)] font-bold sm:text-right">Teknologi, Desain Grafis, Pendidikan</span>
+            </li>
+            <li class="flex flex-col sm:flex-row justify-between pt-1">
+              <span class="text-[var(--text-muted)] tracking-wider">FOKUS 2026:</span>
+              <span class="text-[var(--text-primary)] font-bold sm:text-right">Fondasi Web & Adaptasi Perkuliahan</span>
+            </li>
+          </ul>
+
+          <div class="mt-8 pt-4 border-t border-[var(--border-hairline)] text-[10px] font-mono text-[var(--text-muted)] flex justify-between">
+            <span>REGISTRY: UIN-MLG-26</span>
+            <span>SYSTEM STATE: ACTIVE</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       7. SECTION 02 // CHRONOLOGY & PROVENANCE (EDUCATION)
+       ====================================================================== -->
+  <section id="pendidikan" class="py-24 md:py-36 px-4 md:px-12 relative z-10 border-t border-[var(--border-hairline)] bg-[var(--bg-void)]">
+    
+    <div class="ghost-watermark top-12 right-[-4vw]" aria-hidden="true">02</div>
+
+    <div class="max-w-[1720px] mx-auto">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-16 border-b border-[var(--border-hairline)] pb-6">
+        <div>
+          <span class="text-micro-utility text-[var(--accent-neon)] block mb-2">[ 02 // RIWAYAT PENDIDIKAN ]</span>
+          <h2 class="text-section-huge tilt-on-scroll" data-cursor="[ CHRONO ]">
+            PENDIDIKAN <span class="font-serif italic font-normal text-[var(--accent-neon)]">FORMAL.</span>
+          </h2>
+        </div>
+        <div class="text-micro-utility md:text-right max-w-xs">
+          <span>JEJAK AKADEMIK DAN FONDASI KEILMUAN</span>
+        </div>
+      </div>
+
+      <!-- Chronological Ledger -->
+      <div class="space-y-0">
+        
+        <!-- Entry 1: Current University -->
+        <div class="border-t border-[var(--border-hairline)] py-10 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start hover:border-[var(--accent-neon)] transition-colors duration-300 group">
+          
+          <div class="lg:col-span-3 font-mono">
+            <span class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[var(--accent-neon)] block">
+              2026 — SEKARANG
+            </span>
+            <span class="text-xs text-[var(--text-muted)] tracking-widest uppercase mt-1 block">
+              [ SEMESTER 01 // TINGKAT 1 ]
+            </span>
+          </div>
+
+          <div class="lg:col-span-6 space-y-3">
+            <h3 class="text-2xl md:text-4xl font-display font-bold group-hover:text-[var(--accent-neon)] transition-colors">
+              UIN Maulana Malik Ibrahim Malang
+            </h3>
+            <p class="text-base md:text-lg text-[var(--text-secondary)] font-sans leading-relaxed">
+              Mahasiswa aktif semester 1. Fokus utama pada adaptasi kurikulum perguruan tinggi, eksplorasi teori dasar, pembentukan metodologi belajar mandiri, dan partisipasi dalam kultur intelektual universitas.
+            </p>
+          </div>
+
+          <div class="lg:col-span-3 lg:text-right font-mono text-xs text-[var(--text-muted)] space-y-1">
+            <p class="text-[var(--text-primary)] font-bold">STATUS: SEDANG BERJALAN</p>
+            <p>KOTA MALANG, JAWA TIMUR</p>
+            <p class="text-[var(--accent-neon)]">CAMPUS LEVEL: HIGHER ED</p>
+          </div>
+
+        </div>
+
+        <!-- Entry 2: Senior High School -->
+        <div class="border-t border-[var(--border-hairline)] border-b border-[var(--border-hairline)] py-10 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start hover:border-[var(--accent-neon)] transition-colors duration-300 group">
+          
+          <div class="lg:col-span-3 font-mono">
+            <span class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] block">
+              LULUS 2026
+            </span>
+            <span class="text-xs text-[var(--text-muted)] tracking-widest uppercase mt-1 block">
+              [ 2023 — 2026 ]
+            </span>
+          </div>
+
+          <div class="lg:col-span-6 space-y-3">
+            <h3 class="text-2xl md:text-4xl font-display font-bold group-hover:text-[var(--accent-neon)] transition-colors">
+              Sekolah Menengah Atas / Sederajat
+            </h3>
+            <p class="text-base md:text-lg text-[var(--text-secondary)] font-sans leading-relaxed">
+              Menyelesaikan pendidikan tingkat menengah dengan penguatan pada literasi umum, kepemimpinan siswa, serta persiapan matang untuk seleksi masuk universitas negeri.
+            </p>
+          </div>
+
+          <div class="lg:col-span-3 lg:text-right font-mono text-xs text-[var(--text-muted)] space-y-1">
+            <p class="text-[var(--text-primary)] font-bold">IJAZAH TERVERIFIKASI</p>
+            <p>PRE-COLLEGIATE LEVEL</p>
+            <p class="text-[var(--text-muted)]">STATUS: SELESAI</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       8. SECTION 03 // TAXONOMY OF CAPABILITIES (SKILLS & METRICS)
+       ====================================================================== -->
+  <section id="skill" class="py-24 md:py-36 px-4 md:px-12 relative z-10 border-t border-[var(--border-hairline)] bg-[var(--bg-surface)]">
+    
+    <div class="ghost-watermark top-12 left-[-5vw]" aria-hidden="true">03</div>
+
+    <div class="max-w-[1720px] mx-auto">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-16 border-b border-[var(--border-hairline)] pb-6">
+        <div>
+          <span class="text-micro-utility text-[var(--accent-neon)] block mb-2">[ 03 // MATRIKS KOMPETENSI ]</span>
+          <h2 class="text-section-huge tilt-on-scroll" data-cursor="[ SKILLS ]">
+            TAKSONOMI <span class="font-serif italic font-normal text-[var(--accent-neon)]">SKILL.</span>
+          </h2>
+        </div>
+        <div class="text-micro-utility md:text-right max-w-xs">
+          <span>PARAMETRIK PENGEMBANGAN DIRI DAN PROGRES BELAJAR</span>
+        </div>
+      </div>
+
+      <!-- Kinetic Typographic Metrics Matrix -->
+      <div class="space-y-2">
+        
+        <!-- Skill 1: HTML & CSS -->
+        <div class="metric-row group" data-interactive data-cursor="[ 40% CODE ]">
+          <div>
+            <span class="text-micro-utility text-[var(--text-muted)] block mb-1">01 // CODE ARCHITECTURE</span>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-bold group-hover:text-[var(--accent-neon)] transition-colors" data-scramble>
+              HTML & CSS (Web Dasar)
+            </h3>
+            <p class="text-xs md:text-sm text-[var(--text-secondary)] font-mono mt-1">Struktur markup semantik, penataan gaya CSS, dan pemahaman layout responsif.</p>
+          </div>
+          <div>
+            <div class="metric-bar-outer">
+              <div class="metric-bar-fill" data-percentage="40%"></div>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="font-mono text-2xl md:text-4xl font-bold metric-num text-[var(--accent-neon)]">00%</span>
+            <span class="text-micro-utility text-[var(--text-muted)] block">EXP LEVEL</span>
+          </div>
+        </div>
+
+        <!-- Skill 2: Microsoft Office -->
+        <div class="metric-row group" data-interactive data-cursor="[ 75% SUITE ]">
+          <div>
+            <span class="text-micro-utility text-[var(--text-muted)] block mb-1">02 // DIGITAL PRODUCTIVITY</span>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-bold group-hover:text-[var(--accent-neon)] transition-colors" data-scramble>
+              Microsoft Office Suite
+            </h3>
+            <p class="text-xs md:text-sm text-[var(--text-secondary)] font-mono mt-1">Penyusunan dokumen akademik (Word), pengolahan data tabular (Excel), dan presentasi (PowerPoint).</p>
+          </div>
+          <div>
+            <div class="metric-bar-outer">
+              <div class="metric-bar-fill" data-percentage="75%"></div>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="font-mono text-2xl md:text-4xl font-bold metric-num text-[var(--accent-neon)]">00%</span>
+            <span class="text-micro-utility text-[var(--text-muted)] block">EXP LEVEL</span>
+          </div>
+        </div>
+
+        <!-- Skill 3: Public Speaking -->
+        <div class="metric-row group" data-interactive data-cursor="[ 60% ORATORY ]">
+          <div>
+            <span class="text-micro-utility text-[var(--text-muted)] block mb-1">03 // ORATORY & DISCOURSE</span>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-bold group-hover:text-[var(--accent-neon)] transition-colors" data-scramble>
+              Public Speaking & Diskusi
+            </h3>
+            <p class="text-xs md:text-sm text-[var(--text-secondary)] font-mono mt-1">Artikulasi gagasan di depan forum, komunikasi interpersonal, dan keaktifan dialog kelas.</p>
+          </div>
+          <div>
+            <div class="metric-bar-outer">
+              <div class="metric-bar-fill" data-percentage="60%"></div>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="font-mono text-2xl md:text-4xl font-bold metric-num text-[var(--accent-neon)]">00%</span>
+            <span class="text-micro-utility text-[var(--text-muted)] block">EXP LEVEL</span>
+          </div>
+        </div>
+
+        <!-- Skill 4: Canva Design -->
+        <div class="metric-row group" data-interactive data-cursor="[ 65% VISUAL ]">
+          <div>
+            <span class="text-micro-utility text-[var(--text-muted)] block mb-1">04 // VISUAL IDENTITY</span>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-bold group-hover:text-[var(--accent-neon)] transition-colors" data-scramble>
+              Desain Canva & Komunikasi Visual
+            </h3>
+            <p class="text-xs md:text-sm text-[var(--text-secondary)] font-mono mt-1">Pembuatan poster publikasi kegiatan, visual media sosial, dan slide presentasi estetik.</p>
+          </div>
+          <div>
+            <div class="metric-bar-outer">
+              <div class="metric-bar-fill" data-percentage="65%"></div>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="font-mono text-2xl md:text-4xl font-bold metric-num text-[var(--accent-neon)]">00%</span>
+            <span class="text-micro-utility text-[var(--text-muted)] block">EXP LEVEL</span>
+          </div>
+        </div>
+
+        <!-- Skill 5: English Proficiency -->
+        <div class="metric-row group" data-interactive data-cursor="[ 55% LANG ]">
+          <div>
+            <span class="text-micro-utility text-[var(--text-muted)] block mb-1">05 // GLOBAL DIALOGUE</span>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-bold group-hover:text-[var(--accent-neon)] transition-colors" data-scramble>
+              Bahasa Inggris Komunikatif
+            </h3>
+            <p class="text-xs md:text-sm text-[var(--text-secondary)] font-mono mt-1">Pemahaman literatur internasional, komunikasi dasar, dan literasi teknologi berbahasa Inggris.</p>
+          </div>
+          <div>
+            <div class="metric-bar-outer">
+              <div class="metric-bar-fill" data-percentage="55%"></div>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="font-mono text-2xl md:text-4xl font-bold metric-num text-[var(--accent-neon)]">00%</span>
+            <span class="text-micro-utility text-[var(--text-muted)] block">EXP LEVEL</span>
+          </div>
+        </div>
+
+        <!-- Skill 6: Computer Fundamentals -->
+        <div class="metric-row group" data-interactive data-cursor="[ 70% SYSTEM ]">
+          <div>
+            <span class="text-micro-utility text-[var(--text-muted)] block mb-1">06 // COMPUTATION FUNDAMENTALS</span>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-bold group-hover:text-[var(--accent-neon)] transition-colors" data-scramble>
+              Dasar Komputer & Sistem Operasi
+            </h3>
+            <p class="text-xs md:text-sm text-[var(--text-secondary)] font-mono mt-1">Manajemen berkas, instalasi software, logika sistem informasi, dan keamanan data digital.</p>
+          </div>
+          <div>
+            <div class="metric-bar-outer">
+              <div class="metric-bar-fill" data-percentage="70%"></div>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="font-mono text-2xl md:text-4xl font-bold metric-num text-[var(--accent-neon)]">00%</span>
+            <span class="text-micro-utility text-[var(--text-muted)] block">EXP LEVEL</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       9. SECTION 04 // PROTOCOLS & INITIATIVES (PROJECTS & ACTIVITIES)
+       ====================================================================== -->
+  <section id="proyek" class="py-24 md:py-36 px-4 md:px-12 relative z-10 border-t border-[var(--border-hairline)] bg-[var(--bg-void)]">
+    
+    <div class="ghost-watermark top-12 right-[-6vw]" aria-hidden="true">04</div>
+
+    <div class="max-w-[1720px] mx-auto">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-16 border-b border-[var(--border-hairline)] pb-6">
+        <div>
+          <span class="text-micro-utility text-[var(--accent-neon)] block mb-2">[ 04 // PROTOKOL & EKSPLORASI ]</span>
+          <h2 class="text-section-huge tilt-on-scroll" data-cursor="[ WORKS ]">
+            PROYEK <span class="font-serif italic font-normal text-[var(--accent-neon)]">AKTIVITAS.</span>
+          </h2>
+        </div>
+        <div class="text-micro-utility md:text-right max-w-xs">
+          <span>LANGKAH AWAL MAHASISWA BARU MENUJU DISTINGSI</span>
+        </div>
+      </div>
+
+      <!-- Full-Width Typographic Project Rows (Cardless) -->
+      <div class="space-y-0">
+        
+        <!-- Project 01: Campus Adaptation -->
+        <article class="project-row group" data-interactive data-cursor="[ PROTOCOL 01 ]">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            
+            <div class="lg:col-span-2 font-mono text-xs text-[var(--text-muted)]">
+              <span class="text-[var(--accent-neon)]">[ 01 ]</span> // KAMPUS
+            </div>
+
+            <div class="lg:col-span-6 flex items-center gap-4">
+              <h3 class="project-title">
+                Adaptasi Kampus
+              </h3>
+              <span class="project-arrow text-2xl md:text-4xl">↗</span>
+            </div>
+
+            <div class="lg:col-span-4 text-sm md:text-base text-[var(--text-secondary)] font-sans leading-relaxed">
+              Mengikuti PKKMB (Pengenalan Kehidupan Kampus Mahasiswa Baru), orientasi fakultas & jurusan, pembentukan jejaring teman sejawat, dan integrasi kultur UIN Maliki Malang.
+            </div>
+
+          </div>
+        </article>
+
+        <!-- Project 02: Web Development Practice -->
+        <article class="project-row group" data-interactive data-cursor="[ PROTOCOL 02 ]">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            
+            <div class="lg:col-span-2 font-mono text-xs text-[var(--text-muted)]">
+              <span class="text-[var(--accent-neon)]">[ 02 ]</span> // CODEX
+            </div>
+
+            <div class="lg:col-span-6 flex items-center gap-4">
+              <h3 class="project-title">
+                Belajar Web Dasar
+              </h3>
+              <span class="project-arrow text-2xl md:text-4xl">↗</span>
+            </div>
+
+            <div class="lg:col-span-4 text-sm md:text-base text-[var(--text-secondary)] font-sans leading-relaxed">
+              Membangun dan merancang web portfolio pribadi ini sebagai implementasi perdana pemahaman HTML dan CSS, bertransformasi menjadi visual avant-garde typographic codex.
+            </div>
+
+          </div>
+        </article>
+
+        <!-- Project 03: Semester 1 Targets -->
+        <article class="project-row group" data-interactive data-cursor="[ PROTOCOL 03 ]">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            
+            <div class="lg:col-span-2 font-mono text-xs text-[var(--text-muted)]">
+              <span class="text-[var(--accent-neon)]">[ 03 ]</span> // TARGET
+            </div>
+
+            <div class="lg:col-span-6 flex items-center gap-4">
+              <h3 class="project-title">
+                Target Semester 1
+              </h3>
+              <span class="project-arrow text-2xl md:text-4xl">↗</span>
+            </div>
+
+            <div class="lg:col-span-4 text-sm md:text-base text-[var(--text-secondary)] font-sans leading-relaxed">
+              Fokus terarah pada pencapaian IPK prima, keaktifan partisipasi diskusi di ruang kuliah, serta seleksi keikutsertaan pada 1 Unit Kegiatan Mahasiswa (UKM) strategis.
+            </div>
+
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       10. MASSIVE COLOPHON FOOTER // HORIZON DEPTH
+       ====================================================================== -->
+  <footer class="pt-24 pb-16 px-4 md:px-12 border-t border-[var(--border-hairline)] bg-[var(--bg-void)] relative overflow-hidden perspective-stage">
+    
+    <div class="max-w-[1720px] mx-auto">
+      
+      <!-- Top Colophon Metadata -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16 text-micro-utility border-b border-[var(--border-hairline)] pb-12">
+        <div>
+          <span class="text-[var(--accent-neon)] block mb-1">01 / CREATOR</span>
+          <span class="text-[var(--text-primary)] font-bold">FAHMI EL MUROTTAL</span>
+          <p class="text-[var(--text-muted)] mt-1">Undergraduate • Class of 2026</p>
+        </div>
+        <div>
+          <span class="text-[var(--accent-neon)] block mb-1">02 / INSTITUTION</span>
+          <span class="text-[var(--text-primary)] font-bold">UIN MALIKI MALANG</span>
+          <p class="text-[var(--text-muted)] mt-1">Malang, East Java, Indonesia</p>
+        </div>
+        <div>
+          <span class="text-[var(--accent-neon)] block mb-1">03 / TYPOGRAPHY</span>
+          <span class="text-[var(--text-primary)] font-bold">SYNE + SPACE GROTESK + ITALIANA</span>
+          <p class="text-[var(--text-muted)] mt-1">Kinetic Editorial Architecture</p>
+        </div>
+        <div class="md:text-right">
+          <a href="#" class="hud-btn inline-flex" data-cursor="[ TOP ↑ ]">
+            RETURN TO ZENITH ↑
+          </a>
+        </div>
+      </div>
+
+      <!-- Massive Footer Typographic Horizon -->
+      <div class="text-center select-none py-8">
+        <h2 class="text-[14vw] font-display font-black leading-none tracking-tighter text-[var(--border-hairline)] hover:text-[var(--accent-neon)] transition-colors duration-700 tilt-plane-3d" data-cursor="[ FAHMI 2026 ]">
+          FAHMI.2026
+        </h2>
+      </div>
+
+      <!-- Bottom Legal Ledger -->
+      <div class="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-[var(--border-hairline)] text-micro-utility gap-4">
+        <div>
+          © 2026 FAHMI EL MUROTTAL • ALL RIGHTS RESERVED
+        </div>
+        <div>
+          DESIGNED WITH HIGH-PRECISION KINETIC TYPOGRAPHY
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Kinetic Engine Script -->
+  <script src="app.js"></script>
+</body>
+</html>

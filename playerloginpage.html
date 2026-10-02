@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Player Login — INSERT COFFEE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/player-login.css?v=3.2">
+</head>
+<body class="retro-coffee-body">
+
+<div class="ambient-roast-glow" aria-hidden="true"></div>
+<div class="retro-scanlines" aria-hidden="true"></div>
+
+<main class="login-container" id="loginContainer">
+
+  <!-- 3D Coffee Cup Hero (Moves + Renders Beans & Steam) -->
+  <div class="coffee-3d-wrap" id="coffee3dWrap">
+    <canvas id="coffee3dCanvas" width="220" height="170" aria-label="3D Retro Coffee Object"></canvas>
+  </div>
+
+  <header class="login-header" id="loginHeader">
+    <h1 class="brand-title" id="brandTitle">INSERT COFFEE</h1>
+  </header>
+
+  <!-- Clean Minimal Form with Animated Fields -->
+  <form id="loginForm" class="login-form" onsubmit="handleLoginSubmit(event)" novalidate>
+    
+    <div class="input-group-gamertag" id="groupGamertag">
+      <label for="inputGamertag" class="input-label">Gamertag</label>
+      <div class="input-wrap">
+        <input 
+          type="text" 
+          id="inputGamertag" 
+          name="gamertag"
+          class="retro-input" 
+          placeholder="Enter gamertag"
+          maxlength="16"
+          autocomplete="username"
+          spellcheck="false"
+          required
+        >
+      </div>
+    </div>
+
+    <div class="input-group-password" id="groupPassword">
+      <label for="inputPassword" class="input-label">Password</label>
+      <div class="input-wrap">
+        <input 
+          type="password" 
+          id="inputPassword" 
+          name="password"
+          class="retro-input" 
+          placeholder="Enter password"
+          maxlength="24"
+          autocomplete="current-password"
+          required
+        >
+        <button 
+          type="button" 
+          class="btn-eye" 
+          id="btnToggleEye" 
+          onclick="togglePasswordVisibility()" 
+          aria-label="Toggle password visibility"
+          tabindex="-1"
+        >
+          <svg id="eyeShow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          <svg id="eyeHide" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Minimal Error / Status Notice -->
+    <div id="loginFeedback" class="login-feedback" role="alert"></div>
+
+    <button type="submit" id="btnLogin" class="btn-login">
+      <span class="btn-spinner" id="btnSpinner"></span>
+      <span id="btnText">LOGIN</span>
+    </button>
+
+  </form>
+
+  <nav class="bottom-links" id="bottomNav">
+    <a href="index.html" class="link-return" onclick="sessionStorage.setItem('ic_guest_skipped', 'true')">&larr; Return to Coffee &amp; Arcade</a>
+  </nav>
+
+</main>
+
+<script src="assets/js/player-login.js?v=3.2"></script>
+</body>
+</html>

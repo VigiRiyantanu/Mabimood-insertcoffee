@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>INSERT COFFEE — Coffee, Games, and Chill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=3.6">
+
+<!-- Firebase App & Services (Compat SDK) -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<!-- Ambient 3D Particle & Bean Constellation Background Canvas -->
+<canvas id="ambient3dCanvas" class="ambient-3d-bg"></canvas>
+
+<!-- NAVBAR -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-logo" onclick="navigate('home')" tabindex="0" role="button" aria-label="Go to home">INSERT COFFEE</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" onclick="navigate('home');return false;" id="nav-home" class="active">Home</a></li>
+      <li><a href="#" onclick="navigate('coffee');return false;" id="nav-coffee">Coffee</a></li>
+      <li><a href="#" onclick="navigate('arcade');return false;" id="nav-arcade">Arcade</a></li>
+      <li><a href="leaderboard.html" id="nav-leaderboard">Leaderboard</a></li>
+      <li><a href="#" onclick="navigate('about');return false;" id="nav-about">About</a></li>
+      <li><a href="#" onclick="navigate('display');return false;" id="nav-display">Display</a></li>
+      <li><a href="admin/index.html" id="nav-admin-panel" class="nav-admin-btn" title="Admin Portal & Backend">Admin</a></li>
+      <li>
+        <button class="nav-cart-btn" onclick="openCart()" aria-label="View order cart">
+          Cart
+          <span class="cart-badge" id="cartBadge" aria-live="polite"></span>
+        </button>
+      </li>
+      <li>
+        <a href="playerloginpage.html" class="nav-profile-circle" id="navPlayerBtn" title="Login / Profil Pemain" aria-label="Profil Pemain">
+          <span class="profile-circle-avatar" id="navPlayerAvatar">
+            <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
+          <span class="profile-online-dot"></span>
+        </a>
+      </li>
+    </ul>
+    <div class="nav-right-mobile">
+      <button class="nav-hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="playerloginpage.html" class="nav-profile-circle mobile-profile-btn" id="navPlayerBtnMobile" title="Login / Profil Pemain" aria-label="Profil Pemain">
+        <span class="profile-circle-avatar" id="navPlayerAvatarMobile">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        <span class="profile-online-dot"></span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="nav-mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+  <div class="nav-mobile-user-card" onclick="window.location.href='playerloginpage.html'">
+    <div class="mobile-user-avatar" id="mobileMenuAvatar">P</div>
+    <div class="mobile-user-info">
+      <span class="mobile-user-label">Pemain Aktif</span>
+      <span class="mobile-user-name" id="mobilePlayerName">Tamu</span>
+    </div>
+    <span class="mobile-user-badge">Akun &rarr;</span>
+  </div>
+  <a href="#" onclick="navigate('home');closeMobileMenu();return false;" id="mobile-nav-home" class="active">Home</a>
+  <a href="#" onclick="navigate('coffee');closeMobileMenu();return false;" id="mobile-nav-coffee">Coffee</a>
+  <a href="#" onclick="navigate('arcade');closeMobileMenu();return false;" id="mobile-nav-arcade">Arcade</a>
+  <a href="leaderboard.html" onclick="closeMobileMenu();" id="mobile-nav-leaderboard">Leaderboard</a>
+  <a href="#" onclick="navigate('about');closeMobileMenu();return false;" id="mobile-nav-about">About</a>
+  <a href="#" onclick="navigate('display');closeMobileMenu();return false;" id="mobile-nav-display">Display</a>
+  <a href="admin/index.html" style="color:var(--amber);">Admin Portal</a>
+  <button onclick="openCart();closeMobileMenu();">Cart <span id="mobileCartCount"></span></button>
+</div>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- CART DRAWER -->
+<div class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Order cart">
+  <div class="cart-head">
+    <h3>Your Order</h3>
+    <button class="cart-close" onclick="closeCart()" aria-label="Close cart">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cartItemsEl"></div>
+  <div class="cart-foot" id="cartFootEl"></div>
+</div>
+
+<!-- ======================================================
+     HOME PAGE
+     ====================================================== -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <canvas id="bgDinoCanvas"></canvas>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-label"><span class="pulse-dot"></span>Coffee Shop & Retro Arcade</div>
+        <h1 class="hero-title">COFFEE.<br><span class="hero-gradient-text">PLAY.</span><br>REPEAT.</h1>
+        <p class="hero-sub">Grab your coffee, pick a game, and stay awhile. We made a corner for people who need one more round before heading home.</p>
+        <div class="hero-ctas">
+          <button class="btn-primary btn-3d" onclick="navigate('coffee')"><span>Order Coffee</span></button>
+          <button class="btn-secondary btn-3d" onclick="navigate('arcade')"><span>Play Arcade</span></button>
+        </div>
+      </div>
+      <div class="hero-visual" id="heroVisual3D">
+        <div class="hero-scene-3d" id="heroScene3D">
+          <div class="hero-grid-dec"></div>
+          
+          <!-- Floating 3D Badges -->
+          <div class="hero-floating-chip chip-1">
+            <span class="chip-icon">★</span>
+            <span>Freshly Brewed</span>
+          </div>
+          <div class="hero-floating-chip chip-2">
+            <span class="chip-icon">◆</span>
+            <span>10 Arcade Games</span>
+          </div>
+          <div class="hero-floating-chip chip-3">
+            <span class="chip-icon">✦</span>
+            <span>Chill Vibes</span>
+          </div>
+
+          <!-- 3D Arcade Cabinet -->
+          <div class="hero-cabinet cabinet-3d">
+            <div class="cabinet-marquee">
+              <span class="marquee-text">INSERT COFFEE</span>
+            </div>
+            <div class="cabinet-body">
+              <div class="cabinet-screen-wrap">
+                <div class="crt-scanlines"></div>
+                <div class="cabinet-screen-text">
+                  <div class="screen-pixel-cup">★</div>
+                  <div class="screen-flash">INSERT COFFEE</div>
+                  <div class="screen-sub">PRESS START</div>
+                  <div class="screen-score">HI-SCORE 001240</div>
+                </div>
+              </div>
+              <div class="cabinet-controls">
+                <div class="cab-joystick">
+                  <div class="stick-base"></div>
+                  <div class="stick-shaft"></div>
+                  <div class="stick-ball"></div>
+                </div>
+                <div class="cab-btns">
+                  <div class="cab-btn cab-btn-a"></div>
+                  <div class="cab-btn cab-btn-b"></div>
+                </div>
+              </div>
+            </div>
+            <div class="cabinet-shadow"></div>
+          </div>
+
+          <!-- 3D Coffee Cup -->
+          <div class="coffee-cup cup-3d">
+            <div class="cup-saucer"></div>
+            <div class="cup-body">
+              <div class="cup-steam">
+                <span class="steam-1"></span>
+                <span class="steam-2"></span>
+                <span class="steam-3"></span>
+                <span class="steam-4"></span>
+              </div>
+              <div class="cup-handle"></div>
+              <div class="cup-liquid">
+                <div class="latte-art"></div>
+              </div>
+            </div>
+            <!-- Floating 3D Coffee Beans -->
+            <div class="floating-bean bean-1"></div>
+            <div class="floating-bean bean-2"></div>
+            <div class="floating-bean bean-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Drinks -->
+  <section class="section featured-drinks">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">On the Menu</div>
+        <h2 class="section-title">Featured Drinks</h2>
+        <p class="section-sub">Made to order, every time. No instant, no shortcuts.</p>
+      </div>
+      <div class="drinks-grid" id="featuredDrinksGrid"></div>
+      <div style="margin-top:1.75rem;">
+        <button class="btn-secondary" onclick="navigate('coffee')">Full Menu</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leaderboard Summary (Landing Page - below Coffee Card) -->
+  <section class="section leaderboard-summary-section" id="leaderboardSummarySection">
+    <div class="container">
+      <div class="leaderboard-box">
+        <div class="leaderboard-box-header">
+          <div class="header-meta-row">
+            <span class="live-status-pill">
+              <span class="live-dot"></span>
+              TOP STANDINGS
+            </span>
+            <span class="player-count-badge" id="summaryCountBadge">Arcade Hall of Fame</span>
+          </div>
+          <div class="header-main-row">
+            <div class="header-title-group">
+              <h2 class="section-title">LEADERBOARD</h2>
+              <p class="leaderboard-sub">Pemain dengan skor tertinggi saat menikmati kopi di Insert Coffee.</p>
+            </div>
+            <a href="leaderboard.html" class="btn-view-leaderboard-top" title="Lihat peringkat lengkap">
+              <span>Full Board</span>
+              <span class="arrow">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Current Player Position (Only if logged in with score in Firebase) -->
+        <div class="player-rank-bar" id="landingPlayerRank" style="display:none;"></div>
+
+        <!-- List / Table -->
+        <div class="leaderboard-list-wrap" id="landingLeaderboardList">
+          <div class="lb-state-msg">Loading leaderboard...</div>
+        </div>
+
+        <div class="leaderboard-actions">
+          <a href="leaderboard.html" class="btn-view-leaderboard" id="btnViewLeaderboard">
+            <span>VIEW LEADERBOARD</span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Games -->
+  <section class="section games-preview">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">The Arcade</div>
+        <h2 class="section-title">Waiting? Play Something.</h2>
+        <p class="section-sub">Ten classics, all in browser. While your coffee is being made.</p>
+      </div>
+      <div class="games-preview-grid" id="gamesPreviewGrid"></div>
+      <div style="margin-top:1.75rem;">
+        <button class="btn-secondary" onclick="navigate('arcade')">Open Arcade</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">Simple as That</h2>
+      </div>
+      <div class="how-steps">
+        <div class="how-step tilt-card">
+          <div class="how-step-badge">
+            <span class="step-badge-icon">✦</span>
+            <span class="how-step-num">01</span>
+          </div>
+          <div class="how-step-title">Pick your coffee</div>
+          <div class="how-step-desc">Browse the menu, add what you like, tell us your name and where you're sitting.</div>
+        </div>
+        <div class="how-step tilt-card">
+          <div class="how-step-badge">
+            <span class="step-badge-icon">◆</span>
+            <span class="how-step-num">02</span>
+          </div>
+          <div class="how-step-title">Place your order</div>
+          <div class="how-step-desc">Hit Place Order. You'll get a number and a rough time estimate. No waiting in line.</div>
+        </div>
+        <div class="how-step tilt-card">
+          <div class="how-step-badge">
+            <span class="step-badge-icon">▲</span>
+            <span class="how-step-num">03</span>
+          </div>
+          <div class="how-step-title">Play while you wait</div>
+          <div class="how-step-desc">Head to the Arcade tab. Ten games ready to go. Your cart stays right where you left it.</div>
+        </div>
+        <div class="how-step tilt-card">
+          <div class="how-step-badge">
+            <span class="step-badge-icon">★</span>
+            <span class="how-step-num">04</span>
+          </div>
+          <div class="how-step-title">Coffee's ready</div>
+          <div class="how-step-desc">Check your order status. When it says Ready, head to the counter. Drink, play, repeat.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About snippet -->
+  <section class="section about-section">
+    <div class="container">
+      <div class="about-inner">
+        <div>
+          <div class="section-label">About</div>
+          <h2 class="section-title">Built for people who like good coffee and one more game.</h2>
+          <div style="margin-top:1.5rem; color:var(--text-2); font-size:0.925rem; line-height:1.75; max-width:44ch;">
+            Insert Coffee started as a simple idea: good espresso, a couple of arcade cabinets, and no pressure to leave. We tucked a few machines in the corner, put together a short menu of drinks we'd want to drink ourselves, and opened the doors.
+          </div>
+          <div class="team-home-preview" onclick="navigate('about')" tabindex="0" role="button" aria-label="View team members">
+            <span class="team-home-label">Pengembang Team MabiMood:</span>
+            <div class="team-home-avatars">
+              <div class="mini-avatar mini-leader" title="Vigi Riyantanu (Leader)"><img src="assets/img/team/vigi.jpg" alt="Vigi" /></div>
+              <div class="mini-avatar" title="Nurul Fitriani (Member)"><img src="assets/img/team/nurul.jpg?v=2" alt="Nurul" /></div>
+              <div class="mini-avatar" title="Fahmi El Murottal (Member)"><img src="assets/img/team/fahmi.jpg?v=2" alt="Fahmi" /></div>
+              <div class="mini-avatar" title="Ahmad Azka Ibadillah (Member)"><img src="assets/img/team/jheng.jpg?v=2" alt="Ahmad Azka" /></div>
+              <span class="team-home-names"><strong>Vigi Riyantanu</strong> (Leader), Nurul, Fahmi, Azka</span>
+            </div>
+          </div>
+          <button class="btn-secondary" style="margin-top:1.5rem;" onclick="navigate('about')">Read More</button>
+        </div>
+        <div>
+          <div class="about-hours">
+            <h4>Opening Hours</h4>
+            <div class="hours-row"><span class="days">Monday — Friday</span><span class="time">10:00 — 22:00</span></div>
+            <div class="hours-row"><span class="days">Saturday</span><span class="time">09:00 — 23:00</span></div>
+            <div class="hours-row"><span class="days">Sunday</span><span class="time">10:00 — 21:00</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">INSERT COFFEE</div>
+          <div class="footer-tagline">Coffee, games, and somewhere to sit. We're open most of the time.</div>
+        </div>
+        <div class="footer-col">
+          <h5>Menu</h5>
+          <a href="#" onclick="navigate('coffee');return false;">Coffee</a>
+          <a href="#" onclick="navigate('coffee');return false;">Espresso</a>
+          <a href="#" onclick="navigate('coffee');return false;">Iced Drinks</a>
+          <a href="#" onclick="navigate('coffee');return false;">Signature</a>
+        </div>
+        <div class="footer-col">
+          <h5>Arcade</h5>
+          <a href="#" onclick="navigate('arcade');return false;">All Games</a>
+          <a href="#" onclick="navigate('arcade');return false;">High Scores</a>
+        </div>
+        <div class="footer-col footer-hours">
+          <h5>Hours</h5>
+          <div class="footer-hours-item"><strong>Mon—Fri</strong>10:00 — 22:00</div>
+          <div class="footer-hours-item"><strong>Sat</strong>09:00 — 23:00</div>
+          <div class="footer-hours-item"><strong>Sun</strong>10:00 — 21:00</div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>INSERT COFFEE</span>
+        <span>2024. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ======================================================
+     COFFEE PAGE
+     ====================================================== -->
+<div class="page" id="page-coffee">
+  <div class="menu-header">
+    <div class="container">
+      <div class="menu-title-row">
+        <div class="menu-title-col">
+          <div class="section-label">Artisanal Bar</div>
+          <h1 class="menu-heading">Coffee &amp; Drinks</h1>
+          <p class="menu-sub-lead">Single origins, classic espresso ratios, and house signatures crafted to order.</p>
+        </div>
+        <button class="btn-primary btn-view-order" onclick="openCart()" aria-label="View order cart">
+          <span>View Order</span>
+          <span id="menuCartCount" class="menu-cart-badge"></span>
+        </button>
+      </div>
+      <div class="menu-cat-tabs" id="categoryTabs" role="tablist" aria-label="Drink Categories"></div>
+    </div>
+  </div>
+  <div class="menu-content">
+    <div class="container">
+      <div class="products-grid" id="productsGrid"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>INSERT COFFEE</span>
+        <span>2024. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ======================================================
+     CHECKOUT PAGE
+     ====================================================== -->
+<div class="page" id="page-checkout">
+  <div class="checkout-page">
+    <div class="container">
+      <div class="checkout-layout">
+        <div class="checkout-form-wrap">
+          <div class="checkout-title">Place Your Order</div>
+          <div class="form-group">
+            <label class="form-label" for="customerName">Customer Name</label>
+            <input type="text" id="customerName" placeholder="Your name" autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Order Type</label>
+            <div class="order-type-btns">
+              <button class="order-type-btn selected" id="typedinein" onclick="selectOrderType('dine-in')">Dine In</button>
+              <button class="order-type-btn" id="typetakeaway" onclick="selectOrderType('takeaway')">Takeaway</button>
+            </div>
+          </div>
+          <div class="form-group" id="tableGroup">
+            <label class="form-label" for="tableNumber">Table Number</label>
+            <input type="text" id="tableNumber" placeholder="e.g. A3">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="orderNotes">Notes (optional)</label>
+            <textarea id="orderNotes" placeholder="Any special requests, allergies, or preferences"></textarea>
+          </div>
+
+          <!-- Metode Pembayaran: Only QRIS -->
+          <div class="payment-method-section">
+            <div class="payment-section-title">
+              <span>Metode Pembayaran</span>
+              <span class="qris-tag-free">QRIS Only</span>
+            </div>
+            <div class="qris-select-card" role="region" aria-label="Metode Pembayaran QRIS">
+              <div class="qris-radio-circle"></div>
+              <div class="qris-card-info">
+                <div class="qris-card-head">
+                  <div class="qris-brand-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber);"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    QRIS Dinamis (Bank &amp; e-Wallet)
+                  </div>
+                  <span class="qris-ssl-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="display:inline-block;vertical-align:-1px;margin-right:3px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Bebas Biaya Admin</span>
+                </div>
+                <div class="qris-card-desc">
+                  Scan &amp; bayar instan via GoPay, OVO, DANA, ShopeePay, BCA Mobile, Livin' by Mandiri, BRImo, atau semua aplikasi berstandar QRIS.
+                </div>
+                <div class="qris-supported-logos">
+                  <span class="qris-app-badge">GoPay</span>
+                  <span class="qris-app-badge">OVO</span>
+                  <span class="qris-app-badge">DANA</span>
+                  <span class="qris-app-badge">ShopeePay</span>
+                  <span class="qris-app-badge">BCA Mobile</span>
+                  <span class="qris-app-badge">Livin'</span>
+                  <span class="qris-app-badge">BRImo</span>
+                  <span class="qris-app-badge">+ Semua Bank</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-primary" id="btnCheckoutProceed" style="width:100%; padding:0.95rem; font-size:0.95rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="placeOrder()">
+            <span>Lanjut ke Pembayaran QRIS</span>
+            <span>&rarr;</span>
+          </button>
+          <button class="btn-secondary" style="width:100%; padding:0.8rem; margin-top:0.6rem; text-align:center;" onclick="navigate('coffee')">Back to Menu</button>
+        </div>
+        <div class="order-summary-card" id="checkoutSummary"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================
+     ORDER SUCCESS PAGE
+     ====================================================== -->
+<div class="page" id="page-order-success">
+  <div class="order-success-page">
+    <div class="container">
+      <div class="order-success-inner" id="orderSuccessContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================
+     ARCADE PAGE
+     ====================================================== -->
+<div class="page" id="page-arcade">
+  <div class="arcade-header">
+    <div class="container">
+      <div class="arcade-title-group">
+        <div class="arcade-accent">Arcade Corner</div>
+        <h1>ARCADE</h1>
+        <p>Waiting for your coffee? Play something.</p>
+      </div>
+      <button class="arcade-scores-hint" onclick="toggleHighScores()">★ Leaderboard</button>
+    </div>
+  </div>
+  <div class="arcade-content">
+    <div class="container">
+      <div class="arcade-grid" id="arcadeGrid"></div>
+      <div id="highScoresPanel"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>INSERT COFFEE</span>
+        <span>2024. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ======================================================
+     GAME PLAY PAGE
+     ====================================================== -->
+<div class="page" id="page-game">
+  <div class="game-play-page">
+    <div class="game-play-header">
+      <div class="container">
+        <button class="game-play-back" onclick="navigate('arcade')">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+          Arcade
+        </button>
+        <div class="game-play-name" id="gamePlayName"></div>
+        <div class="game-play-actions">
+          <button class="btn-game-action" id="pauseBtn" onclick="pauseCurrentGame()">Pause</button>
+          <button class="btn-game-action" onclick="restartCurrentGame()">Restart</button>
+        </div>
+      </div>
+    </div>
+    <div class="game-layout">
+      <div class="game-area">
+        <div class="game-canvas-wrap">
+          <canvas id="gameCanvas"></canvas>
+          <div class="game-msg-overlay" id="gameMsgOverlay">
+            <div class="game-msg-title" id="gameMsgTitle">PRESS START</div>
+            <div class="game-msg-sub" id="gameMsgSub"></div>
+            <button class="btn-start-game" id="startGameBtn" onclick="startCurrentGame()">Start</button>
+          </div>
+        </div>
+        <!-- Mobile & Touch Arcade Physical Controller Dock -->
+        <div class="mobile-controls" id="mobileDpad" role="region" aria-label="Arcade Physical Gamepad Controls"></div>
+      </div>
+      <div class="game-side">
+        <div class="game-side-block">
+          <div class="game-side-label">Score</div>
+          <div class="game-score-display" id="gameScoreDisplay">0</div>
+          <div class="game-side-label" style="margin-top:0.75rem;">High Score</div>
+          <div class="game-hs-display" id="gameHsDisplay">0</div>
+        </div>
+        <div class="game-side-block">
+          <div class="game-side-label">Controls</div>
+          <div class="controls-grid" id="controlsGrid"></div>
+        </div>
+        <div class="game-side-block">
+          <div class="game-side-label">About</div>
+          <div id="gameDesc" style="font-size:0.8rem; color:var(--text-3); line-height:1.55;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================
+      DISPLAY SCREEN
+      ====================================================== -->
+<div class="page" id="page-display" role="main">
+  <div class="display-screen">
+    <div class="display-header">
+      <div class="display-logo">INSERT COFFEE</div>
+      <div class="display-clock" id="displayClock">00:00</div>
+    </div>
+    <div class="running-text-container">
+      <div class="running-text" id="runningText">Selamat datang di INSERT COFFEE - Pesanan yang telah selesai akan ditampilkan di sini</div>
+    </div>
+    <div class="display-queues">
+      <div class="queue-column">
+        <h2 class="queue-title">Menunggu (Wait)</h2>
+        <div class="queue-list" id="queueInProgress">
+          <!-- Orders will be dynamically inserted here -->
+        </div>
+      </div>
+      <div class="queue-column">
+        <h2 class="queue-title">Selesai (Siap Diambil)</h2>
+        <div class="queue-list" id="queueReady">
+          <!-- Orders will be dynamically inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================
+      ABOUT PAGE
+      ====================================================== -->
+<div class="page" id="page-about">
+  <div class="about-page">
+    <div class="container">
+      <div class="about-page-inner">
+        <!-- ==========================================
+             DEVELOPMENT TEAM - POHON STRUKTUR PENGEMBANG TEAM MABIMOOD (AT THE TOP)
+             ========================================== -->
+        <div class="team-section org-tree-section">
+          <div class="section-label">Team MabiMood</div>
+          <h1 class="about-page-title org-tree-main-title">Pengembang Team MabiMood</h1>
+          <p class="team-intro">Project <strong>INSERT COFFEE</strong> ini dibuat dan dikembangkan secara kolaboratif oleh <strong>Team MabiMood</strong> (4 anggota) dengan struktur pembagian peran dan tanggung jawab sebagai berikut:</p>
+
+          <!-- Tree Structure Container -->
+          <div class="org-tree-container">
+            <!-- Root Level: Leader -->
+            <div class="org-tree-root">
+              <div class="team-card tilt-card leader-card org-tree-card">
+                <a href="portofolio-vigi/index.html" target="_blank" rel="noopener noreferrer" class="team-avatar-link" title="Buka Portofolio Vigi Riyantanu">
+                  <div class="team-avatar-wrapper">
+                    <div class="avatar-ring-glow leader-glow"></div>
+                    <img src="assets/img/team/vigi.jpg" alt="Vigi Riyantanu" class="team-avatar-img" />
+                    <div class="team-crown-badge" title="Team Leader">★</div>
+                    <div class="github-badge-tag porto-badge-tag" title="Portofolio Vigi Riyantanu">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    </div>
+                  </div>
+                </a>
+                <div class="team-card-content">
+                  <span class="role-badge badge-leader">Leader</span>
+                  <h3 class="member-name">Vigi Riyantanu</h3>
+                  <p class="member-role-title">Project Leader, Game Architecture &amp; UI Composer</p>
+                  <a href="portofolio-vigi/index.html" target="_blank" rel="noopener noreferrer" class="member-porto-btn" title="Buka Portofolio Vigi Riyantanu">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    <span>Portofolio Vigi</span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tree Connector Lines -->
+            <div class="org-tree-connector" aria-hidden="true">
+              <div class="org-line-stem-down"></div>
+              <div class="org-line-crossbar"></div>
+              <div class="org-line-droppers">
+                <span class="org-dropper-stem"></span>
+                <span class="org-dropper-stem"></span>
+                <span class="org-dropper-stem"></span>
+              </div>
+            </div>
+
+            <!-- Children Level: 3 Members -->
+            <div class="org-tree-members">
+              <!-- Nurul Fitriani (Member) -->
+              <div class="org-tree-member-col">
+                <div class="team-card tilt-card org-tree-card">
+                  <a href="portofolio-fitri/index.html" target="_blank" rel="noopener noreferrer" class="team-avatar-link" title="Buka Portofolio Nurul Fitriani">
+                    <div class="team-avatar-wrapper">
+                      <div class="avatar-ring-glow"></div>
+                      <img src="assets/img/team/nurul.jpg?v=2" alt="Nurul Fitriani" class="team-avatar-img" />
+                      <div class="github-badge-tag porto-badge-tag" title="Portofolio Nurul Fitriani">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                      </div>
+                    </div>
+                  </a>
+                  <div class="team-card-content">
+                    <span class="role-badge badge-member">Member</span>
+                    <h3 class="member-name">Nurul Fitriani</h3>
+                    <p class="member-role-title">UI/UX &amp; Design Systems</p>
+                    <a href="portofolio-fitri/index.html" target="_blank" rel="noopener noreferrer" class="member-porto-btn" title="Buka Portofolio Nurul Fitriani">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                      <span>Portofolio Nurul</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Fahmi El Murottal (Member) -->
+              <div class="org-tree-member-col">
+                <div class="team-card tilt-card org-tree-card">
+                  <a href="portofolio-fahmi/index.html" target="_blank" rel="noopener noreferrer" class="team-avatar-link" title="Buka Portofolio Fahmi El Murottal">
+                    <div class="team-avatar-wrapper">
+                      <div class="avatar-ring-glow"></div>
+                      <img src="assets/img/team/fahmi.jpg?v=2" alt="Fahmi El Murottal" class="team-avatar-img" />
+                      <div class="github-badge-tag porto-badge-tag" title="Portofolio Fahmi El Murottal">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                      </div>
+                    </div>
+                  </a>
+                  <div class="team-card-content">
+                    <span class="role-badge badge-member">Member</span>
+                    <h3 class="member-name">Fahmi El Murottal</h3>
+                    <p class="member-role-title">Frontend Developer</p>
+                    <a href="portofolio-fahmi/index.html" target="_blank" rel="noopener noreferrer" class="member-porto-btn" title="Buka Portofolio Fahmi El Murottal">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                      <span>Portofolio Fahmi</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ahmad Azka Ibadillah (Member) -->
+              <div class="org-tree-member-col">
+                <div class="team-card tilt-card org-tree-card">
+                  <a href="portofolio-azka/index.html" target="_blank" rel="noopener noreferrer" class="team-avatar-link" title="Buka Portofolio Ahmad Azka Ibadillah">
+                    <div class="team-avatar-wrapper">
+                      <div class="avatar-ring-glow"></div>
+                      <img src="assets/img/team/jheng.jpg?v=2" alt="Ahmad Azka Ibadillah" class="team-avatar-img" />
+                      <div class="github-badge-tag porto-badge-tag" title="Portofolio Ahmad Azka Ibadillah">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                      </div>
+                    </div>
+                  </a>
+                  <div class="team-card-content">
+                    <span class="role-badge badge-member">Member</span>
+                    <h3 class="member-name">Ahmad Azka Ibadillah</h3>
+                    <p class="member-role-title">Assets &amp; Quality Assurance</p>
+                    <a href="portofolio-azka/index.html" target="_blank" rel="noopener noreferrer" class="member-porto-btn" title="Buka Portofolio Ahmad Azka Ibadillah">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                      <span>Portofolio Azka</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="about-page-rule">
+
+        <div class="section-label">Tentang Cafe</div>
+        <h2 class="about-page-subtitle">We made a place to drink and play.</h2>
+        <div class="about-body">
+          <p>Insert Coffee started with a simple premise: coffee shops are good, arcade bars are good, and nobody had put the two together in a way that felt right. No theme park energy, no neon overload. Just a quiet corner to sit with a good drink and something to play.</p>
+          <p>We opened with a short menu of drinks we actually wanted to drink ourselves — properly pulled espresso, a few variations, and a signature or two. Everything is made to order. Nothing sits on a hot plate.</p>
+          <p>The arcade side is a curated set of classics. Not a hundred machines collecting dust, but ten that work well and never get old. Snake, Tetris, Breakout, Space Invaders, and a few others. They run right in the browser, so you can queue up a game from your phone while you wait for your coffee.</p>
+
+          <hr class="about-page-rule">
+
+          <h3>The Menu</h3>
+          <p>Short and honest. Espresso is the base of everything. We pull it from a blend that works as well as a standalone shot as it does in milk. Iced drinks are made fresh — no concentrated syrups. The signature section is where we experiment, but only with things we'd order again.</p>
+
+          <h3>The Arcade</h3>
+          <p>Every game has one job: be worth playing for five minutes. We picked classics because they hold up — the controls are immediate, the rules are clear, and the skill ceiling is high enough that a good run always feels earned. High scores are saved locally to your browser.</p>
+
+          <hr class="about-page-rule">
+
+          <div class="about-hours" style="max-width:360px;">
+            <h4>Opening Hours</h4>
+            <div class="hours-row"><span class="days">Monday — Friday</span><span class="time">10:00 — 22:00</span></div>
+            <div class="hours-row"><span class="days">Saturday</span><span class="time">09:00 — 23:00</span></div>
+            <div class="hours-row"><span class="days">Sunday</span><span class="time">10:00 — 21:00</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">INSERT COFFEE</div>
+          <div class="footer-tagline">Coffee, games, and somewhere to sit. We're open most of the time.</div>
+        </div>
+        <div class="footer-col">
+          <h5>Menu</h5>
+          <button onclick="navigate('coffee')">Coffee</button>
+          <button onclick="navigate('arcade')">Arcade</button>
+          <button onclick="navigate('leaderboard')">Leaderboard</button>
+          <button onclick="navigate('about')">About</button>
+        </div>
+        <div class="footer-col">
+          <h5>Admin & Staff</h5>
+          <button onclick="window.location.href='admin/index.html'">Admin Portal</button>
+          <button onclick="navigate('display')">Order Display Screen</button>
+        </div>
+        <div class="footer-col footer-hours">
+          <h5>Hours</h5>
+          <div class="footer-hours-item"><strong>Mon—Fri</strong>10:00 — 22:00</div>
+          <div class="footer-hours-item"><strong>Sat</strong>09:00 — 23:00</div>
+          <div class="footer-hours-item"><strong>Sun</strong>10:00 — 21:00</div>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <a href="#">hello@insertcoffee.id</a>
+          <a href="#">Jl. Cikini Raya 12, Jakarta</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>INSERT COFFEE</span>
+        <span>&copy; 2026. All rights reserved. • <a href="admin/index.html" style="color:var(--text-3);text-decoration:underline;">Admin Backend</a></span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ======================================================
+     ADMIN LOGIN PAGE
+     ====================================================== -->
+<div class="page" id="page-admin-login">
+  <div class="admin-login-wrapper">
+    <div class="admin-login-card">
+      <div class="admin-login-header">
+        <div class="admin-login-badge">
+          <span class="badge-tag">ADMIN ACCESS</span>
+        </div>
+        <h1 class="admin-login-title">INSERT COFFEE</h1>
+        <p class="admin-login-sub">Portal Monitoring Pesanan &amp; Status Minuman</p>
+        <div id="adminLoginFirebaseStatus" class="admin-status-pill"></div>
+      </div>
+
+      <!-- State: Already Logged In -->
+      <div id="adminAlreadyLoggedIn" style="display:none;" class="admin-already-box">
+        <div class="already-logged-msg">
+          <p>Anda saat ini sedang login sebagai:</p>
+          <strong id="adminLoggedInEmail" class="logged-email"></strong>
+        </div>
+        <div class="admin-login-actions">
+          <button class="btn-primary" style="width:100%;" onclick="navigate('admin-panel')">Buka Admin Panel</button>
+          <button class="btn-secondary" style="width:100%; margin-top:0.75rem;" onclick="handleAdminLogout()">Logout</button>
+        </div>
+      </div>
+
+      <!-- State: Login Form -->
+      <div id="adminLoginFormBox">
+        <div id="adminLoginError" class="admin-alert-box error" style="display:none;"></div>
+        
+        <form id="adminLoginForm" class="admin-login-form">
+          <div class="form-group">
+            <label class="form-label" for="adminEmail">Email Admin</label>
+            <div class="input-icon-wrap">
+              <input type="email" id="adminEmail" required placeholder="admin@insertcoffee.id" autocomplete="username">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="adminPassword">Password</label>
+            <div class="input-icon-wrap">
+              <input type="password" id="adminPassword" required placeholder="••••••••" autocomplete="current-password">
+            </div>
+          </div>
+
+          <button type="submit" id="adminLoginBtn" class="btn-primary btn-3d" style="width:100%; margin-top:0.5rem; justify-content:center;">
+            <span>Masuk ke Admin Portal</span>
+          </button>
+        </form>
+
+        <div class="admin-demo-callout">
+          <div class="callout-title">Kredensial Akses Default:</div>
+          <div class="callout-creds">
+            <div>Email: <code>admin@insertcoffee.id</code></div>
+            <div>Password: <code>admin123</code></div>
+          </div>
+          <small>Dapat digunakan langsung dalam Mode Lokal atau hubungkan dengan Firebase Authentication Anda di tab Konfigurasi Database.</small>
+        </div>
+      </div>
+
+      <div class="admin-login-footer">
+        <button class="btn-back-link" onclick="navigate('home')">Kembali ke Beranda Menu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================
+     ADMIN PANEL PAGE (BACKEND)
+     ====================================================== -->
+<div class="page" id="page-admin-panel">
+  <div class="admin-dashboard">
+    <!-- Admin Topbar -->
+    <header class="admin-topbar">
+      <div class="admin-topbar-left">
+        <div class="admin-brand">
+          <span class="brand-name">INSERT COFFEE</span>
+          <span class="admin-portal-badge">ADMIN PORTAL</span>
+        </div>
+        <div id="adminConnectionStatus" class="admin-status-pill"></div>
+      </div>
+      <div class="admin-topbar-right">
+        <button class="admin-header-btn" onclick="navigate('coffee')" title="Lihat Tampilan Menu Pelanggan">
+          <span>Menu Toko</span>
+        </button>
+        <button class="admin-header-btn" onclick="navigate('display')" title="Lihat Layar Antrean TV">
+          <span>Layar Antrean</span>
+        </button>
+        <div class="admin-user-profile">
+          <div class="user-avatar">AD</div>
+          <div class="user-meta">
+            <span class="user-role">Administrator</span>
+            <span id="adminUserEmail" class="user-email">admin@insertcoffee.id</span>
+          </div>
+        </div>
+        <button class="admin-logout-btn" onclick="handleAdminLogout()" title="Keluar">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Keluar</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Admin Navigation Tabs -->
+    <div class="admin-nav-bar">
+      <div class="container">
+        <div class="admin-tabs">
+          <button class="admin-tab-btn active" data-tab="orders">
+            <span>Daftar Orderan Masuk (Kasir)</span>
+            <span class="admin-tab-badge" id="adminLiveOrdersCount" style="display:none;"></span>
+          </button>
+          <button class="admin-tab-btn" data-tab="products">
+            <span>Manajemen Menu</span>
+          </button>
+          <button class="admin-tab-btn" data-tab="config">
+            <span>Konfigurasi Database</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <main class="admin-main container">
+      <!-- ==================== TAB 1: LIVE ORDERS ==================== -->
+      <section class="admin-tab-content active" data-tab-content="orders">
+        <!-- Stat Metrics Cards -->
+        <div class="admin-metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon revenue"><span class="metric-code">TOTAL</span></div>
+            <div class="metric-info">
+              <span class="metric-label">Total Pesanan</span>
+              <strong class="metric-val" id="statTotalOrders">0</strong>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon ready-orders"><span class="metric-code">WAIT</span></div>
+            <div class="metric-info">
+              <span class="metric-label">Menunggu (Wait)</span>
+              <strong class="metric-val" id="statWaitOrders">0</strong>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon completed-orders"><span class="metric-code">SELESAI</span></div>
+            <div class="metric-info">
+              <span class="metric-label">Pesanan Selesai</span>
+              <strong class="metric-val" id="statCompletedOrders">0</strong>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon revenue"><span class="metric-code">IDR</span></div>
+            <div class="metric-info">
+              <span class="metric-label">Total Omset</span>
+              <strong class="metric-val" id="statTotalRevenue">Rp0</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="admin-orders-controls">
+          <div class="admin-filter-pills">
+            <button class="admin-filter-pill active" data-filter="all" onclick="setOrderFilter('all')">Semua Pesanan</button>
+            <button class="admin-filter-pill" data-filter="wait" onclick="setOrderFilter('wait')">Menunggu (Wait)</button>
+            <button class="admin-filter-pill" data-filter="selesai" onclick="setOrderFilter('selesai')">Selesai</button>
+          </div>
+          <div class="admin-quick-actions">
+            <button class="btn-secondary" onclick="renderAdminOrders()" title="Refresh Pesanan">
+              <span>Refresh Data</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Orders Grid Container -->
+        <div class="admin-orders-grid" id="adminOrdersList">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2: MENU MANAGEMENT ==================== -->
+      <section class="admin-tab-content" data-tab-content="products">
+        <div class="admin-section-header">
+          <div>
+            <h2 class="admin-section-title">Katalog Menu &amp; Ketersediaan</h2>
+            <p class="admin-section-desc">Atur menu minuman, harga, deskripsi, dan status ketersediaan secara langsung ke Cloud Firestore.</p>
+          </div>
+          <div class="admin-header-actions">
+            <button class="btn-secondary" id="btnSeedProducts" onclick="seedDefaultProductsPrompt()" title="Unggah menu bawaan ke database">
+              <span>Unggah Menu Bawaan ke Firestore</span>
+            </button>
+            <button class="btn-primary" onclick="openAddProductModal()">
+              <span>Tambah Menu Baru</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Products Table -->
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width:40px;">#</th>
+                <th>Menu</th>
+                <th>Kategori</th>
+                <th>Harga</th>
+                <th>Ketersediaan</th>
+                <th style="text-align:right;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductsTableBody">
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 3: FIREBASE & FIRESTORE CONFIG ==================== -->
+      <section class="admin-tab-content" data-tab-content="config">
+        <div class="admin-section-header">
+          <div>
+            <h2 class="admin-section-title">Pengaturan Cloud Firestore &amp; Auth</h2>
+            <p class="admin-section-desc">Hubungkan aplikasi dengan project Firebase Anda untuk sinkronisasi database cloud antar perangkat.</p>
+          </div>
+          <div class="admin-header-actions">
+            <button class="btn-secondary" id="btnTestFirestore" onclick="testFirestoreConnection()">
+              <span>Uji Koneksi Firestore</span>
+            </button>
+            <button class="btn-secondary" onclick="resetFirebaseConfigPrompt()" style="color:var(--text-3);">
+              <span>Reset Default</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="firebaseConfigStatusBox" class="firebase-status-box"></div>
+
+        <div class="firebase-config-grid">
+          <!-- Form Config -->
+          <div class="firebase-config-card">
+            <h3>Kredensial Firebase Web App</h3>
+            <p class="form-helper">Dapatkan nilai ini dari Firebase Console &gt; Project Settings &gt; General &gt; Your Apps (Web App SDK).</p>
+
+            <form id="firebaseConfigForm">
+              <div class="form-group">
+                <label class="form-label" for="fbApiKey">apiKey</label>
+                <input type="text" id="fbApiKey" placeholder="AIzaSy...">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="fbAuthDomain">authDomain</label>
+                <input type="text" id="fbAuthDomain" placeholder="your-project.firebaseapp.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="fbProjectId">projectId</label>
+                <input type="text" id="fbProjectId" placeholder="your-project-id">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="fbStorageBucket">storageBucket</label>
+                <input type="text" id="fbStorageBucket" placeholder="your-project.appspot.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="fbMessagingSenderId">messagingSenderId</label>
+                <input type="text" id="fbMessagingSenderId" placeholder="1234567890">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="fbAppId">appId</label>
+                <input type="text" id="fbAppId" placeholder="1:123456789:web:abcdef">
+              </div>
+
+              <button type="submit" class="btn-primary" style="margin-top:1rem; width:100%;">
+                <span>Simpan Konfigurasi Firebase</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Guide Card -->
+          <div class="firebase-guide-card">
+            <h3>Panduan Singkat Setup Firebase</h3>
+            <ol class="guide-steps">
+              <li>
+                <strong>Buat Project di Firebase Console:</strong>
+                <p>Buka <a href="https://console.firebase.google.com/" target="_blank" rel="noopener">console.firebase.google.com</a> dan buat project baru.</p>
+              </li>
+              <li>
+                <strong>Aktifkan Cloud Firestore:</strong>
+                <p>Buka menu <em>Firestore Database</em> &gt; <em>Create database</em> &gt; pilih mode <em>Test mode</em> (atau atur aturan baca/tulis).</p>
+                <div class="code-preview">
+rules_version = '2';<br>
+service cloud.firestore {<br>
+&nbsp;&nbsp;match /databases/{database}/documents {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;match /{document=**} {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow read, write: if true;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}
+                </div>
+              </li>
+              <li>
+                <strong>Aktifkan Firebase Authentication:</strong>
+                <p>Buka menu <em>Authentication</em> &gt; <em>Sign-in method</em> &gt; aktifkan <strong>Email/Password</strong>.</p>
+              </li>
+              <li>
+                <strong>Salin Config Web:</strong>
+                <p>Buka <em>Project Settings</em> &gt; Tambah Web App (&lt;/&gt;) &gt; salin objek <code>firebaseConfig</code> dan tempel pada form di samping.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- ======================================================
+     PRODUCT MODAL (ADD / EDIT)
+     ====================================================== -->
+<div class="admin-modal-overlay" id="adminProductModal">
+  <div class="admin-modal-card">
+    <div class="admin-modal-header">
+      <h3 id="productModalTitle">Tambah Menu Baru</h3>
+      <button class="admin-modal-close" onclick="closeProductModal()">&times;</button>
+    </div>
+    <form id="adminProductForm" class="admin-modal-body">
+      <div class="form-group">
+        <label class="form-label" for="prodName">Nama Menu</label>
+        <input type="text" id="prodName" required placeholder="Contoh: Cold Brew Vanilla">
+      </div>
+      <div class="form-row-2">
+        <div class="form-group">
+          <label class="form-label" for="prodCategory">Kategori</label>
+          <select id="prodCategory">
+            <option value="Espresso">Espresso</option>
+            <option value="Coffee" selected>Coffee</option>
+            <option value="Non Coffee">Non Coffee</option>
+            <option value="Iced">Iced</option>
+            <option value="Signature">Signature</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="prodPrice">Harga (Rp)</label>
+          <input type="number" id="prodPrice" required min="1000" step="1000" placeholder="25000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="prodDescription">Deskripsi Menu</label>
+        <textarea id="prodDescription" rows="3" placeholder="Penjelasan rasa, komposisi, atau profil seduhan..."></textarea>
+      </div>
+      <div class="form-group form-checkbox-group">
+        <label class="checkbox-container">
+          <input type="checkbox" id="prodAvailable" checked>
+          <span class="checkmark"></span>
+          <span>Tersedia untuk Dipesan (In Stock)</span>
+        </label>
+      </div>
+      <div class="admin-modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeProductModal()">Batal</button>
+        <button type="submit" class="btn-primary">Simpan Menu</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- PLAYER AUTH MODAL (Minta Gamertag & Password untuk Arcade & Coffee) -->
+<div class="player-auth-modal" id="playerAuthModal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+  <div class="player-auth-backdrop" onclick="closePlayerAuthModal()"></div>
+  <div class="player-auth-card">
+    <button class="player-auth-close" onclick="closePlayerAuthModal()" aria-label="Tutup modal">&times;</button>
+    
+    <div class="player-auth-header">
+      <div class="player-auth-badge">
+        <span class="auth-badge-dot"></span>
+        <span id="authModalBadgeText">AKSES TERKUNCI</span>
+      </div>
+      <h3 class="player-auth-title" id="authModalTitle">LOGIN GAMERTAG &amp; PASSWORD</h3>
+      <p class="player-auth-desc" id="authModalDesc">
+        Silakan masukkan Gamertag dan Password Anda untuk mengakses menu kopi dan bermain arcade.
+      </p>
+    </div>
+
+    <form id="playerAuthForm" onsubmit="handlePlayerAuthSubmit(event)" novalidate>
+      <div class="auth-field">
+        <label for="modalGamertag" class="auth-label">Gamertag</label>
+        <div class="auth-input-wrap">
+          <span class="auth-input-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+          <input 
+            type="text" 
+            id="modalGamertag" 
+            class="auth-input" 
+            placeholder="Masukkan Gamertag Anda" 
+            maxlength="16" 
+            autocomplete="username" 
+            spellcheck="false"
+            required
+          >
+        </div>
+      </div>
+
+      <div class="auth-field">
+        <label for="modalPassword" class="auth-label">Password</label>
+        <div class="auth-input-wrap">
+          <span class="auth-input-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span>
+          <input 
+            type="password" 
+            id="modalPassword" 
+            class="auth-input" 
+            placeholder="Masukkan Password Anda" 
+            maxlength="24" 
+            autocomplete="current-password"
+            required
+          >
+          <button 
+            type="button" 
+            class="auth-eye-btn" 
+            id="modalBtnToggleEye" 
+            onclick="toggleModalPasswordVisibility()" 
+            aria-label="Toggle password visibility"
+            tabindex="-1"
+          >
+            <svg id="modalEyeShow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <svg id="modalEyeHide" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="modalAuthFeedback" class="modal-auth-feedback" role="alert"></div>
+
+      <button type="submit" id="btnModalAuthSubmit" class="btn-primary auth-submit-btn">
+        <span class="auth-btn-spinner" id="modalAuthSpinner" style="display:none;"></span>
+        <span id="modalAuthBtnText">MASUK &amp; BUKA AKSES</span>
+      </button>
+
+      <div class="player-auth-footer-links">
+        <a href="#" id="modalLinkFullLogin" onclick="goToFullLoginPage(event)" class="auth-link-alt">
+          Buka Halaman Login 3D Retro &rarr;
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ======================================================
+     QRIS DUMMY PAYMENT GATEWAY MODAL
+     ====================================================== -->
+<div class="qris-modal-overlay" id="qrisPaymentModal" onclick="handleQrisOverlayClick(event)" role="dialog" aria-modal="true" aria-labelledby="qrisMerchantTitle">
+  <div class="qris-modal-card" id="qrisModalCard">
+    <!-- View 1: Pending Payment & QRIS Stand -->
+    <div id="qrisPendingView">
+      <div class="qris-gateway-header">
+        <div class="qris-gw-brand">
+          <span style="font-size: 1.1rem; font-weight:900; color:var(--amber); letter-spacing:1px; font-family:'Press Start 2P',monospace;">IC</span>
+          <div>
+            <div class="qris-gw-logo">INSERT COFFEE PAY</div>
+            <div style="font-size:0.65rem; color:var(--text-3); font-family:'Space Mono', monospace;">SECURE GATEWAY v2.4</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="qris-ssl-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block;vertical-align:-1px;margin-right:3px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>256-Bit SSL</span>
+          <button class="qris-gw-close" onclick="closeQrisGateway()" aria-label="Tutup Payment Gateway">&times;</button>
+        </div>
+      </div>
+
+      <div class="qris-gateway-body">
+        <!-- Invoice & Countdown -->
+        <div class="qris-invoice-strip">
+          <div class="qris-invoice-left">
+            <span class="qris-invoice-label">No. Invoice</span>
+            <span class="qris-invoice-ref" id="qrisInvoiceRef">INV-2026-XXXX</span>
+          </div>
+          <div class="qris-timer-box" title="Sisa Waktu Pembayaran">
+            <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-1px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span>
+            <span id="qrisCountdown">15:00</span>
+          </div>
+        </div>
+
+        <!-- Amount Box -->
+        <div class="qris-amount-container">
+          <div class="qris-amount-title">Total Tagihan Pembayaran</div>
+          <div class="qris-amount-value" id="qrisAmountDisplay">Rp 0</div>
+        </div>
+
+        <!-- Official Indonesian QRIS Stand Frame -->
+        <div class="qris-stand-frame">
+          <div class="qris-stand-header">
+            <!-- QRIS Official typography -->
+            <div style="display:flex; align-items:center; gap:5px;">
+              <span style="font-family:'Space Grotesk',sans-serif; font-weight:900; font-size:1.25rem; color:#dc2626; letter-spacing:-0.03em; line-height:1;">QRIS</span>
+              <span style="font-size:0.58rem; font-weight:700; color:#475569; line-height:1.05; text-align:left;">PEMBAYARAN<br>NASIONAL</span>
+            </div>
+            <!-- GPN Logo badge -->
+            <div style="display:inline-flex; align-items:center; gap:3px; background:#dc2626; color:#ffffff; padding:2px 7px; border-radius:4px; font-weight:800; font-size:0.68rem; letter-spacing:0.04em;">
+              <span>GPN</span>
+            </div>
+          </div>
+
+          <div class="qris-merchant-info">
+            <h3 class="qris-merchant-name" id="qrisMerchantTitle">INSERT COFFEE &amp; ARCADE</h3>
+            <div class="qris-nmid">NMID : ID102026098273619</div>
+            <div style="font-size:0.62rem; color:#64748b; margin-top:2px; font-weight:600;">A01 &bull; KOTA MALANG</div>
+          </div>
+
+          <!-- Crisp SVG QR Code with Corner Finder Patterns -->
+          <div class="qris-qrcode-wrap">
+            <svg class="qris-qrcode-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QRIS Barcode Pembayaran Toko">
+              <!-- Background -->
+              <rect width="200" height="200" fill="#ffffff"/>
+              
+              <!-- Top-Left Finder Pattern -->
+              <rect x="15" y="15" width="46" height="46" rx="5" fill="#0f172a"/>
+              <rect x="23" y="23" width="30" height="30" rx="3" fill="#ffffff"/>
+              <rect x="29" y="29" width="18" height="18" rx="2" fill="#0f172a"/>
+
+              <!-- Top-Right Finder Pattern -->
+              <rect x="139" y="15" width="46" height="46" rx="5" fill="#0f172a"/>
+              <rect x="147" y="23" width="30" height="30" rx="3" fill="#ffffff"/>
+              <rect x="153" y="29" width="18" height="18" rx="2" fill="#0f172a"/>
+
+              <!-- Bottom-Left Finder Pattern -->
+              <rect x="15" y="139" width="46" height="46" rx="5" fill="#0f172a"/>
+              <rect x="23" y="147" width="30" height="30" rx="3" fill="#ffffff"/>
+              <rect x="29" y="153" width="18" height="18" rx="2" fill="#0f172a"/>
+
+              <!-- High-Density QR Matrix Data Elements -->
+              <g fill="#0f172a">
+                <!-- Top Region -->
+                <rect x="68" y="16" width="6" height="6"/>
+                <rect x="80" y="16" width="6" height="6"/>
+                <rect x="92" y="16" width="6" height="6"/>
+                <rect x="104" y="16" width="6" height="6"/>
+                <rect x="120" y="16" width="6" height="6"/>
+                
+                <rect x="68" y="28" width="6" height="6"/>
+                <rect x="86" y="28" width="6" height="6"/>
+                <rect x="110" y="28" width="6" height="6"/>
+                <rect x="126" y="28" width="6" height="6"/>
+
+                <rect x="68" y="40" width="6" height="6"/>
+                <rect x="74" y="40" width="6" height="6"/>
+                <rect x="98" y="40" width="6" height="6"/>
+                <rect x="116" y="40" width="6" height="6"/>
+
+                <rect x="68" y="52" width="6" height="6"/>
+                <rect x="86" y="52" width="6" height="6"/>
+                <rect x="104" y="52" width="6" height="6"/>
+                <rect x="126" y="52" width="6" height="6"/>
+
+                <!-- Middle Region -->
+                <rect x="16" y="68" width="6" height="6"/>
+                <rect x="28" y="68" width="6" height="6"/>
+                <rect x="40" y="68" width="6" height="6"/>
+                <rect x="52" y="68" width="6" height="6"/>
+                <rect x="68" y="68" width="6" height="6"/>
+                <rect x="86" y="68" width="6" height="6"/>
+                <rect x="116" y="68" width="6" height="6"/>
+                <rect x="138" y="68" width="6" height="6"/>
+                <rect x="156" y="68" width="6" height="6"/>
+                <rect x="174" y="68" width="6" height="6"/>
+
+                <rect x="22" y="80" width="6" height="6"/>
+                <rect x="34" y="80" width="6" height="6"/>
+                <rect x="52" y="80" width="6" height="6"/>
+                <rect x="70" y="80" width="6" height="6"/>
+                <rect x="128" y="80" width="6" height="6"/>
+                <rect x="146" y="80" width="6" height="6"/>
+                <rect x="164" y="80" width="6" height="6"/>
+
+                <rect x="16" y="92" width="6" height="6"/>
+                <rect x="40" y="92" width="6" height="6"/>
+                <rect x="58" y="92" width="6" height="6"/>
+                <rect x="138" y="92" width="6" height="6"/>
+                <rect x="150" y="92" width="6" height="6"/>
+                <rect x="168" y="92" width="6" height="6"/>
+
+                <rect x="28" y="104" width="6" height="6"/>
+                <rect x="46" y="104" width="6" height="6"/>
+                <rect x="64" y="104" width="6" height="6"/>
+                <rect x="132" y="104" width="6" height="6"/>
+                <rect x="156" y="104" width="6" height="6"/>
+                <rect x="174" y="104" width="6" height="6"/>
+
+                <rect x="16" y="116" width="6" height="6"/>
+                <rect x="34" y="116" width="6" height="6"/>
+                <rect x="52" y="116" width="6" height="6"/>
+                <rect x="70" y="116" width="6" height="6"/>
+                <rect x="86" y="116" width="6" height="6"/>
+                <rect x="110" y="116" width="6" height="6"/>
+                <rect x="144" y="116" width="6" height="6"/>
+                <rect x="162" y="116" width="6" height="6"/>
+
+                <rect x="22" y="128" width="6" height="6"/>
+                <rect x="46" y="128" width="6" height="6"/>
+                <rect x="64" y="128" width="6" height="6"/>
+                <rect x="76" y="128" width="6" height="6"/>
+                <rect x="94" y="128" width="6" height="6"/>
+                <rect x="120" y="128" width="6" height="6"/>
+                <rect x="138" y="128" width="6" height="6"/>
+                <rect x="156" y="128" width="6" height="6"/>
+                <rect x="174" y="128" width="6" height="6"/>
+
+                <!-- Bottom Region -->
+                <rect x="68" y="144" width="6" height="6"/>
+                <rect x="80" y="144" width="6" height="6"/>
+                <rect x="104" y="144" width="6" height="6"/>
+                <rect x="120" y="144" width="6" height="6"/>
+                <rect x="144" y="144" width="6" height="6"/>
+                <rect x="162" y="144" width="6" height="6"/>
+
+                <rect x="74" y="156" width="6" height="6"/>
+                <rect x="92" y="156" width="6" height="6"/>
+                <rect x="116" y="156" width="6" height="6"/>
+                <rect x="138" y="156" width="6" height="6"/>
+                <rect x="150" y="156" width="6" height="6"/>
+                <rect x="168" y="156" width="6" height="6"/>
+
+                <rect x="68" y="168" width="6" height="6"/>
+                <rect x="86" y="168" width="6" height="6"/>
+                <rect x="98" y="168" width="6" height="6"/>
+                <rect x="126" y="168" width="6" height="6"/>
+                <rect x="144" y="168" width="6" height="6"/>
+                <rect x="174" y="168" width="6" height="6"/>
+
+                <rect x="74" y="178" width="6" height="6"/>
+                <rect x="110" y="178" width="6" height="6"/>
+                <rect x="132" y="178" width="6" height="6"/>
+                <rect x="162" y="178" width="6" height="6"/>
+              </g>
+            </svg>
+            <div class="qris-qr-center-logo" title="INSERT COFFEE QRIS" style="font-weight:900; font-family:'Press Start 2P', monospace; font-size:10px;">
+              IC
+            </div>
+          </div>
+
+          <div class="qris-stand-footer">
+            Dicetak oleh: <strong>PT INSERT TEKNOLOGI NUSANTARA</strong><br>
+            Verifikasi Real-Time Berlisensi Bank Indonesia &bull; ASPI
+          </div>
+        </div>
+
+        <!-- Waiting Status Pill -->
+        <div class="qris-status-pill">
+          <div class="qris-pulse-dot"></div>
+          <span id="qrisStatusText">Menunggu pembayaran terdeteksi...</span>
+        </div>
+
+        <!-- Simulator Action Buttons -->
+        <div class="qris-action-btns">
+          <button type="button" class="btn-qris-simulate" id="btnSimulateSuccess" onclick="simulateQrisPayment()">
+            <span>▶ Simulasi Bayar Berhasil (Demo)</span>
+          </button>
+          <button type="button" class="btn-qris-check" id="btnCheckStatus" onclick="checkQrisPaymentStatus()">
+            <span>↻ Cek Status Transaksi</span>
+          </button>
+        </div>
+
+        <!-- Accordion How to pay -->
+        <div class="qris-how-to-pay">
+          <button type="button" class="qris-accordion-toggle" onclick="toggleQrisAccordion()">
+            <span>Cara Pembayaran QRIS Toko</span>
+            <span id="qrisAccordionArrow">&#9662;</span>
+          </button>
+          <div class="qris-accordion-content" id="qrisAccordionContent">
+            <ol>
+              <li>Buka aplikasi m-Banking (BCA, Mandiri, BRI, BNI) atau e-Wallet (GoPay, OVO, DANA, ShopeePay).</li>
+              <li>Pilih menu <strong>Bayar / Pay / Scan QRIS</strong>.</li>
+              <li>Arahkan kamera ke kode QRIS toko di atas.</li>
+              <li>Periksa nama merchant: <strong>INSERT COFFEE &amp; ARCADE</strong> dan nominal tagihan.</li>
+              <li>Masukkan PIN transaksi Anda untuk menyelesaikan pembayaran.</li>
+              <li>Sistem akan mendeteksi transaksi secara instan dalam beberapa detik.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View 2: Verified Success View (Animates before transitioning to order success) -->
+    <div id="qrisSuccessView" style="display:none;" class="qris-success-modal">
+      <div class="qris-success-icon-wrap">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color:var(--neon-green);"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h2 class="qris-success-title">Pembayaran Berhasil!</h2>
+      <p class="qris-success-sub">Transaksi QRIS Anda telah diverifikasi oleh Bank Indonesia &amp; Merchant Server.</p>
+      
+      <div class="qris-success-box">
+        <div class="qris-success-row">
+          <span>ID Transaksi (RRN)</span>
+          <span id="qrisSuccessRrn" style="font-family:'Space Mono',monospace;">982736192847</span>
+        </div>
+        <div class="qris-success-row">
+          <span>Merchant</span>
+          <span>INSERT COFFEE &amp; ARCADE</span>
+        </div>
+        <div class="qris-success-row">
+          <span>Waktu Pembayaran</span>
+          <span id="qrisSuccessTime">2026-10-02 06:15 WIB</span>
+        </div>
+        <div class="qris-success-row">
+          <span>Total Dibayar</span>
+          <span id="qrisSuccessTotal" style="color:#4ade80; font-weight:700; font-family:'Space Mono',monospace;">Rp 0</span>
+        </div>
+        <div class="qris-success-row">
+          <span>Status Transaksi</span>
+          <span style="color:#4ade80; font-weight:700;">SETTLED / LUNAS</span>
+        </div>
+      </div>
+
+      <div style="font-size:0.78rem; color:var(--text-3); display:flex; align-items:center; gap:8px; margin-top:0.5rem;">
+        <span class="auth-btn-spinner" style="width:14px; height:14px; border-width:2px; display:inline-block;"></span>
+        <span>Menerbitkan nota pesanan digital...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+<!-- ============================================================
+     JAVASCRIPT — MODULAR APPLICATION ARCHITECTURE
+     ============================================================ -->
+<script src="assets/js/data.js?v=3.6"></script>
+<script src="assets/js/audio.js?v=3.6"></script>
+<script src="assets/js/store.js?v=3.6"></script>
+<script src="assets/js/firebase-config.js?v=3.6"></script>
+<script src="assets/js/leaderboard.js?v=3.6"></script>
+<script src="assets/js/effects.js?v=3.6"></script>
+<script src="assets/js/games.js?v=3.6"></script>
+<script src="assets/js/app.js?v=3.6"></script>
+<script src="assets/js/admin.js?v=3.6"></script>
+</body>
+</html>
