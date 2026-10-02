@@ -274,6 +274,7 @@ body.retro-coffee-body {
   outline: none;
   cursor: text;
   -webkit-appearance: none;
+  appearance: none;
   -webkit-user-select: text !important;
   user-select: text !important;
   touch-action: manipulation;
