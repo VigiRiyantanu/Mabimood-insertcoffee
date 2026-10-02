@@ -1,108 +1,225 @@
+<div align="center">
+
 # ☕ INSERT COFFEE
 
-> **Coffee, Games, and Chill** — A modern, immersive web application combining an artisanal coffee menu with retro arcade minigames, fully modularized for professional maintenance and scalability.
+### Coffee, Games, and Chill.
+
+**An immersive web app that blends an artisanal coffee menu with a retro arcade — order, play, earn, repeat.**
+
+![Status](https://img.shields.io/badge/status-active-success?style=flat-square)
+![Frontend](https://img.shields.io/badge/frontend-HTML%20%7C%20CSS%20%7C%20JavaScript-f7df1e?style=flat-square)
+![Backend](https://img.shields.io/badge/backend-Firebase%20Firestore-ffca28?style=flat-square&logo=firebase&logoColor=black)
+![Build](https://img.shields.io/badge/build-zero%20config-blue?style=flat-square)
+![Team](https://img.shields.io/badge/team-MabiMood-ff69b4?style=flat-square)
+
+[Getting Started](#-getting-started) •
+[Features](#-features) •
+[Architecture](#-architecture) •
+[Admin Portal](#-admin-portal) •
+[Team](#-team)
+
+</div>
 
 ---
 
-## 🌟 Features
+## 📖 Overview
 
-- **☕ Artisanal Coffee & Pastry Menu:** Explore specialty drinks, customizable brewing options, and delicious pastries with live cart & checkout simulation.
-- **🕹️ Retro Arcade Hub:** Play 12 built-in browser minigames to earn points and discounts (Snake, Tetris, Pong, Breakout, Space Invaders, Space War, Coffee Mario, Flappy, Minesweeper, Memory, 2048, Tic Tac Toe).
-- **🛡️ Admin Portal & Live Orders Monitor:** Dedicated login page for Barista & Manager to monitor live incoming orders, advance status (`received` -> `preparing` -> `ready` -> `completed`), and manage product catalog stock.
-- **🔥 Firebase & Cloud Firestore Integration:** Real-time database synchronization for orders and catalog items across devices, with instant offline fallback.
-- **🏆 Live Arcade Leaderboard:** Real-time synchronized hall of fame rankings across all minigames with Cloud Firestore & local persistence, minimal Top 3 highlights, current player rank display, and interactive landing page summary.
-- **🔊 Immersive Audio FX:** Retro sound effects powered by the Web Audio API and voice announcements for ready orders.
-- **💾 Local & Cloud Persistence:** Real-time Firestore sync with LocalStorage fail-safe.
+**Insert Coffee** reimagines the café experience: customers browse a specialty coffee and pastry menu, place orders through a live cart and checkout flow, and play **12 built-in retro minigames** to earn points and discounts while they wait.
+
+Behind the counter, baristas and managers run the shop from a dedicated **Admin Portal** with real-time order monitoring and catalog management, all synchronized across devices through **Firebase Cloud Firestore**, with an automatic **LocalStorage fallback** when offline.
+
+> **Zero build step. Zero dependencies to install.** Serve the folder and you're live.
 
 ---
 
-## 👥 Pengembang Team MabiMood
+## ✨ Features
 
-Project ini dibuat dan dikembangkan secara kolaboratif oleh 4 anggota **Team MabiMood** dengan struktur pohon organisasi:
+### 🛍️ For Customers
+| Feature | Description |
+| :-- | :-- |
+| **Artisanal Menu** | Specialty drinks, customizable brewing options, and pastries |
+| **Live Cart & Checkout** | Smooth cart drawer with checkout simulation and order tracking |
+| **Queue Display** | Live order status and voice announcements when your order is ready |
+| **Player Profiles** | Gamertag authentication and profile portal |
 
-```text
-                         👑 [LEADER]
-                       Vigi Riyantanu
-          (Project Leader, Game Arch & UI Composer)
-                               │
-              ┌────────────────┼────────────────┐
-              ▼                ▼                ▼
-          [MEMBER]         [MEMBER]         [MEMBER]
-       Nurul Fitriani   Fahmi El Murottal  Ahmad Azka Ibadillah
-          (UI/UX)          (Frontend)        (Assets & QA)
-```
+### 🕹️ Retro Arcade Hub
+12 browser minigames that earn points and discounts:
 
-| Foto Circle | Nama | Peran (Role) | Tanggung Jawab | Portofolio & GitHub |
-| :---: | :--- | :---: | :--- | :---: |
-| <a href="portofolio-vigi/" target="_blank"><img src="assets/img/team/vigi.jpg" width="52" height="52" style="border-radius:50%;object-fit:cover;display:block;margin:auto;"/></a> | **Vigi Riyantanu** | 👑 **Leader** | Project Leader, Game Architecture, UI Composer & Fullstack | [📁 Portofolio Vigi](portofolio-vigi/) • [@fujikomilk17](https://github.com/fujikomilk17) |
-| <a href="portofolio-fitri/" target="_blank"><img src="assets/img/team/nurul.jpg" width="52" height="52" style="border-radius:50%;object-fit:cover;display:block;margin:auto;"/></a> | **Nurul Fitriani** | **Member** | UI/UX & Creative Design Systems | [📁 Portofolio Nurul](portofolio-fitri/) • [LinkedIn](https://www.linkedin.com/in/nurul-fitriani-42ab90421/) |
-| <a href="portofolio-fahmi/" target="_blank"><img src="assets/img/team/fahmi.jpg" width="52" height="52" style="border-radius:50%;object-fit:cover;display:block;margin:auto;"/></a> | **Fahmi El Murottal** | **Member** | Frontend Engineering | [📁 Portofolio Fahmi](portofolio-fahmi/) • [@fahmielmurottal-sys](https://github.com/fahmielmurottal-sys) |
-| <a href="portofolio-azka/" target="_blank"><img src="assets/img/team/jheng.jpg" width="52" height="52" style="border-radius:50%;object-fit:cover;display:block;margin:auto;"/></a> | **Ahmad Azka Ibadillah** | **Member** | Assets, Content & Quality Assurance | [📁 Portofolio Azka](portofolio-azka/) • *(GitHub belum ditambahkan)* |
+`Snake` · `Tetris` · `Pong` · `Breakout` · `Space Invaders` · `Space War` · `Coffee Mario` · `Flappy` · `Minesweeper` · `Memory` · `2048` · `Tic Tac Toe`
 
----
+### 🏆 Live Leaderboard
+- Real-time Hall of Fame across all minigames (Cloud Firestore + local persistence)
+- Overall and per-game rankings
+- Top 3 podium highlights and current player rank
+- Interactive summary on the landing page
 
-## 📂 Project Structure
+### 🛡️ For Staff (Barista & Manager)
+- **Live Orders Monitor**: `received` → `preparing` → `ready` → `completed`
+- **Menu & Stock Manager**: add, edit, delete items, toggle availability
+- **Firebase Config UI**: connect your Firebase project from the dashboard, no code edits
 
-```text
-teamproject/
-├── index.html                   # Main HTML entry point (Store, Games, Display, Leaderboard Summary)
-├── leaderboard/
-│   └── index.html               # Dedicated Leaderboard Page (Overall & Game-specific rankings)
-├── leaderboard.html             # Quick redirect alias to leaderboard/index.html
-├── admin/
-│   └── index.html               # Dedicated Admin Portal & Cashier Dashboard
-├── admin.html                   # Quick redirect alias to admin/index.html
-├── playerloginpage.html         # Gamertag authentication & player profile portal
-├── assets/
-│   ├── css/
-│   │   ├── style.css            # Master entry stylesheet (imports modular CSS below)
-│   │   ├── base.css             # Design tokens, reset, typography, navbar & transitions
-│   │   ├── store.css            # Coffee menu, hero stage, cart drawer, checkout & order tracking
-│   │   ├── arcade.css           # Retro arcade hub, game stage & CRT effects
-│   │   ├── leaderboard.css      # Hall of fame, podium top 3 & minimal gaming aesthetic
-│   │   ├── admin.css            # Admin portal dashboard, live orders & menu manager
-│   │   ├── profile.css          # User profile modal, gamertag prompt & avatar
-│   │   └── player-login.css     # Dedicated retro login page styling
-│   └── js/
-│       ├── data.js              # Central source of truth: default PRODUCTS, CATEGORIES, GAMES
-│       ├── audio.js             # Retro Web Audio API sound synthesizer (shared across app & admin)
-│       ├── store.js             # Local/cloud stores: CartStore, OrderStore, HSStore, UserStore & auth
-│       ├── effects.js           # 3D canvas, universal tilt, parallax, confetti & background dino
-│       ├── games.js             # Retro Game Engine + 10 classic minigames (Snake, Tetris, Pong, dll)
-│       ├── app.js               # Main SPA router, cart drawer UI, menu filters & queue display
-│       ├── admin.js             # Admin authentication, order monitor & catalog manager
-│       ├── leaderboard.js       # Reusable Leaderboard service & rendering engine
-│       ├── player-login.js      # Player login validation & motion effects
-│       └── firebase-config.js   # Firebase Auth & Cloud Firestore sync service
-├── server.py                    # Lightweight Python 3 development server (No-cache)
-├── agent.md                     # Agent specification and architectural guidelines
-└── README.md                    # Project documentation
-```
-
+### 🔊 Experience
+- Retro sound effects via the **Web Audio API**
+- Voice announcements for ready orders
+- 3D canvas effects, tilt, parallax, and confetti
 
 ---
 
-## Admin Portal & Akses Kasir / Barista
+## 🧱 Tech Stack
 
-- **URL Akses:** Buka `/admin/` (file [admin/index.html](file:///c:/Users/hiura/Documents/mbg/teamproject/admin/index.html)) atau klik tombol **Admin** di navbar.
-- **Kredensial Default (Demo / Mode Lokal):**
-  - **Email:** `admin@insertcoffee.id`
-  - **Password:** `admin123`
-- **Fitur Admin:**
-  1. **Live Orders Monitor:** Memantau pesanan masuk secara real-time, mengubah status pesanan (`Mulai Buat`, `Pesanan Siap`, `Selesai`), memicu suara notifikasi dan pengumuman panggilan ke layar antrean.
-  2. **Manajemen Menu & Stok:** Menambah menu baru, mengedit harga dan deskripsi, mengubah status stok (*Tersedia* / *Habis*), menghapus menu, dan 1-Click *Seed Menu Default ke Cloud Firestore*.
-  3. **Konfigurasi Firebase & Firestore:** Memasukkan kredensial Firebase Web App langsung dari dashboard tanpa harus mengedit file kode, serta tombol tes koneksi real-time.
+| Layer | Technology |
+| :-- | :-- |
+| **Frontend** | HTML5, modular CSS3, Vanilla JavaScript (SPA-style routing) |
+| **Database & Auth** | Firebase Authentication, Cloud Firestore |
+| **Offline Fallback** | LocalStorage |
+| **Audio** | Web Audio API |
+| **Dev Server** | Python 3 (`server.py`, no-cache) |
+
+---
 
 ## 🚀 Getting Started
 
-No complex build steps or package managers required! Simply serve the project using any static file server:
+### Prerequisites
+Any static file server: Python 3 **or** Node.js.
+
+### Run locally
 
 ```bash
-# Using Python 3
+# Option 1: Python 3
 python3 -m http.server 8080
 
-# Using Node.js (npx)
+# Option 2: Project dev server (no-cache)
+python3 server.py
+
+# Option 3: Node.js
 npx serve .
 ```
 
-Open your browser and navigate to `http://localhost:8080`.
+Open **http://localhost:8080** in your browser.
+
+### Quick links
+
+| Page | Path |
+| :-- | :-- |
+| Store & Arcade | `/` |
+| Leaderboard | `/leaderboard/` |
+| Player Login | `/playerloginpage.html` |
+| Admin Portal | `/admin/` |
+
+---
+
+## 🛡️ Admin Portal
+
+Open `/admin/` or click **Admin** in the navbar.
+
+**Demo credentials (local mode):**
+
+| Field | Value |
+| :-- | :-- |
+| Email | `admin@insertcoffee.id` |
+| Password | `admin123` |
+
+> ⚠️ **Security note:** These credentials are for demo and local development only. Replace them and enable Firebase Authentication before any production deployment.
+
+### Connecting Firebase
+1. Open the Admin Portal and go to **Firebase Configuration**.
+2. Paste your Firebase Web App credentials.
+3. Click **Test Connection**.
+4. Click **Seed Default Menu to Cloud Firestore** to populate the catalog in one click.
+
+---
+
+## 🏗️ Architecture
+
+```text
+teamproject/
+├── index.html                # Main entry: Store, Games, Display, Leaderboard summary
+├── leaderboard/index.html    # Dedicated leaderboard page
+├── admin/index.html          # Admin portal & cashier dashboard
+├── playerloginpage.html      # Gamertag authentication & player profile
+├── leaderboard.html          # Redirect alias → leaderboard/
+├── admin.html                # Redirect alias → admin/
+├── assets/
+│   ├── css/                  # Modular stylesheets (style.css imports all)
+│   │   ├── base.css          # Design tokens, reset, typography, navbar
+│   │   ├── store.css         # Menu, hero, cart drawer, checkout, tracking
+│   │   ├── arcade.css        # Arcade hub, game stage, CRT effects
+│   │   ├── leaderboard.css   # Hall of fame & podium
+│   │   ├── admin.css         # Dashboard, live orders, menu manager
+│   │   ├── profile.css       # Profile modal & avatar
+│   │   └── player-login.css  # Retro login page
+│   └── js/
+│       ├── data.js           # Source of truth: PRODUCTS, CATEGORIES, GAMES
+│       ├── audio.js          # Web Audio synthesizer
+│       ├── store.js          # CartStore, OrderStore, HSStore, UserStore
+│       ├── effects.js        # 3D canvas, tilt, parallax, confetti
+│       ├── games.js          # Game engine + minigames
+│       ├── app.js            # SPA router, cart UI, filters, queue
+│       ├── admin.js          # Admin auth, order monitor, catalog manager
+│       ├── leaderboard.js    # Leaderboard service & renderer
+│       ├── player-login.js   # Login validation & motion
+│       └── firebase-config.js# Firebase Auth & Firestore sync
+├── server.py                 # Lightweight Python dev server
+├── agent.md                  # Agent spec & architectural guidelines
+└── README.md
+```
+
+### Design principles
+- **Modular by default:** one concern per file, shared services reused across the app and admin.
+- **Offline-first resilience:** Firestore syncs in real time; LocalStorage keeps everything working if the connection drops.
+- **Single source of truth:** products, categories, and games are defined once in `data.js`.
+
+---
+
+## 👥 Team
+
+Built collaboratively by **Team MabiMood**.
+
+| | Name | Role | Focus | Links |
+| :-: | :-- | :-: | :-- | :-- |
+| <img src="assets/img/team/vigi.jpg" width="52" height="52" style="border-radius:50%;object-fit:cover;"/> | **Vigi Riyantanu** | 👑 Leader | Project Lead, Game Architecture, UI Composer, Fullstack | [Portfolio](portofolio-vigi/) • [GitHub](https://github.com/fujikomilk17) |
+| <img src="assets/img/team/nurul.jpg" width="52" height="52" style="border-radius:50%;object-fit:cover;"/> | **Nurul Fitriani** | Member | UI/UX & Creative Design Systems | [Portfolio](portofolio-fitri/) • [LinkedIn](https://www.linkedin.com/in/nurul-fitriani-42ab90421/) |
+| <img src="assets/img/team/fahmi.jpg" width="52" height="52" style="border-radius:50%;object-fit:cover;"/> | **Fahmi El Murottal** | Member | Frontend Engineering | [Portfolio](portofolio-fahmi/) • [GitHub](https://github.com/fahmielmurottal-sys) |
+| <img src="assets/img/team/jheng.jpg" width="52" height="52" style="border-radius:50%;object-fit:cover;"/> | **Ahmad Azka Ibadillah** | Member | Assets, Content & Quality Assurance | [Portfolio](portofolio-azka/) |
+
+---
+
+## 🗺️ Roadmap
+
+- [x] Coffee & pastry menu with cart and checkout simulation
+- [x] 12 retro arcade minigames
+- [x] Real-time leaderboard
+- [x] Admin portal with live orders and stock management
+- [x] Firebase Firestore sync with offline fallback
+- [ ] Production-grade admin authentication
+- [ ] Real payment gateway integration
+- [ ] PWA support (installable, offline cache)
+- [ ] Multi-branch / multi-outlet support
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -m "feat: add your feature"`
+4. Push to the branch: `git push origin feature/your-feature`
+5. Open a Pull Request
+
+Please read [`agent.md`](agent.md) for architectural guidelines before contributing.
+
+---
+
+## 📄 License
+
+Add your license here (e.g. MIT) and include a `LICENSE` file in the repository root.
+
+---
+
+<div align="center">
+
+**Made with ☕ and 🕹️ by Team MabiMood**
+
+*Insert coin. Insert coffee. Press start.*
+
+</div>
